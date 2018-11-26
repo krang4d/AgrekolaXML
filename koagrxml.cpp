@@ -43,7 +43,7 @@ int readFile(QString name, QDomDocument doc)
         qDebug() << "Faild to open file for writting";
         return -1;
     } else {
-        if(!doc.setContent(&file)){
+        if(!doc.setContent(&file)) {
             qDebug() << "Failed to load document";
             return -2;
         }
@@ -201,12 +201,58 @@ QDomDocument KoAgrXML::createCalibrationKo5()
 
 QDomDocument KoAgrXML::createCalibrationAgr1()
 {
-
+    QString name("calibrationAgr1");
+    QDomDocument document;
+    QDomElement calibration = document.createElement(name);
+    document.appendChild(calibration);
+    //входные данные
+    calibration.appendChild(document.createElement("data"));
+    calibration.appendChild(document.createElement("incube_time"));
+    calibration.appendChild(document.createElement("reagent_serial"));
+    calibration.appendChild(document.createElement("reagent_data"));
+    calibration.appendChild(document.createElement("k_concentration"));
+    //выходные данные
+    calibration.appendChild(document.createElement("level_0"));
+    calibration.appendChild(document.createElement("level_100"));
+    writeFile(name, document);
+    return document;
 }
 
 QDomDocument KoAgrXML::createCalibrationAgr2()
 {
+    QString name("calibrationAgr2");
+    QDomDocument document;
+    QDomElement calibration = document.createElement(name);
+    document.appendChild(calibration);
+    //входные данные
+    calibration.appendChild(document.createElement("data"));
+    calibration.appendChild(document.createElement("incube_time"));
+    calibration.appendChild(document.createElement("reagent_serial"));
+    calibration.appendChild(document.createElement("reagent_data"));
+    calibration.appendChild(document.createElement("k_plazma_serial"));
+    calibration.appendChild(document.createElement("k_plazma_data"));
+    calibration.appendChild(document.createElement("k_plazma"));
+    //выходные данные
+    calibration.appendChild(document.createElement("level_0"));
+    calibration.appendChild(document.createElement("level_100"));
 
+    calibration.appendChild(document.createElement("k_plazma_serial"));
+    calibration.appendChild(document.createElement("k_plazma_data"));
+
+    calibration.appendChild(document.createElement("c1"));
+    calibration.appendChild(document.createElement("ck1"));
+
+    calibration.appendChild(document.createElement("c2"));
+    calibration.appendChild(document.createElement("ck2"));
+
+    calibration.appendChild(document.createElement("c3"));
+    calibration.appendChild(document.createElement("ck3"));
+
+    calibration.appendChild(document.createElement("c4"));
+    calibration.appendChild(document.createElement("ck4"));
+
+    writeFile(name, document);
+    return document;
 }
 
 QDomDocument KoAgrXML::openTestKo1()
@@ -299,10 +345,16 @@ QDomDocument KoAgrXML::openCalibrationKo5()
 
 QDomDocument KoAgrXML::openCalibrationAgr1()
 {
-
+    QDomDocument doc;
+    QString name("calibrationAgr1");
+    readFile(name, doc);
+    return doc;
 }
 
 QDomDocument KoAgrXML::openCalibrationAgr2()
 {
-
+    QDomDocument doc;
+    QString name("calibrationAgr2");
+    readFile(name, doc);
+    return doc;
 }

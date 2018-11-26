@@ -23,6 +23,8 @@ int main(int argc, char *argv[])
     docxml.createCalibrationKo3();
     docxml.createCalibrationKo4();
     docxml.createCalibrationKo5();
+    docxml.createCalibrationAgr1();
+    docxml.createCalibrationAgr2();
     return a.exec();
 }
 
