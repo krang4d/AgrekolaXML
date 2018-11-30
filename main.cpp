@@ -2,6 +2,7 @@
 #include <QDomDocument>
 #include <QDebug>
 #include <QFile>
+#include <QString>
 #include <koagrxml.h>
 
 int Test();
@@ -11,7 +12,12 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
 
     KoAgrXML docxml;
-    docxml.createTestKo1();
+    //docxml.createTestKo1();
+    TestKo1 t_ko1;
+    qDebug() << "Text XML" << t_ko1.getText();
+    t_ko1.setK1(5);
+    qDebug() << "K1 = " << t_ko1.getK1();
+
     docxml.createTestKo2();
     docxml.createTestKo3();
     docxml.createTestKo4();
@@ -25,6 +31,8 @@ int main(int argc, char *argv[])
     docxml.createCalibrationKo5();
     docxml.createCalibrationAgr1();
     docxml.createCalibrationAgr2();
+
+    //Test();
     return a.exec();
 }
 
@@ -109,8 +117,6 @@ int Test()
     agrtest.setAttribute("Incube_time", "2");
     agr1.appendChild(agrtest);
     agr2.appendChild(agrtest);
-
-
 
 //    QDomElement calibrate =document.createElement("Calibrate");
 //    ko1.appendChild(calibrate);

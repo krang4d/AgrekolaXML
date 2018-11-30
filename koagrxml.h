@@ -28,6 +28,7 @@ public:
     QDomDocument createCalibrationAgr2();
 
     QDomDocument openTestKo1();
+    void closeTestKo1(QDomDocument doc);
     QDomDocument openTestKo2();
     QDomDocument openTestKo3();
     QDomDocument openTestKo4();
@@ -41,12 +42,39 @@ public:
     QDomDocument openCalibrationKo5();
     QDomDocument openCalibrationAgr1();
     QDomDocument openCalibrationAgr2();
+
+    static void ListElement(QDomElement root, QString tagname, QString attribute);
+    static QString getElement(QDomDocument root, QString tagname);
+    static void setElement(QDomDocument root, QString tagname, QString value);
 signals:
 
 public slots:
 
 private:
     //QDomDocument document;
+};
+
+class TestKo1 : public KoAgrXML
+{
+    Q_OBJECT
+public:
+    TestKo1();
+    ~TestKo1();
+    void setK1(int k);
+    int getK1();
+    void setK2(int k);
+    int getK2();
+    void setK3(int k);
+    int getK3();
+    void setK4(int k);
+    int getK4();
+    void setSingle(int k);
+    int getSingle();
+
+    QString getText();
+private:
+    QDomDocument document;
+    int k1, k2, k3, k4, single;
 };
 
 #endif // KOAGRXML_H
