@@ -50,7 +50,7 @@ int writeFile(QString name, QDomDocument doc)
     return 0;
 }
 
-int readFile(QString name, QDomDocument doc)
+int readFile(QString name, QDomDocument &doc)
 {
     QFile file(name + QString(".xml"));
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -445,14 +445,12 @@ void KoAgrXML::ListElement(QDomElement root, QString tagname, QString attribute)
     qDebug() << "Total items = " << items.count();
     for(int i =0; i < items.count(); i++) {
         QDomNode itemnode = items.at(i);
-
         //convert to element
         if(itemnode.isElement()) {
             QDomElement itemele = itemnode.toElement();
             qDebug() << itemele.attribute(attribute);
         }
     }
-
 }
 
 QString KoAgrXML::getElement(QDomDocument root, QString tagname)
@@ -465,7 +463,7 @@ QString KoAgrXML::getElement(QDomDocument root, QString tagname)
     } else return QString("");
 }
 
-void KoAgrXML::setElement(QDomDocument root, QString tagname, QString value)
+void KoAgrXML::setElement(QDomDocument &root, QString tagname, QString value)
 {
     QDomNodeList items = root.elementsByTagName(tagname);
     QDomNode itemnode = items.at(0);
@@ -475,9 +473,10 @@ void KoAgrXML::setElement(QDomDocument root, QString tagname, QString value)
     }
 }
 
-TestKo1::TestKo1()
+TestKo1::TestKo1(QObject *parent) : KoAgrXML(parent)
 {
     document = KoAgrXML::openTestKo1();
+    name = "testKo1";
 }
 
 TestKo1::~TestKo1()
@@ -489,6 +488,7 @@ TestKo1::~TestKo1()
 void TestKo1::setK1(int k)
 {
     KoAgrXML::setElement(document, QString("k1"), QString("%1").arg(k));
+    writeFile(name, document);
 }
 
 int TestKo1::getK1()
@@ -500,6 +500,7 @@ int TestKo1::getK1()
 void TestKo1::setK2(int k)
 {
     KoAgrXML::setElement(document, QString("k2"), QString("%1").arg(k));
+    writeFile(name, document);
 }
 
 int TestKo1::getK2()
@@ -511,6 +512,7 @@ int TestKo1::getK2()
 void TestKo1::setK3(int k)
 {
     KoAgrXML::setElement(document, QString("k3"), QString("%1").arg(k));
+    writeFile(name, document);
 }
 
 int TestKo1::getK3()
@@ -522,6 +524,7 @@ int TestKo1::getK3()
 void TestKo1::setK4(int k)
 {
     KoAgrXML::setElement(document, QString("k4"), QString("%1").arg(k));
+    writeFile(name, document);
 }
 
 int TestKo1::getK4()
@@ -533,6 +536,7 @@ int TestKo1::getK4()
 void TestKo1::setSingle(int k)
 {
     KoAgrXML::setElement(document, QString("single"), QString("%1").arg(k));
+    writeFile(name, document);
 }
 
 int TestKo1::getSingle()

@@ -45,7 +45,7 @@ public:
 
     static void ListElement(QDomElement root, QString tagname, QString attribute);
     static QString getElement(QDomDocument root, QString tagname);
-    static void setElement(QDomDocument root, QString tagname, QString value);
+    static void setElement(QDomDocument &root, QString tagname, QString value);
 signals:
 
 public slots:
@@ -58,7 +58,7 @@ class TestKo1 : public KoAgrXML
 {
     Q_OBJECT
 public:
-    TestKo1();
+    explicit TestKo1(QObject *parent = 0);
     ~TestKo1();
     void setK1(int k);
     int getK1();
@@ -74,6 +74,7 @@ public:
     QString getText();
 private:
     QDomDocument document;
+    QString name;
     int k1, k2, k3, k4, single;
 };
 
