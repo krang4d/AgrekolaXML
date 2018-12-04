@@ -1,6 +1,11 @@
 #include "koagrxml.h"
 
-QDomDocument createTestKo(QString name) {
+CreateKoAgr::CreateKoAgr(QObject *parent) : QObject(parent)
+{
+
+}
+
+QDomDocument CreateKoAgr::createTestKo(QString name) {
 
     QDomDocument document;
     QDomElement test = document.createElement(name);
@@ -29,13 +34,13 @@ QDomDocument createTestKo(QString name) {
     return document;
 }
 
-QDomDocument createTestAgr(QString name) {
+QDomDocument CreateKoAgr::createTestAgr(QString name) {
     QDomDocument document = createTestKo(name);
     QDomElement test = document.firstChildElement(name);
     return document;
 }
 
-int writeFile(QString name, QDomDocument doc)
+int CreateKoAgr::writeFile(QString name, QDomDocument doc)
 {
     QFile file(name + QString(".xml"));
     if(!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
@@ -50,7 +55,7 @@ int writeFile(QString name, QDomDocument doc)
     return 0;
 }
 
-int readFile(QString name, QDomDocument &doc)
+int CreateKoAgr::readFile(QString name, QDomDocument &doc)
 {
     QFile file(name + QString(".xml"));
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -66,7 +71,7 @@ int readFile(QString name, QDomDocument &doc)
     return 0;
 }
 
-KoAgrXML::KoAgrXML(QObject *parent) : QObject(parent)
+KoAgrXML::KoAgrXML(QObject *parent) : CreateKoAgr(parent)
 {
 
 }
@@ -301,12 +306,6 @@ QDomDocument KoAgrXML::openTestKo1()
     return doc;
 }
 
-void KoAgrXML::closeTestKo1(QDomDocument doc)
-{
-    QString name("testKo1");
-    writeFile((name + QString(".xml")), doc);
-}
-
 QDomDocument KoAgrXML::openTestKo2()
 {
     QDomDocument doc;
@@ -473,79 +472,99 @@ void KoAgrXML::setElement(QDomDocument &root, QString tagname, QString value)
     }
 }
 
-TestKo1::TestKo1(QObject *parent) : KoAgrXML(parent)
+TestKo::TestKo(QObject *parent) : QObject(parent)
 {
-    document = KoAgrXML::openTestKo1();
-    name = "testKo1";
+    //document = KoAgrXML::openTestKo1();
 }
 
-TestKo1::~TestKo1()
+TestKo::~TestKo()
 {
-    KoAgrXML::closeTestKo1(document);
     qDebug() << "TestKo1::~TestKo1()";
 }
 
-void TestKo1::setK1(int k)
+void TestKo::setK1(int k)
 {
     KoAgrXML::setElement(document, QString("k1"), QString("%1").arg(k));
-    writeFile(name, document);
+    CreateKoAgr::writeFile(name, document);
 }
 
-int TestKo1::getK1()
+int TestKo::getK1()
 {
     QString value = KoAgrXML::getElement(document, QString("k1"));
     return value.toInt();
 }
 
-void TestKo1::setK2(int k)
+void TestKo::setK2(int k)
 {
     KoAgrXML::setElement(document, QString("k2"), QString("%1").arg(k));
-    writeFile(name, document);
+    CreateKoAgr::writeFile(name, document);
 }
 
-int TestKo1::getK2()
+int TestKo::getK2()
 {
     QString value = KoAgrXML::getElement(document, QString("k2"));
     return value.toInt();
 }
 
-void TestKo1::setK3(int k)
+void TestKo::setK3(int k)
 {
     KoAgrXML::setElement(document, QString("k3"), QString("%1").arg(k));
-    writeFile(name, document);
+    CreateKoAgr::writeFile(name, document);
 }
 
-int TestKo1::getK3()
+int TestKo::getK3()
 {
     QString value = KoAgrXML::getElement(document, QString("k3"));
     return value.toInt();
 }
 
-void TestKo1::setK4(int k)
+void TestKo::setK4(int k)
 {
     KoAgrXML::setElement(document, QString("k4"), QString("%1").arg(k));
-    writeFile(name, document);
+    CreateKoAgr::writeFile(name, document);
 }
 
-int TestKo1::getK4()
+int TestKo::getK4()
 {
     QString value = KoAgrXML::getElement(document, QString("k4"));
     return value.toInt();
 }
 
-void TestKo1::setSingle(int k)
+void TestKo::setSingle(int k)
 {
     KoAgrXML::setElement(document, QString("single"), QString("%1").arg(k));
-    writeFile(name, document);
+    CreateKoAgr::writeFile(name, document);
 }
 
-int TestKo1::getSingle()
+int TestKo::getSingle()
 {
     QString value = KoAgrXML::getElement(document, QString("single"));
     return value.toInt();
 }
 
-QString TestKo1::getText()
+QString TestKo::getText()
 {
     return document.toString();
+}
+
+void TestKo::setDoc(QDomDocument doc)
+{
+    document = doc;
+}
+
+void TestKo::setName(QString n)
+{
+    name = n;
+}
+
+
+TestKo1::TestKo1(QObject *parent) : TestKo(parent)
+{
+    TestKo::setDoc(KoAgrXML::createTestKo1());
+    TestKo::setName("testKo1");
+}
+
+TestKo1::~TestKo1()
+{
+
 }
