@@ -18,19 +18,19 @@ int main(int argc, char *argv[])
     t_ko1.setK1(6);
     qDebug() << "K1 = " << t_ko1.getK1();
 
-//    docxml.createTestKo2();
-//    docxml.createTestKo3();
-//    docxml.createTestKo4();
-//    docxml.createTestKo5();
-//    docxml.createTestAgr1();
-//    docxml.createTestAgr2();
+    docxml.createTestKo2();
+    docxml.createTestKo3();
+    docxml.createTestKo4();
+    docxml.createTestKo5();
+    docxml.createTestAgr1();
+    docxml.createTestAgr2();
 
-//    docxml.createCalibrationKo2();
-//    docxml.createCalibrationKo3();
-//    docxml.createCalibrationKo4();
-//    docxml.createCalibrationKo5();
-//    docxml.createCalibrationAgr1();
-//    docxml.createCalibrationAgr2();
+    docxml.createCalibrationKo2();
+    docxml.createCalibrationKo3();
+    docxml.createCalibrationKo4();
+    docxml.createCalibrationKo5();
+    docxml.createCalibrationAgr1();
+    docxml.createCalibrationAgr2();
 
     //Test();
     return a.exec();
@@ -142,4 +142,5 @@ int Test()
 //        }
 //        file.close();
  //   }
+    return 0;
 }
