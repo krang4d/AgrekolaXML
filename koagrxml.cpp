@@ -11,25 +11,29 @@ QDomDocument CreateKoAgr::createTestKo(QString name) {
     QDomElement test = document.createElement(name);
     document.appendChild(test);
 
-    QDomElement single = document.createElement("single");
-    single.setAttribute("Value", "1");
-    test.appendChild(single);
-
     QDomElement k1 = document.createElement("k1");
     k1.setAttribute("Value", "1");
+    k1.setAttribute("Num", "num1");
     test.appendChild(k1);
 
     QDomElement k2 = document.createElement("k2");
     k2.setAttribute("Value", "1");
+    k2.setAttribute("Num", "num2");
     test.appendChild(k2);
 
     QDomElement k3 = document.createElement("k3");
     k3.setAttribute("Value", "1");
+    k3.setAttribute("Num", "num3");
     test.appendChild(k3);
 
     QDomElement k4 = document.createElement("k4");
     k4.setAttribute("Value", "1");
+    k4.setAttribute("Num", "num4");
     test.appendChild(k4);
+
+    QDomElement single = document.createElement("single");
+    single.setAttribute("Value", "1");
+    test.appendChild(single);
 
     return document;
 }
@@ -478,95 +482,118 @@ void KoAgrXML::ListElement(QDomElement root, QString tagname, QString attribute)
     }
 }
 
-QString KoAgrXML::getElement(QDomDocument root, QString tagname)
+QString KoAgrXML::getElement(QDomDocument root, QString tagname, QString attribute)
 {
     QDomNodeList items = root.elementsByTagName(tagname);
     QDomNode itemnode = items.at(0);
     if( itemnode.isElement()) {
         QDomElement itemelement = itemnode.toElement();
-        return itemelement.attribute(QString("Value"));
+        return itemelement.attribute(attribute);
     } else return QString("");
 }
 
-void KoAgrXML::setElement(QDomDocument &root, QString tagname, QString value)
+void KoAgrXML::setElement(QDomDocument &root, QString tagname, QString value, QString attribute)
 {
     QDomNodeList items = root.elementsByTagName(tagname);
     QDomNode itemnode = items.at(0);
     if( itemnode.isElement()) {
         QDomElement itemelement = itemnode.toElement();
-        itemelement.setAttribute(QString("Value"), value);
+        itemelement.setAttribute(attribute, value);
     }
 }
 
-Test::Test(QObject *parent)
-    : QObject(parent), name("none")
+Test::Test(QDomDocument dom, QString n, QObject *parent)
+    : QObject(parent), document(dom), name(n)
 {
+    QString value;
+    value = KoAgrXML::getElement(document, QString("k1"));
+    k1 = value.toInt();
+
+    value = KoAgrXML::getElement(document, QString("k2"));
+    k2 = value.toInt();
+
+    value = KoAgrXML::getElement(document, QString("k3"));
+    k3 = value.toInt();
+
+    value = KoAgrXML::getElement(document, QString("k4"));
+    k4 = value.toInt();
+
+    value = KoAgrXML::getElement(document, QString("single"));
+    single = value.toInt();
+
+    num1 = KoAgrXML::getElement(document, QString("k1"), "Num");
+    num2 = KoAgrXML::getElement(document, QString("k2"), "Num");
+    num3 = KoAgrXML::getElement(document, QString("k3"), "Num");
+    num4 = KoAgrXML::getElement(document, QString("k4"), "Num");
+
     //document = KoAgrXML::openTest();
 }
 
 Test::~Test()
 {
+    KoAgrXML::setElement(document, QString("k1"), QString("%1").arg(k1));
+    KoAgrXML::setElement(document, QString("k2"), QString("%1").arg(k2));
+    KoAgrXML::setElement(document, QString("k3"), QString("%1").arg(k3));
+    KoAgrXML::setElement(document, QString("k4"), QString("%1").arg(k4));
+    KoAgrXML::setElement(document, QString("single"), QString("%1").arg(single));
+
+    KoAgrXML::setElement(document, QString("k1"), QString("%1").arg(k1), "Num");
+    KoAgrXML::setElement(document, QString("k2"), QString("%1").arg(k2), "Num");
+    KoAgrXML::setElement(document, QString("k3"), QString("%1").arg(k3), "Num");
+    KoAgrXML::setElement(document, QString("k4"), QString("%1").arg(k4), "Num");
+
+    CreateKoAgr::writeFile(name, document);
     qDebug() << "TestKo1::~TestKo1()";
 }
 
-void Test::setK1(const int k)
+void Test::setK1(const int value)
 {
-    KoAgrXML::setElement(document, QString("k1"), QString("%1").arg(k));
-    CreateKoAgr::writeFile(name, document);
+    k1 = value;
 }
 
 int Test::getK1() const
 {
-    QString value = KoAgrXML::getElement(document, QString("k1"));
-    return value.toInt();
+    return k1;
 }
 
-void Test::setK2(const int k)
+void Test::setK2(const int value)
 {
-    KoAgrXML::setElement(document, QString("k2"), QString("%1").arg(k));
-    CreateKoAgr::writeFile(name, document);
+    k2 = value;
 }
 
 int Test::getK2() const
 {
-    QString value = KoAgrXML::getElement(document, QString("k2"));
-    return value.toInt();
+    return k2;
 }
 
-void Test::setK3(const int k)
+void Test::setK3(const int value)
 {
-    KoAgrXML::setElement(document, QString("k3"), QString("%1").arg(k));
-    CreateKoAgr::writeFile(name, document);
+    k3 = value;
 }
 
 int Test::getK3() const
 {
-    QString value = KoAgrXML::getElement(document, QString("k3"));
-    return value.toInt();
+    return k3;
 }
 
-void Test::setK4(const int k)
+void Test::setK4(const int value)
 {
-    KoAgrXML::setElement(document, QString("k4"), QString("%1").arg(k));
-    CreateKoAgr::writeFile(name, document);
+    k4 = value;
 }
 
 int Test::getK4() const
 {
-    QString value = KoAgrXML::getElement(document, QString("k4"));
-    return value.toInt();
+    return k4;
 }
 
-void Test::setSingle(const int k)
+void Test::setSingle(const int value)
 {
-    KoAgrXML::setElement(document, QString("single"), QString("%1").arg(k));
-    CreateKoAgr::writeFile(name, document);
+    single = value;
 }
 
 int Test::getSingle() const
 {
-    QString value = KoAgrXML::getElement(document, QString("single"));
-    return value.toInt();
+    return single;
 }
 
 QString Test::getText() const
@@ -574,102 +601,126 @@ QString Test::getText() const
     return document.toString();
 }
 
-void Test::setDoc(const QDomDocument doc)
+QDomDocument Test::getDoc() const
 {
-    document = doc;
+    return document;
 }
 
-void Test::setName(const QString n)
+QString Test::getName() const
 {
-    name = n;
+    return name;
 }
 
-
-TestKo1::TestKo1(QObject *parent) : Test(parent)
+QString Test::getNum4() const
 {
-    Test::setDoc(KoAgrXML::createTestKo1());
-    Test::setName("testKo1");
+    return num4;
 }
+
+void Test::setNum4(const QString &value)
+{
+    num4 = value;
+}
+
+QString Test::getNum3() const
+{
+    return num3;
+}
+
+void Test::setNum3(const QString &value)
+{
+    num3 = value;
+}
+
+QString Test::getNum2() const
+{
+    return num2;
+}
+
+void Test::setNum2(const QString &value)
+{
+    num2 = value;
+}
+
+QString Test::getNum1() const
+{
+    return num1;
+}
+
+void Test::setNum1(const QString &value)
+{
+    num1 = value;
+}
+
+TestKo1::TestKo1(QObject *parent)
+    : Test(KoAgrXML::createTestKo1(), "testKo1", parent)
+{}
 
 TestKo1::~TestKo1()
-{
+{}
 
-}
-
-TestKo2::TestKo2(QObject *parent) : Test(parent)
-{
-    Test::setDoc(KoAgrXML::createTestKo2());
-    Test::setName("testKo2");
-}
+TestKo2::TestKo2(QObject *parent)
+    : Test(KoAgrXML::createTestKo2(), "testKo2", parent)
+{}
 
 TestKo2::~TestKo2()
-{
+{}
 
-}
-
-TestKo3::TestKo3(QObject *parent) : Test(parent)
-{
-    Test::setDoc(KoAgrXML::createTestKo3());
-    Test::setName("testKo3");
-}
+TestKo3::TestKo3(QObject *parent)
+    : Test(KoAgrXML::createTestKo3(), "testKo3", parent)
+{}
 
 TestKo3::~TestKo3()
-{
+{}
 
-}
-
-TestKo4::TestKo4(QObject *parent) : Test(parent)
-{
-    Test::setDoc(KoAgrXML::createTestKo4());
-    Test::setName("testKo4");
-}
+TestKo4::TestKo4(QObject *parent)
+    : Test(KoAgrXML::createTestKo4(), "testKo4", parent)
+{}
 
 TestKo4::~TestKo4()
-{
+{}
 
-}
-
-TestKo5::TestKo5(QObject *parent) : Test(parent)
-{
-    Test::setDoc(KoAgrXML::createTestKo5());
-    Test::setName("testKo5");
-}
+TestKo5::TestKo5(QObject *parent)
+    : Test(KoAgrXML::createTestKo5(), "testKo5", parent)
+{}
 
 TestKo5::~TestKo5()
-{
+{}
 
-}
-
-TestAgr1::TestAgr1(QObject *parent) : Test(parent)
-{
-    Test::setDoc(KoAgrXML::createTestAgr1());
-    Test::setName("testAgr1");
-}
+TestAgr1::TestAgr1(QObject *parent)
+    : Test(KoAgrXML::createTestAgr1(), "testAgr1", parent)
+{}
 
 TestAgr1::~TestAgr1()
-{
+{}
 
-}
-
-TestAgr2::TestAgr2(QObject *parent) : Test(parent)
-{
-    Test::setDoc(KoAgrXML::createTestAgr2());
-    Test::setName("testAgr2");
-}
+TestAgr2::TestAgr2(QObject *parent)
+    : Test(KoAgrXML::createTestAgr2(), "testAgr2", parent)
+{}
 
 TestAgr2::~TestAgr2()
+{}
+
+Calibration::Calibration(QDomDocument doc, QString n, QObject *parent)
+    : QObject(parent), document(doc), name(n)
 {
+    QString value;
+    value = KoAgrXML::getElement(document, QString("date"));
+    date = QDate::fromString(value, "yyyyMMdd");
 
-}
+    value = KoAgrXML::getElement(document, QString("write_time"));
+    write_time = value.toInt();
 
-Calibration::Calibration(QObject *parent) : QObject(parent)
-{
-
+    value = KoAgrXML::getElement(document, QString("incube_time"));
+    incube_time = value.toInt();
 }
 
 Calibration::~Calibration()
 {
+    KoAgrXML::setElement(document, QString("date"), QString("%1").arg(date.toString(QString("yyyyMMdd"))));
+    KoAgrXML::setElement(document, QString("write_time"), QString("%1").arg(write_time));
+    KoAgrXML::setElement(document, QString("incube_time"), QString("%1").arg(incube_time));
 
+    CreateKoAgr::writeFile(name, document);
 }
 
 QDate Calibration::getDate() const
@@ -689,8 +740,7 @@ int Calibration::getWrite_time() const
 
 void Calibration::setWrite_time(const int value)
 {
-//    KoAgrXML::setElement(document, QString("incube_time"), QString("%1").arg(value));
-//    CreateKoAgr::writeFile(name, document);
+    write_time = value;
 }
 
 int Calibration::getIncube_time() const
@@ -704,20 +754,21 @@ void Calibration::setIncube_time(int value)
     incube_time = value;
 }
 
-void Calibration::setDoc(const QDomDocument doc)
+QDomDocument Calibration::getDoc() const
 {
-    document = doc;
+    return document;
 }
 
-void Calibration::setName(const QString n)
+QString Calibration::getName() const
 {
-    name = n;
+    return name;
 }
 
 CalibrationKo1::CalibrationKo1()
+    : Calibration(KoAgrXML::createCalibrationKo1(), "calibrationKo1")
 {
-    Calibration::setDoc(KoAgrXML::createCalibrationKo1());
-    Calibration::setName("calibrationKo1");
+    //Calibration::setDoc(KoAgrXML::createCalibrationKo1());
+    //Calibration::setName("calibrationKo1");
 }
 
 CalibrationKo1::~CalibrationKo1()
@@ -726,9 +777,10 @@ CalibrationKo1::~CalibrationKo1()
 }
 
 CalibrationKo2::CalibrationKo2()
+    : Calibration(KoAgrXML::createCalibrationKo2(), "calibrationKo2")
 {
-    Calibration::setDoc(KoAgrXML::createCalibrationKo2());
-    Calibration::setName("calibrationKo2");
+    //Calibration::setDoc(KoAgrXML::createCalibrationKo2());
+    //Calibration::setName("calibrationKo2");
 }
 
 CalibrationKo2::~CalibrationKo2()
@@ -736,12 +788,13 @@ CalibrationKo2::~CalibrationKo2()
 
 }
 
-QDate CalibrationKo2::getReaget_date() const
+QDate CalibrationKo2::getReagent_date() const
 {
+    QString value = KoAgrXML::getElement(Calibration::getDoc(), QString("reagent_date"));
     return reaget_date;
 }
 
-void CalibrationKo2::setReaget_date(const QDate &value)
+void CalibrationKo2::setReagent_date(const QDate &value)
 {
     reaget_date = value;
 }
@@ -787,6 +840,7 @@ void CalibrationKo2::setA4tv_k_plazma(double value)
 }
 
 CalibrationKo3::CalibrationKo3()
+    : Calibration(KoAgrXML::createCalibrationKo3(), "calibrationKo3")
 {
 
 }
@@ -897,6 +951,7 @@ void CalibrationKo3::setTime_25_plazma(double value)
 }
 
 CalibrationKo4::CalibrationKo4()
+    : Calibration(KoAgrXML::createCalibrationKo4(), "calibrationKo4")
 {
 
 }
@@ -967,6 +1022,7 @@ void CalibrationKo4::setTrombine_time(double value)
 }
 
 CalibrationKo5::CalibrationKo5()
+    : Calibration(KoAgrXML::createCalibrationKo5(), "calibrationKo5")
 {
 
 }
@@ -1137,6 +1193,7 @@ void CalibrationKo5::setProtrombine_otn(double value)
 }
 
 CalibrationAgr1::CalibrationAgr1()
+    : Calibration(KoAgrXML::createCalibrationAgr1(), "calibrationAgr1")
 {
 
 }
@@ -1197,6 +1254,7 @@ void CalibrationAgr1::setLevel_100(double value)
 }
 
 CalibrationAgr2::CalibrationAgr2()
+    : Calibration(KoAgrXML::createCalibrationAgr2(), "calibrationAgr2")
 {
 
 }

@@ -56,38 +56,50 @@ public:
     static QDomDocument openCalibrationAgr2();
 
     static void ListElement(QDomElement root, QString tagname, QString attribute);
-    static QString getElement(QDomDocument root, QString tagname);
-    static void setElement(QDomDocument &root, QString tagname, QString value);
+    static QString getElement(QDomDocument root, QString tagname, QString attribute = "Value");
+    static void setElement(QDomDocument &root, QString tagname, QString value, QString attribute = "Value");
 };
 
 class Test : public QObject
 {
     Q_OBJECT
 public:
-    explicit Test(QObject *parent = 0);
+    explicit Test(QDomDocument doc, QString n, QObject *parent = 0);
     ~Test();
-    virtual void setK1(const int k);
+    virtual void setK1(const int value);
     virtual int getK1() const;
-    virtual void setK2(const int k);
+    virtual void setK2(const int value);
     virtual int getK2() const;
-    virtual void setK3(const int k);
+    virtual void setK3(const int value);
     virtual int getK3() const;
-    virtual void setK4(const int k);
+    virtual void setK4(const int value);
     virtual int getK4() const;
-    virtual void setSingle(const int k);
+    virtual void setSingle(const int value);
     virtual int getSingle() const ;
-
     virtual QString getText() const;
 
+    virtual QString getNum1() const;
+    virtual void setNum1(const QString &value);
+
+    virtual QString getNum2() const;
+    virtual void setNum2(const QString &value);
+
+    virtual QString getNum3() const;
+    virtual void setNum3(const QString &value);
+
+    virtual QString getNum4() const;
+    virtual void setNum4(const QString &value);
+
 protected:
-    void setDoc(const QDomDocument doc);
-    void setName(const QString n);
+    QDomDocument getDoc() const;
+    QString getName() const;
 
 private:
     QDomDocument document;
     QString name;
 
     int k1, k2, k3, k4, single;
+    QString num1, num2, num3, num4;
 };
 
 class TestKo1 : public Test
@@ -149,21 +161,21 @@ public:
 class Calibration : public QObject
 {
 public:
-    explicit Calibration(QObject *parent = 0);
+    explicit Calibration(QDomDocument doc, QString n, QObject *parent = 0);
     ~Calibration();
 
     virtual QDate getDate() const;
     virtual void setDate(const QDate &value);
 
     int getWrite_time() const;
-    void setWrite_time(int value);
+    void setWrite_time(const int value);
 
     int getIncube_time() const;
     void setIncube_time(int value);
 
 protected:
-    void setDoc(const QDomDocument doc);
-    void setName(const QString n);
+    QDomDocument getDoc() const;
+    QString getName() const;
 
 private:
     QDomDocument document;
@@ -189,8 +201,8 @@ public:
     explicit CalibrationKo2();
     ~CalibrationKo2();
 
-    QDate getReaget_date() const;
-    void setReaget_date(const QDate &value);
+    QDate getReagent_date() const;
+    void setReagent_date(const QDate &value);
 
     QDate getK_plazma_date() const;
     void setK_plazma_date(const QDate &value);
