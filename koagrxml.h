@@ -65,7 +65,7 @@ class Test : public QObject
     Q_OBJECT
 public:
     explicit Test(QDomDocument doc, QString n, QObject *parent = 0);
-    ~Test();
+    virtual ~Test();
     virtual void setK1(const int value);
     virtual int getK1() const;
     virtual void setK2(const int value);
@@ -90,6 +90,9 @@ public:
     virtual QString getNum4() const;
     virtual void setNum4(const QString &value);
 
+    virtual void save();
+    virtual void load();
+
 protected:
     QDomDocument getDoc() const;
     QString getName() const;
@@ -107,7 +110,7 @@ class TestKo1 : public Test
     Q_OBJECT
 public:
     explicit TestKo1(QObject *parent = 0);
-    ~TestKo1();
+    virtual ~TestKo1();
 };
 
 class TestKo2 : public Test
@@ -173,11 +176,14 @@ public:
     int getIncube_time() const;
     void setIncube_time(int value);
 
+    virtual void save();
+    virtual void load();
+
 protected:
     QDomDocument getDoc() const;
     QString getName() const;
 
-private:
+protected:
     QDomDocument document;
     QString name;
 
@@ -218,10 +224,15 @@ public:
 
 private:
     //входные
-    QDate reaget_date, k_plazma_date;
+    QDate reagent_date, k_plazma_date;
     QString reagent_serial, k_plazma_serial;
     //выходные
     double a4tv_k_plazma;
+
+    // Calibration interface
+public:
+    void save() override;
+    void load() override;
 };
 
 class CalibrationKo3 : public Calibration
@@ -269,6 +280,11 @@ private:
     double fibrinogen_200_plazma, time_200_plazma;
     double fibrinogen_50_plazma, time_50_plazma;
     double fibrinogen_25_plazma, time_25_plazma;
+
+    // Calibration interface
+public:
+    void save() override;
+    void load() override;
 };
 
 class CalibrationKo4 : public Calibration
@@ -302,6 +318,11 @@ private:
     QString reagent_serial, k_plazma_serial;
     QString action; //стартовый реагент
     double trombine_time;
+
+    // Calibration interface
+public:
+    void save() override;
+    void load() override;
 };
 
 class CalibrationKo5 : public Calibration
@@ -368,6 +389,11 @@ private:
     double protrombine_25_Kvik, time_25_Kvik;
     double protrombine_12_Kvik, time_12_Kvik;
     double protrombine_index, protrombine_otn;
+
+    // Calibration interface
+public:
+    void save() override;
+    void load() override;
 };
 
 class CalibrationAgr1 : public Calibration
@@ -396,6 +422,11 @@ private:
     QDate reagent_date;
     QString reagent_serial;
     double k_concentration, level_0, level_100;
+
+    // Calibration interface
+public:
+    void save() override;
+    void load() override;
 };
 
 class CalibrationAgr2 : public Calibration
@@ -458,10 +489,15 @@ public:
 
 private:
     QDate reagent_date, k_plazma_date;
-    int incube_time_1, incube_time_2;
-
     QString reagent_serial, k_plazma_serial;
+
+    int incube_time_1, incube_time_2;
     double k_plazma, level_0, level_100;
     double c1, ck1, c2, ck2, c3, ck3, c4, ck4;
+
+    // Calibration interface
+public:
+    void save() override;
+    void load() override;
 };
 #endif // KOAGRXML_H
