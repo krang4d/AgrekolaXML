@@ -10,8 +10,6 @@ int Test();
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-
-    KoAgrXML docxml;
     //docxml.createTestKo1();
     TestKo1 t_ko1;
     //qDebug() << "Text XML" << t_ko1.getText();

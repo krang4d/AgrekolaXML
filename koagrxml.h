@@ -7,11 +7,10 @@
 #include <QDate>
 #include <QObject>
 
-class CreateKoAgr : public QObject
+class CreateKoAgr
 {
-    Q_OBJECT
 public:
-    explicit CreateKoAgr(QObject *parent = 0);
+    CreateKoAgr() = delete;
     static QDomDocument createTestKo(QString name);
     static QDomDocument createTestAgr(QString name);
     static int writeFile(QString name, QDomDocument doc);
@@ -20,9 +19,8 @@ public:
 
 class KoAgrXML : public CreateKoAgr
 {
-    Q_OBJECT
 public:
-    explicit KoAgrXML(QObject *parent = 0);
+    KoAgrXML() =  delete;
     static QDomDocument createTestKo1();
     static QDomDocument createTestKo2();
     static QDomDocument createTestKo3();
@@ -306,11 +304,23 @@ public:
     QString getK_plazma_serial() const;
     void setK_plazma_serial(const QString &value);
 
-    QString getAction() const;
-    void setAction(const QString &value);
+    double getTv1_time() const;
+    void setTv1_time(double value);
 
-    double getTrombine_time() const;
-    void setTrombine_time(double value);
+    double getTv2_time() const;
+    void setTv2_time(double value);
+
+    double getTv3_time() const;
+    void setTv3_time(double value);
+
+    double getTv1_concentration() const;
+    void setTv1_concentration(double value);
+
+    double getTv2_concentration() const;
+    void setTv2_concentration(double value);
+
+    double getTv3_concentration() const;
+    void setTv3_concentration(double value);
 
 private:
     QDate reagent_date, k_plazma_date;
@@ -318,6 +328,8 @@ private:
     QString reagent_serial, k_plazma_serial;
     QString action; //стартовый реагент
     double trombine_time;
+    double tv1_time, tv2_time, tv3_time;
+    double tv1_concentration, tv2_concentration, tv3_concentration;
 
     // Calibration interface
 public:

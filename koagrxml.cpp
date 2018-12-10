@@ -1,10 +1,5 @@
 #include "koagrxml.h"
 
-CreateKoAgr::CreateKoAgr(QObject *parent) : QObject(parent)
-{
-
-}
-
 QDomDocument CreateKoAgr::createTestKo(QString name) {
 
     QDomDocument document;
@@ -73,11 +68,6 @@ int CreateKoAgr::readFile(QString name, QDomDocument &doc)
         file.close();
     }
     return 0;
-}
-
-KoAgrXML::KoAgrXML(QObject *parent) : CreateKoAgr(parent)
-{
-
 }
 
 QDomDocument KoAgrXML::createTestKo1()
@@ -210,7 +200,12 @@ QDomDocument KoAgrXML::createCalibrationKo4()
     calibration.appendChild(document.createElement("k_plazma_serial"));
     calibration.appendChild(document.createElement("k_plazma_date"));
     calibration.appendChild(document.createElement("action"));
-    calibration.appendChild(document.createElement("trombine_time"));
+    calibration.appendChild(document.createElement("tv1_concentration"));
+    calibration.appendChild(document.createElement("tv1_time"));
+    calibration.appendChild(document.createElement("tv2_concentration"));
+    calibration.appendChild(document.createElement("tv2_time"));
+    calibration.appendChild(document.createElement("tv3_concentration"));
+    calibration.appendChild(document.createElement("tv3_time"));
     calibration.appendChild(document.createElement("write_time"));
     calibration.appendChild(document.createElement("incube_time"));
 
@@ -1120,24 +1115,64 @@ void CalibrationKo4::setK_plazma_serial(const QString &value)
     k_plazma_serial = value;
 }
 
-QString CalibrationKo4::getAction() const
+double CalibrationKo4::getTv3_concentration() const
 {
-    return action;
+    return tv3_concentration;
 }
 
-void CalibrationKo4::setAction(const QString &value)
+void CalibrationKo4::setTv3_concentration(double value)
 {
-    action = value;
+    tv3_concentration = value;
 }
 
-double CalibrationKo4::getTrombine_time() const
+double CalibrationKo4::getTv2_concentration() const
 {
-    return trombine_time;
+    return tv2_concentration;
 }
 
-void CalibrationKo4::setTrombine_time(double value)
+void CalibrationKo4::setTv2_concentration(double value)
 {
-    trombine_time = value;
+    tv2_concentration = value;
+}
+
+double CalibrationKo4::getTv1_concentration() const
+{
+    return tv1_concentration;
+}
+
+void CalibrationKo4::setTv1_concentration(double value)
+{
+    tv1_concentration = value;
+}
+
+double CalibrationKo4::getTv3_time() const
+{
+    return tv3_time;
+}
+
+void CalibrationKo4::setTv3_time(double value)
+{
+    tv3_time = value;
+}
+
+double CalibrationKo4::getTv2_time() const
+{
+    return tv2_time;
+}
+
+void CalibrationKo4::setTv2_time(double value)
+{
+    tv2_time = value;
+}
+
+double CalibrationKo4::getTv1_time() const
+{
+    return tv1_time;
+}
+
+void CalibrationKo4::setTv1_time(double value)
+{
+    tv1_time = value;
 }
 
 void CalibrationKo4::save()
@@ -1148,10 +1183,14 @@ void CalibrationKo4::save()
     KoAgrXML::setElement(document, QString("reagent_serial"), reagent_serial);
     KoAgrXML::setElement(document, QString("k_plazma_serial"), k_plazma_serial);
 
-    KoAgrXML::setElement(document, QString("action"), action);
+    KoAgrXML::setElement(document, QString("tv1_concentration"), QString("%1").arg(tv1_concentration));
+    KoAgrXML::setElement(document, QString("tv1_time"), QString("%1").arg(tv1_time));
 
+    KoAgrXML::setElement(document, QString("tv2_concentration"), QString("%1").arg(tv2_concentration));
+    KoAgrXML::setElement(document, QString("tv2_time"), QString("%1").arg(tv2_time));
 
-    KoAgrXML::setElement(document, QString("trombine_time"), QString("%1").arg(trombine_time));
+    KoAgrXML::setElement(document, QString("tv3_concentration"), QString("%1").arg(tv3_concentration));
+    KoAgrXML::setElement(document, QString("tv3_time"), QString("%1").arg(tv3_time));
 
     CreateKoAgr::writeFile(name, document);
     qDebug() << "CalibrationKo4::save()";
@@ -1172,11 +1211,20 @@ void CalibrationKo4::load()
     value = KoAgrXML::getElement(document, QString("k_plazma_serial"));
     k_plazma_serial = value;
 
-    value = KoAgrXML::getElement(document, QString("action"));
-    action = value;
+    value = KoAgrXML::getElement(document, QString("tv1_concentration"));
+    tv1_concentration = value.toDouble();
+    value = KoAgrXML::getElement(document, QString("tv1_time"));
+    tv1_time = value.toDouble();
 
-    value = KoAgrXML::getElement(document, QString("trombine_time"));
-    trombine_time = value.toDouble();
+    value = KoAgrXML::getElement(document, QString("tv2_concentration"));
+    tv2_concentration = value.toDouble();
+    value = KoAgrXML::getElement(document, QString("tv2_time"));
+    tv2_time = value.toDouble();
+
+    value = KoAgrXML::getElement(document, QString("tv3_concentration"));
+    tv3_concentration = value.toDouble();
+    value = KoAgrXML::getElement(document, QString("tv3_time"));
+    tv3_time = value.toDouble();
 }
 
 CalibrationKo5::CalibrationKo5()
