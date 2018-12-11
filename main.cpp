@@ -13,12 +13,15 @@ int main(int argc, char *argv[])
     //docxml.createTestKo1();
     TestKo1 t_ko1;
     //qDebug() << "Text XML" << t_ko1.getText();
+    int i = t_ko1.getK1();
+    qDebug() << "integer = " << i;
     t_ko1.setK1(7);
+    t_ko1.setNum1("123");
     t_ko1.save();
     qDebug() << "K1 = " << t_ko1.getK1();
 
     TestKo2 t_ko2;
-    t_ko2.setK1(11);
+    t_ko2.setK1(12);
     t_ko2.save();
     qDebug() <<  "K1 = " << t_ko2.getK1();
 

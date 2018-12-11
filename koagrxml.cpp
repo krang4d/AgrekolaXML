@@ -593,10 +593,10 @@ void Test::save()
     KoAgrXML::setElement(document, QString("k4"), QString("%1").arg(k4));
     KoAgrXML::setElement(document, QString("single"), QString("%1").arg(single));
 
-    KoAgrXML::setElement(document, QString("k1"), QString("%1").arg(k1), "Num");
-    KoAgrXML::setElement(document, QString("k2"), QString("%1").arg(k2), "Num");
-    KoAgrXML::setElement(document, QString("k3"), QString("%1").arg(k3), "Num");
-    KoAgrXML::setElement(document, QString("k4"), QString("%1").arg(k4), "Num");
+    KoAgrXML::setElement(document, QString("k1"), num1, "Num");
+    KoAgrXML::setElement(document, QString("k2"), num2, "Num");
+    KoAgrXML::setElement(document, QString("k3"), num3, "Num");
+    KoAgrXML::setElement(document, QString("k4"), num4, "Num");
 
     CreateKoAgr::writeFile(name, document);
     qDebug() << "Test::save()";
@@ -657,7 +657,7 @@ void Test::setNum1(const QString &value)
 }
 
 TestKo1::TestKo1(QObject *parent)
-    : Test(KoAgrXML::createTestKo1(), "testKo1", parent)
+    : Test(KoAgrXML::openTestKo1(), "testKo1", parent)
 {}
 
 TestKo1::~TestKo1()
@@ -666,42 +666,42 @@ TestKo1::~TestKo1()
 }
 
 TestKo2::TestKo2(QObject *parent)
-    : Test(KoAgrXML::createTestKo2(), "testKo2", parent)
+    : Test(KoAgrXML::openTestKo2(), "testKo2", parent)
 {}
 
 TestKo2::~TestKo2()
 {}
 
 TestKo3::TestKo3(QObject *parent)
-    : Test(KoAgrXML::createTestKo3(), "testKo3", parent)
+    : Test(KoAgrXML::openTestKo3(), "testKo3", parent)
 {}
 
 TestKo3::~TestKo3()
 {}
 
 TestKo4::TestKo4(QObject *parent)
-    : Test(KoAgrXML::createTestKo4(), "testKo4", parent)
+    : Test(KoAgrXML::openTestKo4(), "testKo4", parent)
 {}
 
 TestKo4::~TestKo4()
 {}
 
 TestKo5::TestKo5(QObject *parent)
-    : Test(KoAgrXML::createTestKo5(), "testKo5", parent)
+    : Test(KoAgrXML::openTestKo5(), "testKo5", parent)
 {}
 
 TestKo5::~TestKo5()
 {}
 
 TestAgr1::TestAgr1(QObject *parent)
-    : Test(KoAgrXML::createTestAgr1(), "testAgr1", parent)
+    : Test(KoAgrXML::openTestAgr1(), "testAgr1", parent)
 {}
 
 TestAgr1::~TestAgr1()
 {}
 
 TestAgr2::TestAgr2(QObject *parent)
-    : Test(KoAgrXML::createTestAgr2(), "testAgr2", parent)
+    : Test(KoAgrXML::openTestAgr2(), "testAgr2", parent)
 {}
 
 TestAgr2::~TestAgr2()
