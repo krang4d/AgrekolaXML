@@ -217,15 +217,27 @@ public:
     QString getK_plazma_serial() const;
     void setK_plazma_serial(const QString &value);
 
-    double getA4tv_k_plazma() const;
-    void setA4tv_k_plazma(double value);
+    double getA4tv_kp1() const;
+    void setA4tv_kp1(double value);
+
+    double getA4tv_kp2() const;
+    void setA4tv_kp2(double value);
+
+    double getA4tv_kp3() const;
+    void setA4tv_kp3(double value);
+
+    double getA4tv_kp4() const;
+    void setA4tv_kp4(double value);
 
 private:
     //входные
     QDate reagent_date, k_plazma_date;
     QString reagent_serial, k_plazma_serial;
     //выходные
-    double a4tv_k_plazma;
+    double a4tv_kp1;
+    double a4tv_kp2;
+    double a4tv_kp3;
+    double a4tv_kp4;
 
     // Calibration interface
 public:

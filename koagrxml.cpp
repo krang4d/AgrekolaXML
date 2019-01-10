@@ -136,8 +136,13 @@ QDomDocument KoAgrXML::createCalibrationKo1()
     calibration.appendChild(document.createElement("reagent_serial"));
     calibration.appendChild(document.createElement("reagent_date"));
 
-    calibration.appendChild(document.createElement("write_time"));
-    calibration.appendChild(document.createElement("incube_time"));
+    QDomElement write_time = document.createElement("write_time");
+    write_time.setAttribute("Value", "10");
+    calibration.appendChild(write_time);
+
+    QDomElement incube_time = document.createElement("incube_time");
+    incube_time.setAttribute("Value", "3");
+    calibration.appendChild(incube_time);
 
     writeFile(name, document);
     return document;
@@ -154,7 +159,22 @@ QDomDocument KoAgrXML::createCalibrationKo2()
     calibration.appendChild(document.createElement("reagent_date"));
     calibration.appendChild(document.createElement("k_plazma_serial"));
     calibration.appendChild(document.createElement("k_plazma_date"));
-    calibration.appendChild(document.createElement("a4tv_k_plazma"));
+
+    QDomElement a4tv = document.createElement("a4tv_kp1");
+    a4tv.setAttribute("Value", "0");
+    calibration.appendChild(a4tv);
+
+    a4tv = document.createElement("a4tv_kp2");
+    a4tv.setAttribute("Value", "0");
+    calibration.appendChild(a4tv);
+
+    a4tv = document.createElement("a4tv_kp3");
+    a4tv.setAttribute("Value", "0");
+    calibration.appendChild(a4tv);
+
+    a4tv = document.createElement("a4tv_kp4");
+    a4tv.setAttribute("Value", "0");
+    calibration.appendChild(a4tv);
 
     calibration.appendChild(document.createElement("write_time"));
     calibration.appendChild(document.createElement("incube_time"));
@@ -858,14 +878,44 @@ void CalibrationKo2::setK_plazma_serial(const QString &value)
     k_plazma_serial = value;
 }
 
-double CalibrationKo2::getA4tv_k_plazma() const
+double CalibrationKo2::getA4tv_kp4() const
 {
-    return a4tv_k_plazma;
+    return a4tv_kp4;
 }
 
-void CalibrationKo2::setA4tv_k_plazma(double value)
+void CalibrationKo2::setA4tv_kp4(double value)
 {
-    a4tv_k_plazma = value;
+    a4tv_kp4 = value;
+}
+
+double CalibrationKo2::getA4tv_kp3() const
+{
+    return a4tv_kp3;
+}
+
+void CalibrationKo2::setA4tv_kp3(double value)
+{
+    a4tv_kp3 = value;
+}
+
+double CalibrationKo2::getA4tv_kp2() const
+{
+    return a4tv_kp2;
+}
+
+void CalibrationKo2::setA4tv_kp2(double value)
+{
+    a4tv_kp2 = value;
+}
+
+double CalibrationKo2::getA4tv_kp1() const
+{
+    return a4tv_kp1;
+}
+
+void CalibrationKo2::setA4tv_kp1(double value)
+{
+    a4tv_kp1 = value;
 }
 
 void CalibrationKo2::save()
@@ -874,7 +924,10 @@ void CalibrationKo2::save()
     KoAgrXML::setElement(document, QString("k_plazma_date"), k_plazma_date.toString("yyyyMMdd"));
     KoAgrXML::setElement(document, QString("reagent_serial"), reagent_serial);
     KoAgrXML::setElement(document, QString("k_plazma_serial"), k_plazma_serial);
-    KoAgrXML::setElement(document, QString("a4tv_k_plazma"), QString("%1").arg(a4tv_k_plazma));
+    KoAgrXML::setElement(document, QString("a4tv_kp1"), QString("%1").arg(a4tv_kp1));
+    KoAgrXML::setElement(document, QString("a4tv_kp2"), QString("%1").arg(a4tv_kp2));
+    KoAgrXML::setElement(document, QString("a4tv_kp3"), QString("%1").arg(a4tv_kp3));
+    KoAgrXML::setElement(document, QString("a4tv_kp4"), QString("%1").arg(a4tv_kp4));
     CreateKoAgr::writeFile(name, document);
     qDebug() << "CalibrationKo2::save()";
 }
@@ -894,8 +947,14 @@ void CalibrationKo2::load()
     value = KoAgrXML::getElement(document, QString("k_plazma_serial"));
     k_plazma_serial = value.toInt();
 
-    value = KoAgrXML::getElement(document, QString("a4tv_k_plazma"));
-    a4tv_k_plazma = value.toInt();
+    value = KoAgrXML::getElement(document, QString("a4tv_kp1"));
+    a4tv_kp1 = value.toDouble();
+    value = KoAgrXML::getElement(document, QString("a4tv_kp2"));
+    a4tv_kp2 = value.toDouble();
+    value = KoAgrXML::getElement(document, QString("a4tv_kp3"));
+    a4tv_kp3 = value.toDouble();
+    value = KoAgrXML::getElement(document, QString("a4tv_kp4"));
+    a4tv_kp4 = value.toDouble();
 }
 
 CalibrationKo3::CalibrationKo3()
