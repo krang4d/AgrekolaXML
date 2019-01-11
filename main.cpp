@@ -23,7 +23,16 @@ int main(int argc, char *argv[])
     TestKo2 t_ko2;
     t_ko2.setK1(12);
     t_ko2.save();
-    qDebug() <<  "K1 = " << t_ko2.getK1();
+
+    qDebug() << QDir::currentPath();
+    CalibrationKo2 c_ko2;
+    c_ko2.setK_plazma_date(QDate::currentDate());
+    c_ko2.save();
+    CalibrationKo3 c_ko3;
+    c_ko3.setFibrinogen_25_plazma(4.16);
+    c_ko3.setFibrinogen_50_plazma(50.55);
+    qDebug() <<  "25_plazma = " << c_ko3.getFibrinogen_25_plazma();
+    c_ko3.save();
 
 //    docxml.createTestKo2();
 //    docxml.createTestKo3();

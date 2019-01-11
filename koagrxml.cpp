@@ -815,7 +815,7 @@ QString Calibration::getName() const
 }
 
 CalibrationKo1::CalibrationKo1()
-    : Calibration(KoAgrXML::createCalibrationKo1(), "calibrationKo1")
+    : Calibration(KoAgrXML::openCalibrationKo1(), "calibrationKo1")
 {
     //Calibration::setDoc(KoAgrXML::createCalibrationKo1());
     //Calibration::setName("calibrationKo1");
@@ -825,7 +825,7 @@ CalibrationKo1::~CalibrationKo1()
 {}
 
 CalibrationKo2::CalibrationKo2()
-    : Calibration(KoAgrXML::createCalibrationKo2(), "calibrationKo2")
+    : Calibration(KoAgrXML::openCalibrationKo2(), "calibrationKo2")
 {
     load();
     //Calibration::setDoc(KoAgrXML::createCalibrationKo2());
@@ -958,7 +958,7 @@ void CalibrationKo2::load()
 }
 
 CalibrationKo3::CalibrationKo3()
-    : Calibration(KoAgrXML::createCalibrationKo3(), "calibrationKo3")
+    : Calibration(KoAgrXML::openCalibrationKo3(), "calibrationKo3")
 {
     load();
 }
@@ -1124,7 +1124,7 @@ void CalibrationKo3::load()
 }
 
 CalibrationKo4::CalibrationKo4()
-    : Calibration(KoAgrXML::createCalibrationKo4(), "calibrationKo4")
+    : Calibration(KoAgrXML::openCalibrationKo4(), "calibrationKo4")
 {
     load();
 }
@@ -1287,7 +1287,7 @@ void CalibrationKo4::load()
 }
 
 CalibrationKo5::CalibrationKo5()
-    : Calibration(KoAgrXML::createCalibrationKo5(), "calibrationKo5")
+    : Calibration(KoAgrXML::openCalibrationKo5(), "calibrationKo5")
 {
     load();
 }
@@ -1526,7 +1526,7 @@ void CalibrationKo5::load()
 }
 
 CalibrationAgr1::CalibrationAgr1()
-    : Calibration(KoAgrXML::createCalibrationAgr1(), "calibrationAgr1")
+    : Calibration(KoAgrXML::openCalibrationAgr1(), "calibrationAgr1")
 {
     load();
 }
@@ -1619,7 +1619,7 @@ void CalibrationAgr1::load()
 }
 
 CalibrationAgr2::CalibrationAgr2()
-    : Calibration(KoAgrXML::createCalibrationAgr2(), "calibrationAgr2")
+    : Calibration(KoAgrXML::openCalibrationAgr2(), "calibrationAgr2")
 {
     load();
 }
