@@ -761,23 +761,22 @@ void Calibration::setDate(const QDate &value)
     date = value;
 }
 
-int Calibration::getWrite_time() const
+double Calibration::getWrite_time() const
 {
     return write_time;
 }
 
-void Calibration::setWrite_time(const int value)
+void Calibration::setWrite_time(const double value)
 {
     write_time = value;
 }
 
-int Calibration::getIncube_time() const
+double Calibration::getIncube_time() const
 {
-
     return incube_time;
 }
 
-void Calibration::setIncube_time(int value)
+void Calibration::setIncube_time(double value)
 {
     incube_time = value;
 }
@@ -798,10 +797,10 @@ void Calibration::load()
     date = QDate::fromString(value, QString("yyyyMMdd"));
 
     value = KoAgrXML::getElement(document, QString("write_time"));
-    write_time = value.toInt();
+    write_time = value.toDouble();
 
     value = KoAgrXML::getElement(document, QString("incube_time"));
-    incube_time = value.toInt();
+    incube_time = value.toDouble();
 }
 
 QDomDocument Calibration::getDoc() const
@@ -822,7 +821,9 @@ CalibrationKo1::CalibrationKo1()
 }
 
 CalibrationKo1::~CalibrationKo1()
-{}
+{
+
+}
 
 CalibrationKo2::CalibrationKo2()
     : Calibration(KoAgrXML::openCalibrationKo2(), "calibrationKo2")
@@ -920,6 +921,7 @@ void CalibrationKo2::setA4tv_kp1(double value)
 
 void CalibrationKo2::save()
 {
+    Calibration::save();
     KoAgrXML::setElement(document, QString("reaget_date"), reagent_date.toString("yyyyMMdd"));
     KoAgrXML::setElement(document, QString("k_plazma_date"), k_plazma_date.toString("yyyyMMdd"));
     KoAgrXML::setElement(document, QString("reagent_serial"), reagent_serial);
@@ -934,6 +936,7 @@ void CalibrationKo2::save()
 
 void CalibrationKo2::load()
 {
+    Calibration::load();
     QString value;
     value = KoAgrXML::getElement(document, QString("reagent_date"));
     reagent_date = QDate::fromString(value, QString("yyyyMMdd"));
@@ -1070,6 +1073,7 @@ void CalibrationKo3::setTime_25_plazma(double value)
 
 void CalibrationKo3::save()
 {
+    Calibration::save();
     KoAgrXML::setElement(document, QString("reagent_date"), reagent_date.toString("yyyyMMdd"));
     KoAgrXML::setElement(document, QString("reagent_serial"), reagent_serial);
 
@@ -1091,6 +1095,7 @@ void CalibrationKo3::save()
 
 void CalibrationKo3::load()
 {
+    Calibration::load();
     QString value;
     value = KoAgrXML::getElement(document, QString("reagent_date"));
     reagent_date = QDate::fromString(value, QString("yyyyMMdd"));
@@ -1236,6 +1241,7 @@ void CalibrationKo4::setTv1_time(double value)
 
 void CalibrationKo4::save()
 {
+    Calibration::save();
     KoAgrXML::setElement(document, QString("reagent_date"), reagent_date.toString("yyyyMMdd"));
     KoAgrXML::setElement(document, QString("k_plazma_date"), k_plazma_date.toString("yyyyMMdd"));
 
@@ -1257,6 +1263,7 @@ void CalibrationKo4::save()
 
 void CalibrationKo4::load()
 {
+    Calibration::load();
     QString value;
     value = KoAgrXML::getElement(document, QString("reagent_date"));
     reagent_date = QDate::fromString(value, QString("yyyyMMdd"));
@@ -1459,6 +1466,7 @@ void CalibrationKo5::setProtrombine_otn(double value)
 
 void CalibrationKo5::save()
 {
+    Calibration::save();
     KoAgrXML::setElement(document, QString("tromboplastin_date"), tromboplastin_date.toString("yyyyMMdd"));
     KoAgrXML::setElement(document, QString("k_plazma_date"), k_plazma_date.toString("yyyyMMdd"));
 
@@ -1484,6 +1492,7 @@ void CalibrationKo5::save()
 
 void CalibrationKo5::load()
 {
+    Calibration::load();
     QString value;
     value = KoAgrXML::getElement(document, QString("tromboplastin_date"));
     tromboplastin_date = QDate::fromString(value, QString("yyyyMMdd"));
@@ -1588,6 +1597,7 @@ void CalibrationAgr1::setLevel_100(double value)
 
 void CalibrationAgr1::save()
 {
+    CalibrationAgr1::save();
     KoAgrXML::setElement(document, QString("reagent_date"), reagent_date.toString("yyyyMMdd"));
 
     KoAgrXML::setElement(document, QString("reagent_serial"), reagent_serial);
@@ -1601,6 +1611,7 @@ void CalibrationAgr1::save()
 
 void CalibrationAgr1::load()
 {
+    CalibrationAgr2::load();
     QString value;
     value = KoAgrXML::getElement(document, QString("reagent_date"));
     reagent_date = QDate::fromString(value, QString("yyyyMMdd"));

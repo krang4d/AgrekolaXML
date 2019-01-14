@@ -163,16 +163,16 @@ class Calibration : public QObject
 {
 public:
     explicit Calibration(QDomDocument doc, QString n, QObject *parent = 0);
-    ~Calibration();
+    virtual ~Calibration();
 
     virtual QDate getDate() const;
     virtual void setDate(const QDate &value);
 
-    int getWrite_time() const;
-    void setWrite_time(const int value);
+    double getWrite_time() const;
+    void setWrite_time(const double value);
 
-    int getIncube_time() const;
-    void setIncube_time(int value);
+    double getIncube_time() const;
+    void setIncube_time(const double value);
 
     virtual void save();
     virtual void load();
@@ -187,7 +187,7 @@ protected:
 
 private:
     QDate date;
-    int write_time, incube_time;
+    double write_time, incube_time;
 };
 
 class CalibrationKo1 : public Calibration
@@ -195,7 +195,7 @@ class CalibrationKo1 : public Calibration
     Q_OBJECT
 public:
     explicit CalibrationKo1();
-    ~CalibrationKo1();
+    virtual ~CalibrationKo1();
 };
 
 class CalibrationKo2 : public Calibration
