@@ -191,7 +191,9 @@ QDomDocument KoAgrXML::createCalibrationKo3()
     document.appendChild(calibration);
     calibration.appendChild(document.createElement("date"));
     calibration.appendChild(document.createElement("reagent_serial"));
-    calibration.appendChild(document.createElement("reagent_date"));
+    calibration.appendChild(document.createElement("reagent_date"));   
+    calibration.appendChild(document.createElement("k_plazma_serial"));
+    calibration.appendChild(document.createElement("k_plazma_date"));
     calibration.appendChild(document.createElement("fibrinogen_k_plazma"));
     calibration.appendChild(document.createElement("time_k_plazma"));
     calibration.appendChild(document.createElement("fibrinogen_200_plazma"));
@@ -240,6 +242,8 @@ QDomDocument KoAgrXML::createCalibrationKo5()
     QDomElement calibration = document.createElement(name);
     document.appendChild(calibration);
     calibration.appendChild(document.createElement("date"));
+    calibration.appendChild(document.createElement("reagent_date"));
+    calibration.appendChild(document.createElement("reagent_serial"));
     calibration.appendChild(document.createElement("tromboplastin_serial"));
     calibration.appendChild(document.createElement("tromboplastin_date"));
     calibration.appendChild(document.createElement("k_plazma_serial"));
@@ -923,8 +927,8 @@ void CalibrationKo2::save()
 {
     Calibration::save();
     KoAgrXML::setElement(document, QString("reaget_date"), reagent_date.toString("yyyyMMdd"));
-    KoAgrXML::setElement(document, QString("k_plazma_date"), k_plazma_date.toString("yyyyMMdd"));
     KoAgrXML::setElement(document, QString("reagent_serial"), reagent_serial);
+    KoAgrXML::setElement(document, QString("k_plazma_date"), k_plazma_date.toString("yyyyMMdd"));
     KoAgrXML::setElement(document, QString("k_plazma_serial"), k_plazma_serial);
     KoAgrXML::setElement(document, QString("a4tv_kp1"), QString("%1").arg(a4tv_kp1));
     KoAgrXML::setElement(document, QString("a4tv_kp2"), QString("%1").arg(a4tv_kp2));
@@ -1071,11 +1075,34 @@ void CalibrationKo3::setTime_25_plazma(double value)
     time_25_plazma = value;
 }
 
+QString CalibrationKo3::getK_plazma_serial() const
+{
+    return k_plazma_serial;
+}
+
+void CalibrationKo3::setK_plazma_serial(const QString &value)
+{
+    k_plazma_serial = value;
+}
+
+QDate CalibrationKo3::getK_plazma_date() const
+{
+    return k_plazma_date;
+}
+
+void CalibrationKo3::setK_plazma_date(const QDate &value)
+{
+    k_plazma_date = value;
+}
+
 void CalibrationKo3::save()
 {
     Calibration::save();
     KoAgrXML::setElement(document, QString("reagent_date"), reagent_date.toString("yyyyMMdd"));
     KoAgrXML::setElement(document, QString("reagent_serial"), reagent_serial);
+
+    KoAgrXML::setElement(document, QString("k_plazma_date"), k_plazma_date.toString("yyyyMMdd"));
+    KoAgrXML::setElement(document, QString("k_plazma_serial"), k_plazma_serial);
 
     KoAgrXML::setElement(document, QString("fibrinogen_k_plazma"), QString("%1").arg(fibrinogen_k_plazma));
     KoAgrXML::setElement(document, QString("time_k_plazma"), QString("%1").arg(time_k_plazma));
@@ -1268,11 +1295,11 @@ void CalibrationKo4::load()
     value = KoAgrXML::getElement(document, QString("reagent_date"));
     reagent_date = QDate::fromString(value, QString("yyyyMMdd"));
 
-    value = KoAgrXML::getElement(document, QString("k_plazma_date"));
-    k_plazma_date = QDate::fromString(value, QString("yyyyMMdd"));
-
     value = KoAgrXML::getElement(document, QString("reagent_serial"));
     reagent_serial = value;
+
+    value = KoAgrXML::getElement(document, QString("k_plazma_date"));
+    k_plazma_date = QDate::fromString(value, QString("yyyyMMdd"));
 
     value = KoAgrXML::getElement(document, QString("k_plazma_serial"));
     k_plazma_serial = value;
@@ -1464,13 +1491,36 @@ void CalibrationKo5::setProtrombine_otn(double value)
     protrombine_otn = value;
 }
 
+QString CalibrationKo5::getReagent_serial() const
+{
+    return reagent_serial;
+}
+
+void CalibrationKo5::setReagent_serial(const QString &value)
+{
+    reagent_serial = value;
+}
+
+QDate CalibrationKo5::getReagent_date() const
+{
+    return reagent_date;
+}
+
+void CalibrationKo5::setReagent_date(const QDate &value)
+{
+    reagent_date = value;
+}
+
 void CalibrationKo5::save()
 {
     Calibration::save();
-    KoAgrXML::setElement(document, QString("tromboplastin_date"), tromboplastin_date.toString("yyyyMMdd"));
-    KoAgrXML::setElement(document, QString("k_plazma_date"), k_plazma_date.toString("yyyyMMdd"));
+    KoAgrXML::setElement(document, QString("reagent_date"), reagent_date.toString("yyyyMMdd"));
+    KoAgrXML::setElement(document, QString("reagent_serial"), reagent_serial);
 
-    KoAgrXML::setElement(document, QString("tromboplastin_serial"), tromboplastin_serial);
+    KoAgrXML::setElement(document, QString("tromboplastin_date"), tromboplastin_date.toString("yyyyMMdd"));
+        KoAgrXML::setElement(document, QString("tromboplastin_serial"), tromboplastin_serial);
+
+    KoAgrXML::setElement(document, QString("k_plazma_date"), k_plazma_date.toString("yyyyMMdd"));
     KoAgrXML::setElement(document, QString("k_plazma_serial"), k_plazma_serial);
 
     KoAgrXML::setElement(document, QString("k_protrombine_index"), QString("%1").arg(k_protrombine_index));
@@ -1494,14 +1544,21 @@ void CalibrationKo5::load()
 {
     Calibration::load();
     QString value;
+
+    value = KoAgrXML::getElement(document, QString("reagent_date"));
+    reagent_date = QDate::fromString(value, QString("yyyyMMdd"));
+
+    value = KoAgrXML::getElement(document, QString("reagent_serial"));
+    reagent_serial = value;
+
     value = KoAgrXML::getElement(document, QString("tromboplastin_date"));
     tromboplastin_date = QDate::fromString(value, QString("yyyyMMdd"));
 
-    value = KoAgrXML::getElement(document, QString("k_plazma_date"));
-    k_plazma_date = QDate::fromString(value, QString("yyyyMMdd"));
-
     value = KoAgrXML::getElement(document, QString("tromboplastin_serial"));
     tromboplastin_serial = value;
+
+    value = KoAgrXML::getElement(document, QString("k_plazma_date"));
+    k_plazma_date = QDate::fromString(value, QString("yyyyMMdd"));
 
     value = KoAgrXML::getElement(document, QString("k_plazma_serial"));
     k_plazma_serial = value;
@@ -1595,6 +1652,16 @@ void CalibrationAgr1::setLevel_100(double value)
     level_100 = value;
 }
 
+double CalibrationAgr1::getIncube_time_2() const
+{
+    return incube_time_2;
+}
+
+void CalibrationAgr1::setIncube_time_2(double value)
+{
+    incube_time_2 = value;
+}
+
 void CalibrationAgr1::save()
 {
     CalibrationAgr1::save();
@@ -1611,10 +1678,13 @@ void CalibrationAgr1::save()
 
 void CalibrationAgr1::load()
 {
-    CalibrationAgr2::load();
+    Calibration::load();
     QString value;
     value = KoAgrXML::getElement(document, QString("reagent_date"));
     reagent_date = QDate::fromString(value, QString("yyyyMMdd"));
+
+    value = KoAgrXML::getElement(document, QString("incube_time_2"));
+    incube_time_2 = value.toDouble();
 
     value = KoAgrXML::getElement(document, QString("reagent_serial"));
     reagent_serial = value;

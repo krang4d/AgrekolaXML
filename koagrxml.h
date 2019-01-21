@@ -258,6 +258,12 @@ public:
     QString getReagent_serial() const;
     void setReagent_serial(const QString &value);
 
+    QDate getK_plazma_date() const;
+    void setK_plazma_date(const QDate &value);
+
+    QString getK_plazma_serial() const;
+    void setK_plazma_serial(const QString &value);
+
     double getFibrinogen_k_plazma() const;
     void setFibrinogen_k_plazma(double value);
 
@@ -283,8 +289,8 @@ public:
     void setTime_25_plazma(double value);
 
 private:
-    QDate reagent_date;
-    QString reagent_serial;
+    QDate reagent_date, k_plazma_date;
+    QString reagent_serial, k_plazma_serial;
 
     double fibrinogen_k_plazma, time_k_plazma;
     double fibrinogen_200_plazma, time_200_plazma;
@@ -356,6 +362,12 @@ public:
     explicit CalibrationKo5();
     ~CalibrationKo5();
 
+    QDate getReagent_date() const;
+    void setReagent_date(const QDate &value);
+
+    QString getReagent_serial() const;
+    void setReagent_serial(const QString &value);
+
     QDate getTromboplastin_date() const;
     void setTromboplastin_date(const QDate &value);
 
@@ -405,8 +417,8 @@ public:
     void setProtrombine_otn(double value);
 
 private:
-    QDate tromboplastin_date, k_plazma_date;
-    QString tromboplastin_serial, k_plazma_serial;
+    QDate reagent_date, tromboplastin_date, k_plazma_date;
+    QString reagent_serial, tromboplastin_serial, k_plazma_serial;
     double k_protrombine_index, k_protrombine_otn;
     double protrombine_k_Kvik, time_k_Kvik;
     double protrombine_50_Kvik, time_50_Kvik;
@@ -442,9 +454,13 @@ public:
     double getLevel_100() const;
     void setLevel_100(double value);
 
+    double getIncube_time_2() const;
+    void setIncube_time_2(double value);
+
 private:
     QDate reagent_date;
     QString reagent_serial;
+    double incube_time_2;
     double k_concentration, level_0, level_100;
 
     // Calibration interface
