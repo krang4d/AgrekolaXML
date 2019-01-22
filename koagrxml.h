@@ -6,28 +6,32 @@
 #include <QFile>
 #include <QDate>
 #include <QObject>
+#include <QDir>
 
 class CreateKoAgr
 {
 public:
     CreateKoAgr() = delete;
-    static QDomDocument createTestKo(QString name);
-    static QDomDocument createTestAgr(QString name);
+    static QDomDocument createTest(QString name);
+    static QDomDocument createCalibration(QString name);
+    //static QDomDocument createTestAgr(QString name);
     static int writeFile(QString name, QDomDocument doc);
     static int readFile(QString name, QDomDocument &doc);
+
+    static QDir getXMLDir();
 };
 
 class KoAgrXML : public CreateKoAgr
 {
 public:
     KoAgrXML() =  delete;
-    static QDomDocument createTestKo1();
-    static QDomDocument createTestKo2();
-    static QDomDocument createTestKo3();
-    static QDomDocument createTestKo4();
-    static QDomDocument createTestKo5();
-    static QDomDocument createTestAgr1();
-    static QDomDocument createTestAgr2();
+//    static QDomDocument createTestKo1();
+//    static QDomDocument createTestKo2();
+//    static QDomDocument createTestKo3();
+//    static QDomDocument createTestKo4();
+//    static QDomDocument createTestKo5();
+//    static QDomDocument createTestAgr1();
+//    static QDomDocument createTestAgr2();
 
     static QDomDocument createCalibrationKo1();
     static QDomDocument createCalibrationKo2();
@@ -37,13 +41,13 @@ public:
     static QDomDocument createCalibrationAgr1();
     static QDomDocument createCalibrationAgr2();
 
-    static QDomDocument openTestKo1();
-    static QDomDocument openTestKo2();
-    static QDomDocument openTestKo3();
-    static QDomDocument openTestKo4();
-    static QDomDocument openTestKo5();
-    static QDomDocument openTestAgr1();
-    static QDomDocument openTestAgr2();
+//    static QDomDocument openTestKo1();
+//    static QDomDocument openTestKo2();
+//    static QDomDocument openTestKo3();
+//    static QDomDocument openTestKo4();
+//    static QDomDocument openTestKo5();
+//    static QDomDocument openTestAgr1();
+//    static QDomDocument openTestAgr2();
 
     static QDomDocument openCalibrationKo1();
     static QDomDocument openCalibrationKo2();
@@ -52,17 +56,13 @@ public:
     static QDomDocument openCalibrationKo5();
     static QDomDocument openCalibrationAgr1();
     static QDomDocument openCalibrationAgr2();
-
-    static void ListElement(QDomElement root, QString tagname, QString attribute);
-    static QString getElement(QDomDocument root, QString tagname, QString attribute = "Value");
-    static void setElement(QDomDocument &root, QString tagname, QString value, QString attribute = "Value");
 };
 
 class Test : public QObject
 {
     Q_OBJECT
 public:
-    explicit Test(QDomDocument doc, QString n, QObject *parent = 0);
+    explicit Test(QString n, QObject *parent = 0);
     virtual ~Test();
     virtual void setK1(const int value);
     virtual int getK1() const;
@@ -88,6 +88,10 @@ public:
     virtual QString getNum4() const;
     virtual void setNum4(const QString &value);
 
+    virtual void ListElement(QDomElement root, QString tagname, QString attribute);
+    virtual QString getElement(QDomDocument root, QString tagname, QString attribute = "Value");
+    virtual void setElement(QDomDocument &root, QString tagname, QString value, QString attribute = "Value");
+
     virtual void save();
     virtual void load();
 
@@ -95,9 +99,11 @@ protected:
     QDomDocument getDoc() const;
     QString getName() const;
 
+
 private:
     QDomDocument document;
     QString name;
+    QDir dir;
 
     int k1, k2, k3, k4, single;
     QString num1, num2, num3, num4;
@@ -174,6 +180,10 @@ public:
     double getIncube_time() const;
     void setIncube_time(const double value);
 
+    virtual void ListElement(QDomElement root, QString tagname, QString attribute);
+    virtual QString getElement(QDomDocument root, QString tagname, QString attribute = "Value");
+    virtual void setElement(QDomDocument &root, QString tagname, QString value, QString attribute = "Value");
+
     virtual void save();
     virtual void load();
 
@@ -184,6 +194,7 @@ protected:
 protected:
     QDomDocument document;
     QString name;
+    QDir dir;
 
 private:
     QDate date;
