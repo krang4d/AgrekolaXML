@@ -33,13 +33,13 @@ public:
 //    static QDomDocument createTestAgr1();
 //    static QDomDocument createTestAgr2();
 
-    static QDomDocument createCalibrationKo1();
-    static QDomDocument createCalibrationKo2();
-    static QDomDocument createCalibrationKo3();
-    static QDomDocument createCalibrationKo4();
-    static QDomDocument createCalibrationKo5();
-    static QDomDocument createCalibrationAgr1();
-    static QDomDocument createCalibrationAgr2();
+//    static QDomDocument createCalibrationKo1();
+//    static QDomDocument createCalibrationKo2();
+//    static QDomDocument createCalibrationKo3();
+//    static QDomDocument createCalibrationKo4();
+//    static QDomDocument createCalibrationKo5();
+//    static QDomDocument createCalibrationAgr1();
+//    static QDomDocument createCalibrationAgr2();
 
 //    static QDomDocument openTestKo1();
 //    static QDomDocument openTestKo2();
@@ -49,13 +49,13 @@ public:
 //    static QDomDocument openTestAgr1();
 //    static QDomDocument openTestAgr2();
 
-    static QDomDocument openCalibrationKo1();
-    static QDomDocument openCalibrationKo2();
-    static QDomDocument openCalibrationKo3();
-    static QDomDocument openCalibrationKo4();
-    static QDomDocument openCalibrationKo5();
-    static QDomDocument openCalibrationAgr1();
-    static QDomDocument openCalibrationAgr2();
+//    static QDomDocument openCalibrationKo1();
+//    static QDomDocument openCalibrationKo2();
+//    static QDomDocument openCalibrationKo3();
+//    static QDomDocument openCalibrationKo4();
+//    static QDomDocument openCalibrationKo5();
+//    static QDomDocument openCalibrationAgr1();
+//    static QDomDocument openCalibrationAgr2();
 };
 
 class Test : public QObject
@@ -100,7 +100,7 @@ protected:
     QString getName() const;
 
 
-private:
+protected:
     QDomDocument document;
     QString name;
     QDir dir;
@@ -168,7 +168,7 @@ public:
 class Calibration : public QObject
 {
 public:
-    explicit Calibration(QDomDocument doc, QString n, QObject *parent = 0);
+    explicit Calibration(QString n, QObject *parent = 0);
     virtual ~Calibration();
 
     virtual QDate getDate() const;
@@ -205,7 +205,7 @@ class CalibrationKo1 : public Calibration
 {
     Q_OBJECT
 public:
-    explicit CalibrationKo1();
+    explicit CalibrationKo1(QObject *parent = 0);
     virtual ~CalibrationKo1();
 };
 
@@ -213,7 +213,7 @@ class CalibrationKo2 : public Calibration
 {
     Q_OBJECT
 public:
-    explicit CalibrationKo2();
+    explicit CalibrationKo2(QObject *parent = 0);
     ~CalibrationKo2();
 
     QDate getReagent_date() const;
@@ -260,7 +260,7 @@ class CalibrationKo3 : public Calibration
 {
     Q_OBJECT
 public:
-    explicit CalibrationKo3();
+    explicit CalibrationKo3(QObject *parent = 0);
     ~CalibrationKo3();
 
     QDate getReagent_date() const;
@@ -318,7 +318,7 @@ class CalibrationKo4 : public Calibration
 {
     Q_OBJECT
 public:
-    explicit CalibrationKo4();
+    explicit CalibrationKo4(QObject *parent = 0);
     ~CalibrationKo4();
 
     QDate getReagent_date() const;
@@ -370,7 +370,7 @@ class CalibrationKo5 : public Calibration
 {
     Q_OBJECT
 public:
-    explicit CalibrationKo5();
+    explicit CalibrationKo5(QObject *parent = 0);
     ~CalibrationKo5();
 
     QDate getReagent_date() const;
@@ -447,7 +447,7 @@ class CalibrationAgr1 : public Calibration
 {
     Q_OBJECT
 public:
-    explicit CalibrationAgr1();
+    explicit CalibrationAgr1(QObject *parent = 0);
     ~CalibrationAgr1();
 
     QDate getReagent_date() const;
@@ -484,7 +484,7 @@ class CalibrationAgr2 : public Calibration
 {
     Q_OBJECT
 public:
-    explicit CalibrationAgr2();
+    explicit CalibrationAgr2(QObject *parent = 0);
     ~CalibrationAgr2();
 
     QDate getReagent_date() const;

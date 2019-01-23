@@ -53,8 +53,7 @@ int CreateKoAgr::writeFile(QString name, QDomDocument doc)
 //    qDebug() << "cur_dir at start" << cur_dir.path();
 //    QDir xml_dir = getXMLDir();
 //    QDir::setCurrent(xml_dir.path());
-    //qDebug() << "KoAgrXML::openTestKo1() cur_dir" << QDir::currentPath() << "xml_dir.dirName()" << xml_dir.path();
-    //dir.dirName();
+//    qDebug() << "KoAgrXML::openTestKo1() cur_dir" << QDir::currentPath() << "xml_dir.dirName()" << xml_dir.path();
     QFile file(name + QString(".xml"));
     if(!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
         qDebug() << "Faild to open file for write";
@@ -72,12 +71,12 @@ int CreateKoAgr::writeFile(QString name, QDomDocument doc)
 
 int CreateKoAgr::readFile(QString name, QDomDocument &doc)
 {
-//    QDir cur_dir = QDir::current();
-//    qDebug() << "cur_dir at start" << cur_dir.path();
-//    QDir xml_dir = getXMLDir();
-//    QDir::setCurrent(xml_dir.path());
-//    //qDebug() << "KoAgrXML::openTestKo1() cur_dir" << QDir::currentPath() << "xml_dir.dirName()" << xml_dir.path();
-//    //dir.dirName();
+    //QDir cur_dir = QDir::current();
+    //qDebug() << "cur_dir at start" << cur_dir.path();
+    //QDir xml_dir = getXMLDir();
+    //QDir::setCurrent(xml_dir.path());
+    //qDebug() << "KoAgrXML::openTestKo1() cur_dir" << QDir::currentPath() << "xml_dir.dirName()" << xml_dir.path();
+    //dir.dirName();
     QFile file(name + QString(".xml"));
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         qDebug() << "Faild to open file for read";
@@ -91,6 +90,7 @@ int CreateKoAgr::readFile(QString name, QDomDocument &doc)
         }
         file.close();
     }
+    file.close();
     //QDir::setCurrent(cur_dir.path());
     //qDebug() << "cur_dir at stop" << cur_dir.path();
     return 0;
@@ -171,206 +171,206 @@ QDir CreateKoAgr::getXMLDir()
 //    return document;
 //}
 
-QDomDocument KoAgrXML::createCalibrationKo1()
-{
-    QString name("calibrationKo1");
-    QDomDocument document = createCalibration(name);
-    QDomElement calibration = document.firstChildElement();
-    calibration.appendChild(document.createElement("date"));
-    calibration.appendChild(document.createElement("reagent_serial"));
-    calibration.appendChild(document.createElement("reagent_date"));
+//QDomDocument KoAgrXML::createCalibrationKo1()
+//{
+//    QString name("calibrationKo1");
+//    QDomDocument document = createCalibration(name);
+//    QDomElement calibration = document.firstChildElement();
+//    calibration.appendChild(document.createElement("date"));
+//    calibration.appendChild(document.createElement("reagent_serial"));
+//    calibration.appendChild(document.createElement("reagent_date"));
 
-    QDomElement write_time = document.createElement("write_time");
-    write_time.setAttribute("Value", "10");
-    calibration.appendChild(write_time);
+//    QDomElement write_time = document.createElement("write_time");
+//    write_time.setAttribute("Value", "10");
+//    calibration.appendChild(write_time);
 
-    QDomElement incube_time = document.createElement("incube_time");
-    incube_time.setAttribute("Value", "3");
-    calibration.appendChild(incube_time);
+//    QDomElement incube_time = document.createElement("incube_time");
+//    incube_time.setAttribute("Value", "3");
+//    calibration.appendChild(incube_time);
 
-    writeFile(name, document);
-    return document;
-}
+//    writeFile(name, document);
+//    return document;
+//}
 
-QDomDocument KoAgrXML::createCalibrationKo2()
-{
-    QString name("calibrationKo2");
-    QDomDocument document = createCalibration(name);
-    QDomElement calibration = document.firstChildElement();
-    calibration.appendChild(document.createElement("date"));
-    calibration.appendChild(document.createElement("reagent_serial"));
-    calibration.appendChild(document.createElement("reagent_date"));
-    calibration.appendChild(document.createElement("k_plazma_serial"));
-    calibration.appendChild(document.createElement("k_plazma_date"));
+//QDomDocument KoAgrXML::createCalibrationKo2()
+//{
+//    QString name("calibrationKo2");
+//    QDomDocument document = createCalibration(name);
+//    QDomElement calibration = document.firstChildElement();
+//    calibration.appendChild(document.createElement("date"));
+//    calibration.appendChild(document.createElement("reagent_serial"));
+//    calibration.appendChild(document.createElement("reagent_date"));
+//    calibration.appendChild(document.createElement("k_plazma_serial"));
+//    calibration.appendChild(document.createElement("k_plazma_date"));
 
-    QDomElement a4tv = document.createElement("a4tv_kp1");
-    a4tv.setAttribute("Value", "0");
-    calibration.appendChild(a4tv);
+//    QDomElement a4tv = document.createElement("a4tv_kp1");
+//    a4tv.setAttribute("Value", "0");
+//    calibration.appendChild(a4tv);
 
-    a4tv = document.createElement("a4tv_kp2");
-    a4tv.setAttribute("Value", "0");
-    calibration.appendChild(a4tv);
+//    a4tv = document.createElement("a4tv_kp2");
+//    a4tv.setAttribute("Value", "0");
+//    calibration.appendChild(a4tv);
 
-    a4tv = document.createElement("a4tv_kp3");
-    a4tv.setAttribute("Value", "0");
-    calibration.appendChild(a4tv);
+//    a4tv = document.createElement("a4tv_kp3");
+//    a4tv.setAttribute("Value", "0");
+//    calibration.appendChild(a4tv);
 
-    a4tv = document.createElement("a4tv_kp4");
-    a4tv.setAttribute("Value", "0");
-    calibration.appendChild(a4tv);
+//    a4tv = document.createElement("a4tv_kp4");
+//    a4tv.setAttribute("Value", "0");
+//    calibration.appendChild(a4tv);
 
-    calibration.appendChild(document.createElement("write_time"));
-    calibration.appendChild(document.createElement("incube_time"));
+//    calibration.appendChild(document.createElement("write_time"));
+//    calibration.appendChild(document.createElement("incube_time"));
 
-    writeFile(name, document);
-    return document;
-}
+//    writeFile(name, document);
+//    return document;
+//}
 
-QDomDocument KoAgrXML::createCalibrationKo3()
-{
-    QString name("calibrationKo3");
-    QDomDocument document = createCalibration(name);
-    QDomElement calibration = document.firstChildElement();
-    calibration.appendChild(document.createElement("date"));
-    calibration.appendChild(document.createElement("reagent_serial"));
-    calibration.appendChild(document.createElement("reagent_date"));   
-    calibration.appendChild(document.createElement("k_plazma_serial"));
-    calibration.appendChild(document.createElement("k_plazma_date"));
-    calibration.appendChild(document.createElement("fibrinogen_k_plazma"));
-    calibration.appendChild(document.createElement("time_k_plazma"));
-    calibration.appendChild(document.createElement("fibrinogen_200_plazma"));
-    calibration.appendChild(document.createElement("time_200_plazma"));
-    calibration.appendChild(document.createElement("fibrinogen_50_plazma"));
-    calibration.appendChild(document.createElement("time_50_plazma"));
-    calibration.appendChild(document.createElement("fibrinogen_25_plazma"));
-    calibration.appendChild(document.createElement("time_25_plazma"));
+//QDomDocument KoAgrXML::createCalibrationKo3()
+//{
+//    QString name("calibrationKo3");
+//    QDomDocument document = createCalibration(name);
+//    QDomElement calibration = document.firstChildElement();
+//    calibration.appendChild(document.createElement("date"));
+//    calibration.appendChild(document.createElement("reagent_serial"));
+//    calibration.appendChild(document.createElement("reagent_date"));
+//    calibration.appendChild(document.createElement("k_plazma_serial"));
+//    calibration.appendChild(document.createElement("k_plazma_date"));
+//    calibration.appendChild(document.createElement("fibrinogen_k_plazma"));
+//    calibration.appendChild(document.createElement("time_k_plazma"));
+//    calibration.appendChild(document.createElement("fibrinogen_200_plazma"));
+//    calibration.appendChild(document.createElement("time_200_plazma"));
+//    calibration.appendChild(document.createElement("fibrinogen_50_plazma"));
+//    calibration.appendChild(document.createElement("time_50_plazma"));
+//    calibration.appendChild(document.createElement("fibrinogen_25_plazma"));
+//    calibration.appendChild(document.createElement("time_25_plazma"));
 
-    calibration.appendChild(document.createElement("write_time"));
-    calibration.appendChild(document.createElement("incube_time"));
+//    calibration.appendChild(document.createElement("write_time"));
+//    calibration.appendChild(document.createElement("incube_time"));
 
-    writeFile(name, document);
-    return document;
-}
+//    writeFile(name, document);
+//    return document;
+//}
 
-QDomDocument KoAgrXML::createCalibrationKo4()
-{
-    QString name("calibrationKo4");
-    QDomDocument document = createCalibration(name);
-    QDomElement calibration = document.firstChildElement();
-    calibration.appendChild(document.createElement("date"));
-    calibration.appendChild(document.createElement("reagent_serial"));
-    calibration.appendChild(document.createElement("reagent_date"));
-    calibration.appendChild(document.createElement("k_plazma_serial"));
-    calibration.appendChild(document.createElement("k_plazma_date"));
-    calibration.appendChild(document.createElement("action"));
-    calibration.appendChild(document.createElement("tv1_concentration"));
-    calibration.appendChild(document.createElement("tv1_time"));
-    calibration.appendChild(document.createElement("tv2_concentration"));
-    calibration.appendChild(document.createElement("tv2_time"));
-    calibration.appendChild(document.createElement("tv3_concentration"));
-    calibration.appendChild(document.createElement("tv3_time"));
-    calibration.appendChild(document.createElement("write_time"));
-    calibration.appendChild(document.createElement("incube_time"));
+//QDomDocument KoAgrXML::createCalibrationKo4()
+//{
+//    QString name("calibrationKo4");
+//    QDomDocument document = createCalibration(name);
+//    QDomElement calibration = document.firstChildElement();
+//    calibration.appendChild(document.createElement("date"));
+//    calibration.appendChild(document.createElement("reagent_serial"));
+//    calibration.appendChild(document.createElement("reagent_date"));
+//    calibration.appendChild(document.createElement("k_plazma_serial"));
+//    calibration.appendChild(document.createElement("k_plazma_date"));
+//    calibration.appendChild(document.createElement("action"));
+//    calibration.appendChild(document.createElement("tv1_concentration"));
+//    calibration.appendChild(document.createElement("tv1_time"));
+//    calibration.appendChild(document.createElement("tv2_concentration"));
+//    calibration.appendChild(document.createElement("tv2_time"));
+//    calibration.appendChild(document.createElement("tv3_concentration"));
+//    calibration.appendChild(document.createElement("tv3_time"));
+//    calibration.appendChild(document.createElement("write_time"));
+//    calibration.appendChild(document.createElement("incube_time"));
 
-    writeFile(name, document);
-    return document;
-}
+//    writeFile(name, document);
+//    return document;
+//}
 
-QDomDocument KoAgrXML::createCalibrationKo5()
-{
-    QString name("calibrationKo5");
-    QDomDocument document = createCalibration(name);
-    QDomElement calibration = document.firstChildElement();
-    calibration.appendChild(document.createElement("date"));
-    calibration.appendChild(document.createElement("reagent_date"));
-    calibration.appendChild(document.createElement("reagent_serial"));
-    calibration.appendChild(document.createElement("tromboplastin_serial"));
-    calibration.appendChild(document.createElement("tromboplastin_date"));
-    calibration.appendChild(document.createElement("k_plazma_serial"));
-    calibration.appendChild(document.createElement("k_plazma_date"));
-    calibration.appendChild(document.createElement("k_protrombine_index"));
-    calibration.appendChild(document.createElement("k_protrombine_otn"));
-    calibration.appendChild(document.createElement("protrombine_k_Kvik"));
-    calibration.appendChild(document.createElement("time_k_Kvik"));
+//QDomDocument KoAgrXML::createCalibrationKo5()
+//{
+//    QString name("calibrationKo5");
+//    QDomDocument document = createCalibration(name);
+//    QDomElement calibration = document.firstChildElement();
+//    calibration.appendChild(document.createElement("date"));
+//    calibration.appendChild(document.createElement("reagent_date"));
+//    calibration.appendChild(document.createElement("reagent_serial"));
+//    calibration.appendChild(document.createElement("tromboplastin_serial"));
+//    calibration.appendChild(document.createElement("tromboplastin_date"));
+//    calibration.appendChild(document.createElement("k_plazma_serial"));
+//    calibration.appendChild(document.createElement("k_plazma_date"));
+//    calibration.appendChild(document.createElement("k_protrombine_index"));
+//    calibration.appendChild(document.createElement("k_protrombine_otn"));
+//    calibration.appendChild(document.createElement("protrombine_k_Kvik"));
+//    calibration.appendChild(document.createElement("time_k_Kvik"));
 
-    calibration.appendChild(document.createElement("protrombine_50_Kvik"));
-    calibration.appendChild(document.createElement("time_50_Kvik"));
+//    calibration.appendChild(document.createElement("protrombine_50_Kvik"));
+//    calibration.appendChild(document.createElement("time_50_Kvik"));
 
-    calibration.appendChild(document.createElement("protrombine_25_Kvik"));
-    calibration.appendChild(document.createElement("time_25_Kvik"));
+//    calibration.appendChild(document.createElement("protrombine_25_Kvik"));
+//    calibration.appendChild(document.createElement("time_25_Kvik"));
 
-    calibration.appendChild(document.createElement("protrombine_12_Kvik"));
-    calibration.appendChild(document.createElement("time_12_Kvik"));
+//    calibration.appendChild(document.createElement("protrombine_12_Kvik"));
+//    calibration.appendChild(document.createElement("time_12_Kvik"));
 
-    calibration.appendChild(document.createElement("protrombine_index"));
-    calibration.appendChild(document.createElement("protrombine_otn"));
+//    calibration.appendChild(document.createElement("protrombine_index"));
+//    calibration.appendChild(document.createElement("protrombine_otn"));
 
-    calibration.appendChild(document.createElement("write_time"));
-    calibration.appendChild(document.createElement("incube_time"));
+//    calibration.appendChild(document.createElement("write_time"));
+//    calibration.appendChild(document.createElement("incube_time"));
 
-    writeFile(name, document);
-    return document;
-}
+//    writeFile(name, document);
+//    return document;
+//}
 
-QDomDocument KoAgrXML::createCalibrationAgr1()
-{
-    qDebug() << "QDomDocument KoAgrXML::createCalibrationAgr1()";
-    QString name("calibrationAgr1");
-    QDomDocument document = createCalibration(name);
-    QDomElement calibration = document.firstChildElement();
-    //входные данные
-    calibration.appendChild(document.createElement("date"));
-    calibration.appendChild(document.createElement("reagent_serial"));
-    calibration.appendChild(document.createElement("reagent_date"));
-    calibration.appendChild(document.createElement("k_concentration"));
+//QDomDocument KoAgrXML::createCalibrationAgr1()
+//{
+//    qDebug() << "QDomDocument KoAgrXML::createCalibrationAgr1()";
+//    QString name("calibrationAgr1");
+//    QDomDocument document = createCalibration(name);
+//    QDomElement calibration = document.firstChildElement();
+//    //входные данные
+//    calibration.appendChild(document.createElement("date"));
+//    calibration.appendChild(document.createElement("reagent_serial"));
+//    calibration.appendChild(document.createElement("reagent_date"));
+//    calibration.appendChild(document.createElement("k_concentration"));
 
-    calibration.appendChild(document.createElement("write_time"));
-    calibration.appendChild(document.createElement("incube_time"));
-    calibration.appendChild(document.createElement("incube_time_2"));
-    //выходные данные
-    calibration.appendChild(document.createElement("level_0"));
-    calibration.appendChild(document.createElement("level_100"));
+//    calibration.appendChild(document.createElement("write_time"));
+//    calibration.appendChild(document.createElement("incube_time"));
+//    calibration.appendChild(document.createElement("incube_time_2"));
+//    //выходные данные
+//    calibration.appendChild(document.createElement("level_0"));
+//    calibration.appendChild(document.createElement("level_100"));
 
-    writeFile(name, document);
-    return document;
-}
+//    writeFile(name, document);
+//    return document;
+//}
 
-QDomDocument KoAgrXML::createCalibrationAgr2()
-{
-    QString name("calibrationAgr2");
-    QDomDocument document = createCalibration(name);
-    QDomElement calibration = document.firstChildElement();
-    //входные данные
-    calibration.appendChild(document.createElement("date"));
+//QDomDocument KoAgrXML::createCalibrationAgr2()
+//{
+//    QString name("calibrationAgr2");
+//    QDomDocument document = createCalibration(name);
+//    QDomElement calibration = document.firstChildElement();
+//    //входные данные
+//    calibration.appendChild(document.createElement("date"));
 
-    calibration.appendChild(document.createElement("write_time"));
-    calibration.appendChild(document.createElement("incube_time"));
-    calibration.appendChild(document.createElement("incube_time_2"));
+//    calibration.appendChild(document.createElement("write_time"));
+//    calibration.appendChild(document.createElement("incube_time"));
+//    calibration.appendChild(document.createElement("incube_time_2"));
 
-    calibration.appendChild(document.createElement("reagent_serial"));
-    calibration.appendChild(document.createElement("reagent_date"));
-    calibration.appendChild(document.createElement("k_plazma_serial"));
-    calibration.appendChild(document.createElement("k_plazma_date"));
-    calibration.appendChild(document.createElement("k_plazma"));
-    //выходные данные
-    calibration.appendChild(document.createElement("level_0"));
-    calibration.appendChild(document.createElement("level_100"));
+//    calibration.appendChild(document.createElement("reagent_serial"));
+//    calibration.appendChild(document.createElement("reagent_date"));
+//    calibration.appendChild(document.createElement("k_plazma_serial"));
+//    calibration.appendChild(document.createElement("k_plazma_date"));
+//    calibration.appendChild(document.createElement("k_plazma"));
+//    //выходные данные
+//    calibration.appendChild(document.createElement("level_0"));
+//    calibration.appendChild(document.createElement("level_100"));
 
-    calibration.appendChild(document.createElement("c1"));
-    calibration.appendChild(document.createElement("ck1"));
+//    calibration.appendChild(document.createElement("c1"));
+//    calibration.appendChild(document.createElement("ck1"));
 
-    calibration.appendChild(document.createElement("c2"));
-    calibration.appendChild(document.createElement("ck2"));
+//    calibration.appendChild(document.createElement("c2"));
+//    calibration.appendChild(document.createElement("ck2"));
 
-    calibration.appendChild(document.createElement("c3"));
-    calibration.appendChild(document.createElement("ck3"));
+//    calibration.appendChild(document.createElement("c3"));
+//    calibration.appendChild(document.createElement("ck3"));
 
-    calibration.appendChild(document.createElement("c4"));
-    calibration.appendChild(document.createElement("ck4"));
+//    calibration.appendChild(document.createElement("c4"));
+//    calibration.appendChild(document.createElement("ck4"));
 
-    writeFile(name, document);
-    return document;
-}
+//    writeFile(name, document);
+//    return document;
+//}
 
 //QDomDocument openXML(QString name, std::function<QDomDocument(void)> fun)
 //{
@@ -461,96 +461,183 @@ QDomDocument KoAgrXML::createCalibrationAgr2()
 //    return doc;
 //}
 
-QDomDocument KoAgrXML::openCalibrationKo1()
-{
-    QDomDocument doc;
-    QString name("calibrationKo1");
-    if( QFile::exists(name + QString(".xml")) ) {
-        readFile(name, doc);
-    }
-    else doc = createCalibrationKo1();
-    return doc;
-}
+//QDomDocument KoAgrXML::openCalibrationKo1()
+//{
+//    QDomDocument doc;
+//    QString name("calibrationKo1");
+//    if( QFile::exists(name + QString(".xml")) ) {
+//        readFile(name, doc);
+//    }
+//    else doc = createCalibrationKo1();
+//    return doc;
+//}
 
-QDomDocument KoAgrXML::openCalibrationKo2()
-{
-    QDomDocument doc;
-    QString name("calibrationKo2");
-    if( QFile::exists(name + QString(".xml")) ) {
-        readFile(name, doc);
-    }
-    else doc = createCalibrationKo2();
-    return doc;
-}
+//QDomDocument KoAgrXML::openCalibrationKo2()
+//{
+//    QDomDocument doc;
+//    QString name("calibrationKo2");
+//    if( QFile::exists(name + QString(".xml")) ) {
+//        readFile(name, doc);
+//    }
+//    else doc = createCalibrationKo2();
+//    return doc;
+//}
 
-QDomDocument KoAgrXML::openCalibrationKo3()
-{
-    QDomDocument doc;
-    QString name("calibrationKo3");
-    if( QFile::exists(name + QString(".xml")) ) {
-        readFile(name, doc);
-    }
-    else doc = createCalibrationKo3();
-    return doc;
-}
+//QDomDocument KoAgrXML::openCalibrationKo3()
+//{
+//    QDomDocument doc;
+//    QString name("calibrationKo3");
+//    if( QFile::exists(name + QString(".xml")) ) {
+//        readFile(name, doc);
+//    }
+//    else doc = createCalibrationKo3();
+//    return doc;
+//}
 
-QDomDocument KoAgrXML::openCalibrationKo4()
-{
-    QDomDocument doc;
-    QString name("calibrationKo4");
-    if( QFile::exists(name + QString(".xml")) ) {
-        readFile(name, doc);
-    }
-    else doc = createCalibrationKo4();
-    return doc;
-}
+//QDomDocument KoAgrXML::openCalibrationKo4()
+//{
+//    QDomDocument doc;
+//    QString name("calibrationKo4");
+//    if( QFile::exists(name + QString(".xml")) ) {
+//        readFile(name, doc);
+//    }
+//    else doc = createCalibrationKo4();
+//    return doc;
+//}
 
-QDomDocument KoAgrXML::openCalibrationKo5()
-{
-    QDomDocument doc;
-    QString name("calibrationKo5");
-    if( QFile::exists(name + QString(".xml")) ) {
-        readFile(name, doc);
-    }
-    else doc = createCalibrationKo5();
-    return doc;
-}
+//QDomDocument KoAgrXML::openCalibrationKo5()
+//{
+//    QDomDocument doc;
+//    QString name("calibrationKo5");
+//    if( QFile::exists(name + QString(".xml")) ) {
+//        readFile(name, doc);
+//    }
+//    else doc = createCalibrationKo5();
+//    return doc;
+//}
 
-QDomDocument KoAgrXML::openCalibrationAgr1()
-{
-    qDebug() << "QDomDocument KoAgrXML::openCalibrationAgr1() dir: " << QDir::currentPath();
-    QDomDocument doc;
-    QString name("calibrationAgr1");
-    if( QFile::exists(name + QString(".xml")) ) {
-        readFile(name, doc);
-    }
-    else doc = createCalibrationAgr1();
-    return doc;
-}
+//QDomDocument KoAgrXML::openCalibrationAgr1()
+//{
+//    qDebug() << "QDomDocument KoAgrXML::openCalibrationAgr1() dir: " << QDir::currentPath();
+//    QDomDocument doc;
+//    QString name("calibrationAgr1");
+//    if( QFile::exists(name + QString(".xml")) ) {
+//        readFile(name, doc);
+//    }
+//    else doc = createCalibrationAgr1();
+//    return doc;
+//}
 
-QDomDocument KoAgrXML::openCalibrationAgr2()
-{
-    QDomDocument doc;
-    QString name("calibrationAgr2");
-    if( QFile::exists(name + QString(".xml")) ) {
-        readFile(name, doc);
-    }
-    else doc = createCalibrationAgr2();
-    return doc;
-}
+//QDomDocument KoAgrXML::openCalibrationAgr2()
+//{
+//    QDomDocument doc;
+//    QString name("calibrationAgr2");
+//    if( QFile::exists(name + QString(".xml")) ) {
+//        readFile(name, doc);
+//    }
+//    else doc = createCalibrationAgr2();
+//    return doc;
+//}
 
 Test::Test(QString n, QObject *parent) : QObject(parent)
 {
     name = n;
-    dir = QDir::current();
+
+    dir = KoAgrXML::getXMLDir();
+    QDir::setCurrent(dir.path());
+    qDebug() << "name" << name << "dir" << dir.currentPath();
     load();
     //document = KoAgrXML::openTest();
 }
 
+void Test::load()
+{
+    QDir::setCurrent(dir.path());
+    if( QFile::exists(name  + QString(".xml")) ) {
+        CreateKoAgr::readFile(name, document);
+    }
+    else {
+        document = CreateKoAgr::createTest(name);
+        KoAgrXML::writeFile(name, document);
+    }
+
+    QString value;
+    value = getElement(document, QString("k1"));
+    k1 = value.toInt();
+
+    value = getElement(document, QString("k2"));
+    k2 = value.toInt();
+
+    value = getElement(document, QString("k3"));
+    k3 = value.toInt();
+
+    value = getElement(document, QString("k4"));
+    k4 = value.toInt();
+
+    value = getElement(document, QString("single"));
+    single = value.toInt();
+
+    num1 = getElement(document, QString("k1"), "Num");
+    num2 = getElement(document, QString("k2"), "Num");
+    num3 = getElement(document, QString("k3"), "Num");
+    num4 = getElement(document, QString("k4"), "Num");
+}
+
 Test::~Test()
 {
+    qDebug() << name << " ~Test()";
     save();
-    qDebug() << "TestKo1::~TestKo1()";
+}
+
+void Test::save()
+{
+    QDir::setCurrent(dir.path());
+    setElement(document, QString("k1"), QString("%1").arg(k1));
+    setElement(document, QString("k2"), QString("%1").arg(k2));
+    setElement(document, QString("k3"), QString("%1").arg(k3));
+    setElement(document, QString("k4"), QString("%1").arg(k4));
+    setElement(document, QString("single"), QString("%1").arg(single));
+
+    setElement(document, QString("k1"), num1, "Num");
+    setElement(document, QString("k2"), num2, "Num");
+    setElement(document, QString("k3"), num3, "Num");
+    setElement(document, QString("k4"), num4, "Num");
+
+    CreateKoAgr::writeFile(name, document);
+}
+
+void Test::ListElement(QDomElement root, QString tagname, QString attribute)
+{
+    QDomNodeList items = root.elementsByTagName(tagname);
+    qDebug() << "Total items = " << items.count();
+    for(int i =0; i < items.count(); i++) {
+        QDomNode itemnode = items.at(i);
+        //convert to element
+        if(itemnode.isElement()) {
+            QDomElement itemele = itemnode.toElement();
+            qDebug() << itemele.attribute(attribute);
+        }
+    }
+}
+
+QString Test::getElement(QDomDocument root, QString tagname, QString attribute)
+{
+    QDomNodeList items = root.elementsByTagName(tagname);
+    QDomNode itemnode = items.at(0);
+    if( itemnode.isElement()) {
+        QDomElement itemelement = itemnode.toElement();
+        return itemelement.attribute(attribute);
+    } else return QString("");
+}
+
+void Test::setElement(QDomDocument &root, QString tagname, QString value, QString attribute)
+{
+    QDomNodeList items = root.elementsByTagName(tagname);
+    QDomNode itemnode = items.at(0);
+    if( itemnode.isElement()) {
+        QDomElement itemelement = itemnode.toElement();
+        itemelement.setAttribute(attribute, value);
+    }
 }
 
 void Test::setK1(const int value)
@@ -628,89 +715,6 @@ void Test::setNum4(const QString &value)
     num4 = value;
 }
 
-void Test::ListElement(QDomElement root, QString tagname, QString attribute)
-{
-    QDomNodeList items = root.elementsByTagName(tagname);
-    qDebug() << "Total items = " << items.count();
-    for(int i =0; i < items.count(); i++) {
-        QDomNode itemnode = items.at(i);
-        //convert to element
-        if(itemnode.isElement()) {
-            QDomElement itemele = itemnode.toElement();
-            qDebug() << itemele.attribute(attribute);
-        }
-    }
-}
-
-QString Test::getElement(QDomDocument root, QString tagname, QString attribute)
-{
-    QDomNodeList items = root.elementsByTagName(tagname);
-    QDomNode itemnode = items.at(0);
-    if( itemnode.isElement()) {
-        QDomElement itemelement = itemnode.toElement();
-        return itemelement.attribute(attribute);
-    } else return QString("");
-}
-
-void Test::setElement(QDomDocument &root, QString tagname, QString value, QString attribute)
-{
-    QDomNodeList items = root.elementsByTagName(tagname);
-    QDomNode itemnode = items.at(0);
-    if( itemnode.isElement()) {
-        QDomElement itemelement = itemnode.toElement();
-        itemelement.setAttribute(attribute, value);
-    }
-}
-
-void Test::save()
-{
-    setElement(document, QString("k1"), QString("%1").arg(k1));
-    setElement(document, QString("k2"), QString("%1").arg(k2));
-    setElement(document, QString("k3"), QString("%1").arg(k3));
-    setElement(document, QString("k4"), QString("%1").arg(k4));
-    setElement(document, QString("single"), QString("%1").arg(single));
-
-    setElement(document, QString("k1"), num1, "Num");
-    setElement(document, QString("k2"), num2, "Num");
-    setElement(document, QString("k3"), num3, "Num");
-    setElement(document, QString("k4"), num4, "Num");
-
-    CreateKoAgr::writeFile(name, document);
-    qDebug() << "Test::save()";
-}
-
-void Test::load()
-{
-    QDir::setCurrent(dir.path());
-    if( QFile::exists(name  + QString(".xml")) ) {
-        CreateKoAgr::readFile(name, document);
-    }
-    else {
-        document = CreateKoAgr::createTest(name);
-    }
-
-    QString value;
-    value = getElement(document, QString("k1"));
-    k1 = value.toInt();
-
-    value = getElement(document, QString("k2"));
-    k2 = value.toInt();
-
-    value = getElement(document, QString("k3"));
-    k3 = value.toInt();
-
-    value = getElement(document, QString("k4"));
-    k4 = value.toInt();
-
-    value = getElement(document, QString("single"));
-    single = value.toInt();
-
-    num1 = getElement(document, QString("k1"), "Num");
-    num2 = getElement(document, QString("k2"), "Num");
-    num3 = getElement(document, QString("k3"), "Num");
-    num4 = getElement(document, QString("k4"), "Num");
-}
-
 QString Test::getNum3() const
 {
     return num3;
@@ -749,7 +753,7 @@ TestKo1::TestKo1(QObject *parent)
 
 TestKo1::~TestKo1()
 {
-    qDebug() << "~TestKo1()";
+    qDebug() << name << " ~TestKo1()";
 }
 
 TestKo2::TestKo2(QObject *parent)
@@ -757,90 +761,93 @@ TestKo2::TestKo2(QObject *parent)
 {}
 
 TestKo2::~TestKo2()
-{}
+{
+    qDebug() << name << " ~TestKo2()";
+}
 
 TestKo3::TestKo3(QObject *parent)
     : Test("testKo3", parent)
-{}
+{
+
+}
 
 TestKo3::~TestKo3()
-{}
+{
+    qDebug() << name << " ~TestKo3()";
+}
 
 TestKo4::TestKo4(QObject *parent)
     : Test("testKo4", parent)
 {}
 
 TestKo4::~TestKo4()
-{}
+{
+    qDebug() << name << " ~TestKo4()";
+}
 
 TestKo5::TestKo5(QObject *parent)
     : Test("testKo5", parent)
 {}
 
 TestKo5::~TestKo5()
-{}
+{
+    qDebug() << name << " ~TestKo5()";
+}
 
 TestAgr1::TestAgr1(QObject *parent)
     : Test("testAgr1", parent)
 {}
 
 TestAgr1::~TestAgr1()
-{}
+{
+    qDebug() << name << " ~TestAgr1()";
+}
 
 TestAgr2::TestAgr2(QObject *parent)
     : Test("testAgr2", parent)
 {}
 
 TestAgr2::~TestAgr2()
-{}
-
-Calibration::Calibration(QDomDocument doc, QString n, QObject *parent)
-    : QObject(parent), document(doc), name(n)
 {
-    load();
-//    QString value;
-//    value = KoAgrXML::getElement(document, QString("date"));
-//    date = QDate::fromString(value, "yyyyMMdd");
+    qDebug() << name << " ~TestAgr2()";
+}
 
-//    value = KoAgrXML::getElement(document, QString("write_time"));
-//    write_time = value.toInt();
+Calibration::Calibration(QString n, QObject *parent) : QObject(parent)
+{
+    name = n;
+    dir = KoAgrXML::getXMLDir();
+    QDir::setCurrent(dir.path());
+    qDebug() << "name" << name << "dir" << dir.currentPath();
+}
 
-//    value = KoAgrXML::getElement(document, QString("incube_time"));
-//    incube_time = value.toInt();
+void Calibration::load()
+{
+    QDir::setCurrent(dir.path());
+    QString value;
+    value = getElement(document, QString("date"));
+    date = QDate::fromString(value, QString("yyyyMMdd"));
+
+    value = getElement(document, QString("write_time"));
+    write_time = value.toDouble();
+
+    value = getElement(document, QString("incube_time"));
+    incube_time = value.toDouble();
 }
 
 Calibration::~Calibration()
 {
-//    KoAgrXML::setElement(document, QString("date"), QString("%1").arg(date.toString(QString("yyyyMMdd"))));
-//    KoAgrXML::setElement(document, QString("write_time"), QString("%1").arg(write_time));
-//    KoAgrXML::setElement(document, QString("incube_time"), QString("%1").arg(incube_time));
-//    CreateKoAgr::writeFile(name, document);
+    qDebug() << name << " ~Calibration()";
     save();
 }
 
-QDate Calibration::getDate() const
+void Calibration::save()
 {
-    return date;
-}
-
-void Calibration::setDate(const QDate &value)
-{
-    date = value;
-}
-
-double Calibration::getWrite_time() const
-{
-    return write_time;
-}
-
-void Calibration::setWrite_time(const double value)
-{
-    write_time = value;
-}
-
-double Calibration::getIncube_time() const
-{
-    return incube_time;
+    QDir::setCurrent(dir.path());
+    setElement(document, QString("date"), QString("%1").arg(date.toString("yyyyMMdd")));
+    setElement(document, QString("write_time"), QString("%1").arg(write_time));
+    setElement(document, QString("incube_time"), QString("%1").arg(incube_time));
+    CreateKoAgr::writeFile(name, document);
+    //qDebug() << "Calibration::save()";
 }
 
 void Calibration::ListElement(QDomElement root, QString tagname, QString attribute)
@@ -882,36 +889,6 @@ void Calibration::setIncube_time(double value)
     incube_time = value;
 }
 
-void Calibration::save()
-{
-    setElement(document, QString("date"), QString("%1").arg(date.toString("yyyyMMdd")));
-    setElement(document, QString("write_time"), QString("%1").arg(write_time));
-    setElement(document, QString("incube_time"), QString("%1").arg(incube_time));
-    CreateKoAgr::writeFile(name, document);
-    qDebug() << "Calibration::save()";
-}
-
-void Calibration::load()
-{
-    QDir::setCurrent(dir.path());
-    if( QFile::exists(name  + QString(".xml")) ) {
-        CreateKoAgr::readFile(name, document);
-    }
-    else {
-        document = CreateKoAgr::createTest(name);
-    }
-
-    QString value;
-    value = getElement(document, QString("date"));
-    date = QDate::fromString(value, QString("yyyyMMdd"));
-
-    value = getElement(document, QString("write_time"));
-    write_time = value.toDouble();
-
-    value = getElement(document, QString("incube_time"));
-    incube_time = value.toDouble();
-}
-
 QDomDocument Calibration::getDoc() const
 {
     return document;
@@ -922,29 +899,149 @@ QString Calibration::getName() const
     return name;
 }
 
-CalibrationKo1::CalibrationKo1()
-    : Calibration(KoAgrXML::openCalibrationKo1(), "calibrationKo1")
+QDate Calibration::getDate() const
 {
-    //Calibration::setDoc(KoAgrXML::createCalibrationKo1());
-    //Calibration::setName("calibrationKo1");
+    return date;
+}
+
+void Calibration::setDate(const QDate &value)
+{
+    date = value;
+}
+
+double Calibration::getWrite_time() const
+{
+    return write_time;
+}
+
+void Calibration::setWrite_time(const double value)
+{
+    write_time = value;
+}
+
+double Calibration::getIncube_time() const
+{
+    return incube_time;
+}
+
+CalibrationKo1::CalibrationKo1(QObject *parent) : Calibration("calibrationKo1", parent)
+{
+    if( QFile::exists(name  + QString(".xml")) ) {
+        CreateKoAgr::readFile(name, document);
+    }
+    else {
+        document = CreateKoAgr::createCalibration(name);
+        QDomElement calibration = document.firstChildElement();
+        calibration.appendChild(document.createElement("date"));
+        calibration.appendChild(document.createElement("reagent_serial"));
+        calibration.appendChild(document.createElement("reagent_date"));
+
+        QDomElement write_time = document.createElement("write_time");
+        write_time.setAttribute("Value", "10");
+        calibration.appendChild(write_time);
+
+        QDomElement incube_time = document.createElement("incube_time");
+        incube_time.setAttribute("Value", "3");
+        calibration.appendChild(incube_time);
+
+        CreateKoAgr::writeFile(name, document);
+    }
+    load();
 }
 
 CalibrationKo1::~CalibrationKo1()
 {
+    qDebug() << name << "~CalibrationKo1()";
     save();
 }
 
-CalibrationKo2::CalibrationKo2()
-    : Calibration(KoAgrXML::openCalibrationKo2(), "calibrationKo2")
+CalibrationKo2::CalibrationKo2(QObject *parent)
+    : Calibration("calibrationKo2")
 {
+    if( QFile::exists(name  + QString(".xml")) ) {
+        CreateKoAgr::readFile(name, document);
+    }
+    else {
+        document = CreateKoAgr::createCalibration(name);
+        QDomElement calibration = document.firstChildElement();
+        calibration.appendChild(document.createElement("date"));
+        calibration.appendChild(document.createElement("reagent_serial"));
+        calibration.appendChild(document.createElement("reagent_date"));
+        calibration.appendChild(document.createElement("k_plazma_serial"));
+        calibration.appendChild(document.createElement("k_plazma_date"));
+
+        QDomElement a4tv = document.createElement("a4tv_kp1");
+        a4tv.setAttribute("Value", "0");
+        calibration.appendChild(a4tv);
+
+        a4tv = document.createElement("a4tv_kp2");
+        a4tv.setAttribute("Value", "0");
+        calibration.appendChild(a4tv);
+
+        a4tv = document.createElement("a4tv_kp3");
+        a4tv.setAttribute("Value", "0");
+        calibration.appendChild(a4tv);
+
+        a4tv = document.createElement("a4tv_kp4");
+        a4tv.setAttribute("Value", "0");
+        calibration.appendChild(a4tv);
+
+        calibration.appendChild(document.createElement("write_time"));
+        calibration.appendChild(document.createElement("incube_time"));
+
+        CreateKoAgr::writeFile(name, document);
+    }
     load();
+
     //Calibration::setDoc(KoAgrXML::createCalibrationKo2());
     //Calibration::setName("calibrationKo2");
 }
 
+void CalibrationKo2::load()
+{
+    Calibration::load();
+    QString value;
+    value = getElement(document, QString("reagent_date"));
+    reagent_date = QDate::fromString(value, QString("yyyyMMdd"));
+
+    value = getElement(document, QString("reagent_serial"));
+    reagent_serial = value.toInt();
+
+    value = getElement(document, QString("k_plazma_date"));
+    k_plazma_date = QDate::fromString(value, QString("yyyyMMdd"));
+
+    value = getElement(document, QString("k_plazma_serial"));
+    k_plazma_serial = value.toInt();
+
+    value = getElement(document, QString("a4tv_kp1"));
+    a4tv_kp1 = value.toDouble();
+    value = getElement(document, QString("a4tv_kp2"));
+    a4tv_kp2 = value.toDouble();
+    value = getElement(document, QString("a4tv_kp3"));
+    a4tv_kp3 = value.toDouble();
+    value = getElement(document, QString("a4tv_kp4"));
+    a4tv_kp4 = value.toDouble();
+}
+
 CalibrationKo2::~CalibrationKo2()
 {
+    qDebug() << name << "~CalibrationKo2()";
     save();
+}
+
+void CalibrationKo2::save()
+{
+    Calibration::save();
+    setElement(document, QString("reagent_date"), reagent_date.toString("yyyyMMdd"));
+    setElement(document, QString("reagent_serial"), reagent_serial);
+    setElement(document, QString("k_plazma_date"), k_plazma_date.toString("yyyyMMdd"));
+    setElement(document, QString("k_plazma_serial"), k_plazma_serial);
+    setElement(document, QString("a4tv_kp1"), QString("%1").arg(a4tv_kp1));
+    setElement(document, QString("a4tv_kp2"), QString("%1").arg(a4tv_kp2));
+    setElement(document, QString("a4tv_kp3"), QString("%1").arg(a4tv_kp3));
+    setElement(document, QString("a4tv_kp4"), QString("%1").arg(a4tv_kp4));
+    CreateKoAgr::writeFile(name, document);
+    //qDebug() << "CalibrationKo2::save()";
 }
 
 QDate CalibrationKo2::getReagent_date() const
@@ -1028,56 +1125,106 @@ void CalibrationKo2::setA4tv_kp1(double value)
     a4tv_kp1 = value;
 }
 
-void CalibrationKo2::save()
+CalibrationKo3::CalibrationKo3(QObject *parent)
+    : Calibration("calibrationKo3", parent)
 {
-    Calibration::save();
-    setElement(document, QString("reaget_date"), reagent_date.toString("yyyyMMdd"));
-    setElement(document, QString("reagent_serial"), reagent_serial);
-    setElement(document, QString("k_plazma_date"), k_plazma_date.toString("yyyyMMdd"));
-    setElement(document, QString("k_plazma_serial"), k_plazma_serial);
-    setElement(document, QString("a4tv_kp1"), QString("%1").arg(a4tv_kp1));
-    setElement(document, QString("a4tv_kp2"), QString("%1").arg(a4tv_kp2));
-    setElement(document, QString("a4tv_kp3"), QString("%1").arg(a4tv_kp3));
-    setElement(document, QString("a4tv_kp4"), QString("%1").arg(a4tv_kp4));
-    CreateKoAgr::writeFile(name, document);
-    qDebug() << "CalibrationKo2::save()";
+    if( QFile::exists(name  + QString(".xml")) ) {
+        CreateKoAgr::readFile(name, document);
+    }
+    else {
+        document = CreateKoAgr::createCalibration(name);
+        QDomElement calibration = document.firstChildElement();
+        calibration.appendChild(document.createElement("date"));
+        calibration.appendChild(document.createElement("reagent_serial"));
+        calibration.appendChild(document.createElement("reagent_date"));
+        calibration.appendChild(document.createElement("k_plazma_serial"));
+        calibration.appendChild(document.createElement("k_plazma_date"));
+        calibration.appendChild(document.createElement("fibrinogen_k_plazma"));
+        calibration.appendChild(document.createElement("time_k_plazma"));
+        calibration.appendChild(document.createElement("fibrinogen_200_plazma"));
+        calibration.appendChild(document.createElement("time_200_plazma"));
+        calibration.appendChild(document.createElement("fibrinogen_50_plazma"));
+        calibration.appendChild(document.createElement("time_50_plazma"));
+        calibration.appendChild(document.createElement("fibrinogen_25_plazma"));
+        calibration.appendChild(document.createElement("time_25_plazma"));
+
+        QDomElement write_time = document.createElement("write_time");
+        write_time.setAttribute("Value", "10");
+        calibration.appendChild(write_time);
+
+        QDomElement incube_time = document.createElement("incube_time");
+        incube_time.setAttribute("Value", "3");
+        calibration.appendChild(incube_time);
+
+        CreateKoAgr::writeFile(name, document);
+    }
+    load();
 }
 
-void CalibrationKo2::load()
+void CalibrationKo3::load()
 {
     Calibration::load();
     QString value;
     value = getElement(document, QString("reagent_date"));
     reagent_date = QDate::fromString(value, QString("yyyyMMdd"));
 
-    value = getElement(document, QString("k_plazma_date"));
-    k_plazma_date = QDate::fromString(value, QString("yyyyMMdd"));
-
     value = getElement(document, QString("reagent_serial"));
-    reagent_serial = value.toInt();
+    reagent_serial = value;
 
-    value = getElement(document, QString("k_plazma_serial"));
-    k_plazma_serial = value.toInt();
+    value = getElement(document, QString("fibrinogen_k_plazma"));
+    fibrinogen_k_plazma = value.toDouble();
 
-    value = getElement(document, QString("a4tv_kp1"));
-    a4tv_kp1 = value.toDouble();
-    value = getElement(document, QString("a4tv_kp2"));
-    a4tv_kp2 = value.toDouble();
-    value = getElement(document, QString("a4tv_kp3"));
-    a4tv_kp3 = value.toDouble();
-    value = getElement(document, QString("a4tv_kp4"));
-    a4tv_kp4 = value.toDouble();
-}
+    value = getElement(document, QString("time_k_plazma"));
+    time_k_plazma = value.toDouble();
 
-CalibrationKo3::CalibrationKo3()
-    : Calibration(KoAgrXML::openCalibrationKo3(), "calibrationKo3")
-{
-    load();
+    value = getElement(document, QString("fibrinogen_200_plazma"));
+    fibrinogen_200_plazma = value.toDouble();
+
+    value = getElement(document, QString("time_200_plazma"));
+    time_200_plazma = value.toDouble();
+
+    value = getElement(document, QString("fibrinogen_50_plazma"));
+    fibrinogen_50_plazma = value.toDouble();
+
+    value = getElement(document, QString("time_50_plazma"));
+    time_50_plazma = value.toDouble();
+
+    value = getElement(document, QString("fibrinogen_25_plazma"));
+    fibrinogen_25_plazma = value.toDouble();
+
+    value = getElement(document, QString("time_25_plazma"));
+    time_25_plazma = value.toDouble();
 }
 
 CalibrationKo3::~CalibrationKo3()
 {
+    qDebug() << name << "~CalibrationKo3()";
     save();
+}
+
+void CalibrationKo3::save()
+{
+    Calibration::save();
+    setElement(document, QString("reagent_date"), reagent_date.toString("yyyyMMdd"));
+    setElement(document, QString("reagent_serial"), reagent_serial);
+
+    setElement(document, QString("k_plazma_date"), k_plazma_date.toString("yyyyMMdd"));
+    setElement(document, QString("k_plazma_serial"), k_plazma_serial);
+
+    setElement(document, QString("fibrinogen_k_plazma"), QString("%1").arg(fibrinogen_k_plazma));
+    setElement(document, QString("time_k_plazma"), QString("%1").arg(time_k_plazma));
+
+    setElement(document, QString("fibrinogen_200_plazma"), QString("%1").arg(fibrinogen_200_plazma));
+    setElement(document, QString("time_200_plazma"), QString("%1").arg(time_200_plazma));
+
+    setElement(document, QString("fibrinogen_50_plazma"), QString("%1").arg(fibrinogen_50_plazma));
+    setElement(document, QString("time_50_plazma"), QString("%1").arg(time_50_plazma));
+
+    setElement(document, QString("fibrinogen_25_plazma"), QString("%1").arg(fibrinogen_25_plazma));
+    setElement(document, QString("time_25_plazma"), QString("%1").arg(time_25_plazma));
+
+    CreateKoAgr::writeFile(name, document);
+    //qDebug() << "CalibrationKo3::save()";
 }
 
 QDate CalibrationKo3::getReagent_date() const
@@ -1200,32 +1347,41 @@ void CalibrationKo3::setK_plazma_date(const QDate &value)
     k_plazma_date = value;
 }
 
-void CalibrationKo3::save()
+CalibrationKo4::CalibrationKo4(QObject *parent)
+    : Calibration("calibrationKo4", parent)
 {
-    Calibration::save();
-    setElement(document, QString("reagent_date"), reagent_date.toString("yyyyMMdd"));
-    setElement(document, QString("reagent_serial"), reagent_serial);
+    if( QFile::exists(name  + QString(".xml")) ) {
+        CreateKoAgr::readFile(name, document);
+    }
+    else {
+        document = CreateKoAgr::createCalibration(name);
+        QDomElement calibration = document.firstChildElement();
+        calibration.appendChild(document.createElement("date"));
+        calibration.appendChild(document.createElement("reagent_serial"));
+        calibration.appendChild(document.createElement("reagent_date"));
+        calibration.appendChild(document.createElement("k_plazma_serial"));
+        calibration.appendChild(document.createElement("k_plazma_date"));
+        calibration.appendChild(document.createElement("action"));
+        calibration.appendChild(document.createElement("tv1_concentration"));
+        calibration.appendChild(document.createElement("tv1_time"));
+        calibration.appendChild(document.createElement("tv2_concentration"));
+        calibration.appendChild(document.createElement("tv2_time"));
+        calibration.appendChild(document.createElement("tv3_concentration"));
+        calibration.appendChild(document.createElement("tv3_time"));
+        QDomElement write_time = document.createElement("write_time");
+        write_time.setAttribute("Value", "10");
+        calibration.appendChild(write_time);
 
-    setElement(document, QString("k_plazma_date"), k_plazma_date.toString("yyyyMMdd"));
-    setElement(document, QString("k_plazma_serial"), k_plazma_serial);
+        QDomElement incube_time = document.createElement("incube_time");
+        incube_time.setAttribute("Value", "3");
+        calibration.appendChild(incube_time);
 
-    setElement(document, QString("fibrinogen_k_plazma"), QString("%1").arg(fibrinogen_k_plazma));
-    setElement(document, QString("time_k_plazma"), QString("%1").arg(time_k_plazma));
-
-    setElement(document, QString("fibrinogen_200_plazma"), QString("%1").arg(fibrinogen_200_plazma));
-    setElement(document, QString("time_200_plazma"), QString("%1").arg(time_200_plazma));
-
-    setElement(document, QString("fibrinogen_50_plazma"), QString("%1").arg(fibrinogen_50_plazma));
-    setElement(document, QString("time_50_plazma"), QString("%1").arg(time_50_plazma));
-
-    setElement(document, QString("fibrinogen_25_plazma"), QString("%1").arg(fibrinogen_25_plazma));
-    setElement(document, QString("time_25_plazma"), QString("%1").arg(time_25_plazma));
-
-    CreateKoAgr::writeFile(name, document);
-    qDebug() << "CalibrationKo3::save()";
+        CreateKoAgr::writeFile(name, document);
+    }
+    load();
 }
 
-void CalibrationKo3::load()
+void CalibrationKo4::load()
 {
     Calibration::load();
     QString value;
@@ -1235,40 +1391,54 @@ void CalibrationKo3::load()
     value = getElement(document, QString("reagent_serial"));
     reagent_serial = value;
 
-    value = getElement(document, QString("fibrinogen_k_plazma"));
-    fibrinogen_k_plazma = value.toDouble();
+    value = getElement(document, QString("k_plazma_date"));
+    k_plazma_date = QDate::fromString(value, QString("yyyyMMdd"));
 
-    value = getElement(document, QString("time_k_plazma"));
-    time_k_plazma = value.toDouble();
+    value = getElement(document, QString("k_plazma_serial"));
+    k_plazma_serial = value;
 
-    value = getElement(document, QString("fibrinogen_200_plazma"));
-    fibrinogen_200_plazma = value.toDouble();
+    value = getElement(document, QString("tv1_concentration"));
+    tv1_concentration = value.toDouble();
+    value = getElement(document, QString("tv1_time"));
+    tv1_time = value.toDouble();
 
-    value = getElement(document, QString("time_200_plazma"));
-    time_200_plazma = value.toDouble();
+    value = getElement(document, QString("tv2_concentration"));
+    tv2_concentration = value.toDouble();
+    value = getElement(document, QString("tv2_time"));
+    tv2_time = value.toDouble();
 
-    value = getElement(document, QString("fibrinogen_50_plazma"));
-    fibrinogen_50_plazma = value.toDouble();
-
-    value = getElement(document, QString("time_50_plazma"));
-    time_50_plazma = value.toDouble();
-
-    value = getElement(document, QString("fibrinogen_25_plazma"));
-    fibrinogen_25_plazma = value.toDouble();
-
-    value = getElement(document, QString("time_25_plazma"));
-    time_25_plazma = value.toDouble();
-}
-
-CalibrationKo4::CalibrationKo4()
-    : Calibration(KoAgrXML::openCalibrationKo4(), "calibrationKo4")
-{
-    load();
+    value = getElement(document, QString("tv3_concentration"));
+    tv3_concentration = value.toDouble();
+    value = getElement(document, QString("tv3_time"));
+    tv3_time = value.toDouble();
 }
 
 CalibrationKo4::~CalibrationKo4()
 {
+    qDebug() << name << "~CalibrationKo4()";
     save();
+}
+
+void CalibrationKo4::save()
+{
+    Calibration::save();
+    setElement(document, QString("reagent_date"), reagent_date.toString("yyyyMMdd"));
+    setElement(document, QString("k_plazma_date"), k_plazma_date.toString("yyyyMMdd"));
+
+    setElement(document, QString("reagent_serial"), reagent_serial);
+    setElement(document, QString("k_plazma_serial"), k_plazma_serial);
+
+    setElement(document, QString("tv1_concentration"), QString("%1").arg(tv1_concentration));
+    setElement(document, QString("tv1_time"), QString("%1").arg(tv1_time));
+
+    setElement(document, QString("tv2_concentration"), QString("%1").arg(tv2_concentration));
+    setElement(document, QString("tv2_time"), QString("%1").arg(tv2_time));
+
+    setElement(document, QString("tv3_concentration"), QString("%1").arg(tv3_concentration));
+    setElement(document, QString("tv3_time"), QString("%1").arg(tv3_time));
+
+    CreateKoAgr::writeFile(name, document);
+    //qDebug() << "CalibrationKo4::save()";
 }
 
 QDate CalibrationKo4::getReagent_date() const
@@ -1371,37 +1541,69 @@ void CalibrationKo4::setTv1_time(double value)
     tv1_time = value;
 }
 
-void CalibrationKo4::save()
+
+CalibrationKo5::CalibrationKo5(QObject *parent) : Calibration("calibrationKo5", parent)
 {
-    Calibration::save();
-    setElement(document, QString("reagent_date"), reagent_date.toString("yyyyMMdd"));
-    setElement(document, QString("k_plazma_date"), k_plazma_date.toString("yyyyMMdd"));
+    if( QFile::exists(name  + QString(".xml")) ) {
+        CreateKoAgr::readFile(name, document);
+    }
+    else {
+        document = CreateKoAgr::createCalibration(name);
+        QDomElement calibration = document.firstChildElement();
+        calibration.appendChild(document.createElement("date"));
+        calibration.appendChild(document.createElement("reagent_serial"));
+        calibration.appendChild(document.createElement("reagent_date"));
 
-    setElement(document, QString("reagent_serial"), reagent_serial);
-    setElement(document, QString("k_plazma_serial"), k_plazma_serial);
+        calibration.appendChild(document.createElement("tromboplastin_serial"));
+        calibration.appendChild(document.createElement("tromboplastin_date"));
+        calibration.appendChild(document.createElement("k_plazma_serial"));
+        calibration.appendChild(document.createElement("k_plazma_date"));
+        calibration.appendChild(document.createElement("k_protrombine_index"));
+        calibration.appendChild(document.createElement("k_protrombine_otn"));
+        calibration.appendChild(document.createElement("protrombine_k_Kvik"));
+        calibration.appendChild(document.createElement("time_k_Kvik"));
 
-    setElement(document, QString("tv1_concentration"), QString("%1").arg(tv1_concentration));
-    setElement(document, QString("tv1_time"), QString("%1").arg(tv1_time));
+        calibration.appendChild(document.createElement("protrombine_50_Kvik"));
+        calibration.appendChild(document.createElement("time_50_Kvik"));
 
-    setElement(document, QString("tv2_concentration"), QString("%1").arg(tv2_concentration));
-    setElement(document, QString("tv2_time"), QString("%1").arg(tv2_time));
+        calibration.appendChild(document.createElement("protrombine_25_Kvik"));
+        calibration.appendChild(document.createElement("time_25_Kvik"));
 
-    setElement(document, QString("tv3_concentration"), QString("%1").arg(tv3_concentration));
-    setElement(document, QString("tv3_time"), QString("%1").arg(tv3_time));
+        calibration.appendChild(document.createElement("protrombine_12_Kvik"));
+        calibration.appendChild(document.createElement("time_12_Kvik"));
 
-    CreateKoAgr::writeFile(name, document);
-    qDebug() << "CalibrationKo4::save()";
+        calibration.appendChild(document.createElement("protrombine_index"));
+        calibration.appendChild(document.createElement("protrombine_otn"));
+
+        QDomElement write_time = document.createElement("write_time");
+        write_time.setAttribute("Value", "10");
+        calibration.appendChild(write_time);
+
+        QDomElement incube_time = document.createElement("incube_time");
+        incube_time.setAttribute("Value", "3");
+        calibration.appendChild(incube_time);
+
+        CreateKoAgr::writeFile(name, document);
+    }
+    load();
 }
 
-void CalibrationKo4::load()
+void CalibrationKo5::load()
 {
     Calibration::load();
     QString value;
+
     value = getElement(document, QString("reagent_date"));
     reagent_date = QDate::fromString(value, QString("yyyyMMdd"));
 
     value = getElement(document, QString("reagent_serial"));
     reagent_serial = value;
+
+    value = getElement(document, QString("tromboplastin_date"));
+    tromboplastin_date = QDate::fromString(value, QString("yyyyMMdd"));
+
+    value = getElement(document, QString("tromboplastin_serial"));
+    tromboplastin_serial = value;
 
     value = getElement(document, QString("k_plazma_date"));
     k_plazma_date = QDate::fromString(value, QString("yyyyMMdd"));
@@ -1409,31 +1611,67 @@ void CalibrationKo4::load()
     value = getElement(document, QString("k_plazma_serial"));
     k_plazma_serial = value;
 
-    value = getElement(document, QString("tv1_concentration"));
-    tv1_concentration = value.toDouble();
-    value = getElement(document, QString("tv1_time"));
-    tv1_time = value.toDouble();
+    value = getElement(document, QString("k_protrombine_index"));
+    k_protrombine_index = value.toDouble();
+    value = getElement(document, QString("k_protrombine_otn"));
+    k_protrombine_otn = value.toDouble();
 
-    value = getElement(document, QString("tv2_concentration"));
-    tv2_concentration = value.toDouble();
-    value = getElement(document, QString("tv2_time"));
-    tv2_time = value.toDouble();
+    value = getElement(document, QString("protrombine_k_Kvik"));
+    protrombine_k_Kvik = value.toDouble();
+    value = getElement(document, QString("time_k_Kvik"));
+    time_k_Kvik = value.toDouble();
 
-    value = getElement(document, QString("tv3_concentration"));
-    tv3_concentration = value.toDouble();
-    value = getElement(document, QString("tv3_time"));
-    tv3_time = value.toDouble();
-}
-
-CalibrationKo5::CalibrationKo5()
-    : Calibration(KoAgrXML::openCalibrationKo5(), "calibrationKo5")
-{
-    load();
+    value = getElement(document, QString("protrombine_50_Kvik"));
+    protrombine_50_Kvik = value.toDouble();
+    value = getElement(document, QString("time_50_Kvik"));
+    time_50_Kvik = value.toDouble();
+    value = getElement(document, QString("protrombine_25_Kvik"));
+    protrombine_25_Kvik = value.toDouble();
+    value = getElement(document, QString("time_25_Kvik"));
+    time_25_Kvik = value.toDouble();
+    value = getElement(document, QString("protrombine_12_Kvik"));
+    protrombine_12_Kvik = value.toDouble();
+    value = getElement(document, QString("time_12_Kvik"));
+    time_12_Kvik = value.toDouble();
+    value = getElement(document, QString("protrombine_index"));
+    protrombine_index = value.toDouble();
+    value = getElement(document, QString("protrombine_otn"));
+    protrombine_otn = value.toDouble();
 }
 
 CalibrationKo5::~CalibrationKo5()
 {
+    qDebug() << name << "~CalibrationKo5()";
     save();
+}
+
+void CalibrationKo5::save()
+{
+    Calibration::save();
+    setElement(document, QString("reagent_date"), reagent_date.toString("yyyyMMdd"));
+    setElement(document, QString("reagent_serial"), reagent_serial);
+
+    setElement(document, QString("tromboplastin_date"), tromboplastin_date.toString("yyyyMMdd"));
+    setElement(document, QString("tromboplastin_serial"), tromboplastin_serial);
+
+    setElement(document, QString("k_plazma_date"), k_plazma_date.toString("yyyyMMdd"));
+    setElement(document, QString("k_plazma_serial"), k_plazma_serial);
+
+    setElement(document, QString("k_protrombine_index"), QString("%1").arg(k_protrombine_index));
+    setElement(document, QString("k_protrombine_otn"), QString("%1").arg(k_protrombine_otn));
+    setElement(document, QString("protrombine_k_Kvik"), QString("%1").arg(protrombine_k_Kvik));
+    setElement(document, QString("time_k_Kvik"), QString("%1").arg(time_k_Kvik));
+    setElement(document, QString("protrombine_50_Kvik"), QString("%1").arg(protrombine_50_Kvik));
+    setElement(document, QString("time_50_Kvik"), QString("%1").arg(time_50_Kvik));
+    setElement(document, QString("protrombine_25_Kvik"), QString("%1").arg(protrombine_25_Kvik));
+    setElement(document, QString("time_25_Kvik"), QString("%1").arg(time_25_Kvik));
+    setElement(document, QString("protrombine_12_Kvik"), QString("%1").arg(protrombine_12_Kvik));
+    setElement(document, QString("time_12_Kvik"), QString("%1").arg(time_12_Kvik));
+    setElement(document, QString("protrombine_index"), QString("%1").arg(protrombine_index));
+    setElement(document, QString("protrombine_otn"), QString("%1").arg(protrombine_otn));
+
+    CreateKoAgr::writeFile(name, document);
+    //qDebug() << "CalibrationKo5::save()";
 }
 
 QDate CalibrationKo5::getTromboplastin_date() const
@@ -1616,95 +1854,79 @@ void CalibrationKo5::setReagent_date(const QDate &value)
     reagent_date = value;
 }
 
-void CalibrationKo5::save()
+CalibrationAgr1::CalibrationAgr1(QObject *parent) : Calibration("calibrationAgr1", parent)
 {
-    Calibration::save();
-    setElement(document, QString("reagent_date"), reagent_date.toString("yyyyMMdd"));
-    setElement(document, QString("reagent_serial"), reagent_serial);
+    if( QFile::exists(name  + QString(".xml")) ) {
+        CreateKoAgr::readFile(name, document);
+    }
+    else {
+        document = CreateKoAgr::createCalibration(name);
+        QDomElement calibration = document.firstChildElement();
+        calibration.appendChild(document.createElement("date"));
+        calibration.appendChild(document.createElement("reagent_serial"));
+        calibration.appendChild(document.createElement("reagent_date"));
 
-    setElement(document, QString("tromboplastin_date"), tromboplastin_date.toString("yyyyMMdd"));
-    setElement(document, QString("tromboplastin_serial"), tromboplastin_serial);
+        calibration.appendChild(document.createElement("k_concentration"));
 
-    setElement(document, QString("k_plazma_date"), k_plazma_date.toString("yyyyMMdd"));
-    setElement(document, QString("k_plazma_serial"), k_plazma_serial);
+        QDomElement write_time = document.createElement("write_time");
+        write_time.setAttribute("Value", "10");
+        calibration.appendChild(write_time);
 
-    setElement(document, QString("k_protrombine_index"), QString("%1").arg(k_protrombine_index));
-    setElement(document, QString("k_protrombine_otn"), QString("%1").arg(k_protrombine_otn));
-    setElement(document, QString("protrombine_k_Kvik"), QString("%1").arg(protrombine_k_Kvik));
-    setElement(document, QString("time_k_Kvik"), QString("%1").arg(time_k_Kvik));
-    setElement(document, QString("protrombine_50_Kvik"), QString("%1").arg(protrombine_50_Kvik));
-    setElement(document, QString("time_50_Kvik"), QString("%1").arg(time_50_Kvik));
-    setElement(document, QString("protrombine_25_Kvik"), QString("%1").arg(protrombine_25_Kvik));
-    setElement(document, QString("time_25_Kvik"), QString("%1").arg(time_25_Kvik));
-    setElement(document, QString("protrombine_12_Kvik"), QString("%1").arg(protrombine_12_Kvik));
-    setElement(document, QString("time_12_Kvik"), QString("%1").arg(time_12_Kvik));
-    setElement(document, QString("protrombine_index"), QString("%1").arg(protrombine_index));
-    setElement(document, QString("protrombine_otn"), QString("%1").arg(protrombine_otn));
+        QDomElement incube_time = document.createElement("incube_time");
+        incube_time.setAttribute("Value", "1");
+        calibration.appendChild(incube_time);
 
-    CreateKoAgr::writeFile(name, document);
-    qDebug() << "CalibrationKo5::save()";
+        QDomElement incube_time_2 = document.createElement("incube_time_2");
+        incube_time_2.setAttribute("Value", "3");
+        calibration.appendChild(incube_time);
+
+        //выходные данные
+        calibration.appendChild(document.createElement("level_0"));
+        calibration.appendChild(document.createElement("level_100"));
+
+        CreateKoAgr::writeFile(name, document);
+    }
+    load();
 }
 
-void CalibrationKo5::load()
+void CalibrationAgr1::load()
 {
     Calibration::load();
     QString value;
-
     value = getElement(document, QString("reagent_date"));
     reagent_date = QDate::fromString(value, QString("yyyyMMdd"));
+
+    value = getElement(document, QString("incube_time_2"));
+    incube_time_2 = value.toDouble();
 
     value = getElement(document, QString("reagent_serial"));
     reagent_serial = value;
 
-    value = getElement(document, QString("tromboplastin_date"));
-    tromboplastin_date = QDate::fromString(value, QString("yyyyMMdd"));
+    value = getElement(document, QString("k_concentration"));
+    k_concentration = value.toDouble();
 
-    value = getElement(document, QString("tromboplastin_serial"));
-    tromboplastin_serial = value;
+    value = getElement(document, QString("level_0"));
+    level_0 = value.toDouble();
 
-    value = getElement(document, QString("k_plazma_date"));
-    k_plazma_date = QDate::fromString(value, QString("yyyyMMdd"));
-
-    value = getElement(document, QString("k_plazma_serial"));
-    k_plazma_serial = value;
-
-    value = getElement(document, QString("k_protrombine_index"));
-    k_protrombine_index = value.toDouble();
-    value = getElement(document, QString("k_protrombine_otn"));
-    k_protrombine_otn = value.toDouble();
-
-    value = getElement(document, QString("protrombine_k_Kvik"));
-    protrombine_k_Kvik = value.toDouble();
-    value = getElement(document, QString("time_k_Kvik"));
-    time_k_Kvik = value.toDouble();
-
-    value = getElement(document, QString("protrombine_50_Kvik"));
-    protrombine_50_Kvik = value.toDouble();
-    value = getElement(document, QString("time_50_Kvik"));
-    time_50_Kvik = value.toDouble();
-    value = getElement(document, QString("protrombine_25_Kvik"));
-    protrombine_25_Kvik = value.toDouble();
-    value = getElement(document, QString("time_25_Kvik"));
-    time_25_Kvik = value.toDouble();
-    value = getElement(document, QString("protrombine_12_Kvik"));
-    protrombine_12_Kvik = value.toDouble();
-    value = getElement(document, QString("time_12_Kvik"));
-    time_12_Kvik = value.toDouble();
-    value = getElement(document, QString("protrombine_index"));
-    protrombine_index = value.toDouble();
-    value = getElement(document, QString("protrombine_otn"));
-    protrombine_otn = value.toDouble();
-}
-
-CalibrationAgr1::CalibrationAgr1()
-    : Calibration(KoAgrXML::openCalibrationAgr1(), "calibrationAgr1")
-{
-    load();
+    value = getElement(document, QString("level_100"));
+    level_100 = value.toDouble();
 }
 
 CalibrationAgr1::~CalibrationAgr1()
 {
+    qDebug() << name << "~CalibrationAgr1()";
     save();
+}
+
+void CalibrationAgr1::save()
+{
+    setElement(document, QString("reagent_date"), reagent_date.toString("yyyyMMdd"));
+    setElement(document, QString("reagent_serial"), reagent_serial);
+    setElement(document, QString("k_concentration"), QString("%1").arg(k_concentration));
+    setElement(document, QString("level_0"), QString("%1").arg(level_0));
+    setElement(document, QString("level_100"), QString("%1").arg(level_100));
+
+    CreateKoAgr::writeFile(name, document);
 }
 
 QDate CalibrationAgr1::getReagent_date() const
@@ -1767,52 +1989,130 @@ void CalibrationAgr1::setIncube_time_2(double value)
     incube_time_2 = value;
 }
 
-void CalibrationAgr1::save()
+CalibrationAgr2::CalibrationAgr2(QObject *parent) : Calibration("calibrationAgr2", parent)
 {
-    Calibration::save();
+    if( QFile::exists(name  + QString(".xml")) ) {
+        CreateKoAgr::readFile(name, document);
+    }
+    else {
+        document = CreateKoAgr::createCalibration(name);
+        QDomElement calibration = document.firstChildElement();
+        calibration.appendChild(document.createElement("date"));
+        calibration.appendChild(document.createElement("reagent_serial"));
+        calibration.appendChild(document.createElement("reagent_date"));
 
-    setElement(document, QString("reagent_date"), reagent_date.toString("yyyyMMdd"));
-    setElement(document, QString("reagent_serial"), reagent_serial);
-    setElement(document, QString("k_concentration"), QString("%1").arg(k_concentration));
-    setElement(document, QString("level_0"), QString("%1").arg(level_0));
-    setElement(document, QString("level_100"), QString("%1").arg(level_100));
+        QDomElement write_time = document.createElement("write_time");
+        write_time.setAttribute("Value", "10");
+        calibration.appendChild(write_time);
 
-    CreateKoAgr::writeFile(name, document);
-    qDebug() << "CalibrationKo4::save()";
+        QDomElement incube_time = document.createElement("incube_time");
+        incube_time.setAttribute("Value", "1");
+        calibration.appendChild(incube_time);
+
+        QDomElement incube_time_2 = document.createElement("incube_time_2");
+        incube_time_2.setAttribute("Value", "3");
+        calibration.appendChild(incube_time);
+
+        calibration.appendChild(document.createElement("k_plazma_serial"));
+        calibration.appendChild(document.createElement("k_plazma_date"));
+        calibration.appendChild(document.createElement("k_plazma"));
+        //выходные данные
+        calibration.appendChild(document.createElement("level_0"));
+        calibration.appendChild(document.createElement("level_100"));
+
+        calibration.appendChild(document.createElement("c1"));
+        calibration.appendChild(document.createElement("ck1"));
+
+        calibration.appendChild(document.createElement("c2"));
+        calibration.appendChild(document.createElement("ck2"));
+
+        calibration.appendChild(document.createElement("c3"));
+        calibration.appendChild(document.createElement("ck3"));
+
+        calibration.appendChild(document.createElement("c4"));
+        calibration.appendChild(document.createElement("ck4"));
+        CreateKoAgr::writeFile(name, document);
+    }
+    load();
 }
 
-void CalibrationAgr1::load()
+void CalibrationAgr2::load()
 {
-    Calibration::load();
     QString value;
     value = getElement(document, QString("reagent_date"));
     reagent_date = QDate::fromString(value, QString("yyyyMMdd"));
 
-    value = getElement(document, QString("incube_time_2"));
-    incube_time_2 = value.toDouble();
+    value = getElement(document, QString("k_plazma_date"));
+    k_plazma_date = QDate::fromString(value, QString("yyyyMMdd"));
 
     value = getElement(document, QString("reagent_serial"));
     reagent_serial = value;
 
-    value = getElement(document, QString("k_concentration"));
-    k_concentration = value.toDouble();
+    value = getElement(document, QString("k_plazma_serial"));
+    k_plazma_serial = value;
 
+    value = getElement(document, QString("incube_time_1"));
+    incube_time_1 = value.toDouble();
+
+    value = getElement(document, QString("incube_time_2"));
+    incube_time_2 = value.toDouble();
+
+    value = getElement(document, QString("k_plazma"));
+    k_plazma = value.toDouble();
     value = getElement(document, QString("level_0"));
     level_0 = value.toDouble();
-
     value = getElement(document, QString("level_100"));
     level_100 = value.toDouble();
-}
 
-CalibrationAgr2::CalibrationAgr2()
-    : Calibration(KoAgrXML::openCalibrationAgr2(), "calibrationAgr2")
-{
-    load();
+    value = getElement(document, QString("c1"));
+    c1 = value.toDouble();
+    value = getElement(document, QString("ck1"));
+    ck1 = value.toDouble();
+    value = getElement(document, QString("c2"));
+    c2 = value.toDouble();
+    value = getElement(document, QString("ck2"));
+    ck2 = value.toDouble();
+    value = getElement(document, QString("c3"));
+    c3 = value.toDouble();
+    value = getElement(document, QString("ck3"));
+    ck3 = value.toDouble();
+    value = getElement(document, QString("c4"));
+    c4 = value.toDouble();
+    value = getElement(document, QString("ck4"));
+    ck4 = value.toDouble();
 }
 
 CalibrationAgr2::~CalibrationAgr2()
 {
+    qDebug() << name << "~CalibrationAgr2()";
     save();
+}
+
+void CalibrationAgr2::save()
+{
+    setElement(document, QString("reagent_date"), reagent_date.toString("yyyyMMdd"));
+    setElement(document, QString("k_plazma_date"), k_plazma_date.toString("yyyyMMdd"));
+
+    setElement(document, QString("reagent_serial"), reagent_serial);
+    setElement(document, QString("k_plazma_serial"), k_plazma_serial);
+
+    setElement(document, QString("incube_time_1"), QString("%1").arg(incube_time_1));
+    setElement(document, QString("incube_time_2"), QString("%1").arg(incube_time_2));
+
+    setElement(document, QString("k_plazma"), QString("%1").arg(k_plazma));
+    setElement(document, QString("level_0"), QString("%1").arg(level_0));
+    setElement(document, QString("level_100"), QString("%1").arg(level_100));
+
+    setElement(document, QString("c1"), QString("%1").arg(c1));
+    setElement(document, QString("ck1"), QString("%1").arg(ck1));
+    setElement(document, QString("c2"), QString("%1").arg(c2));
+    setElement(document, QString("ck2"), QString("%1").arg(ck2));
+    setElement(document, QString("c3"), QString("%1").arg(c3));
+    setElement(document, QString("ck3"), QString("%1").arg(ck3));
+    setElement(document, QString("c4"), QString("%1").arg(c4));
+    setElement(document, QString("ck4"), QString("%1").arg(ck4));
+
+    CreateKoAgr::writeFile(name, document);
 }
 
 QDate CalibrationAgr2::getReagent_date() const
@@ -1983,78 +2283,4 @@ double CalibrationAgr2::getCk4() const
 void CalibrationAgr2::setCk4(double value)
 {
     ck4 = value;
-}
-
-void CalibrationAgr2::save()
-{
-    setElement(document, QString("reagent_date"), reagent_date.toString("yyyyMMdd"));
-    setElement(document, QString("k_plazma_date"), k_plazma_date.toString("yyyyMMdd"));
-
-    setElement(document, QString("reagent_serial"), reagent_serial);
-    setElement(document, QString("k_plazma_serial"), k_plazma_serial);
-
-    setElement(document, QString("incube_time_1"), QString("%1").arg(incube_time_1));
-    setElement(document, QString("incube_time_2"), QString("%1").arg(incube_time_2));
-
-    setElement(document, QString("k_plazma"), QString("%1").arg(k_plazma));
-    setElement(document, QString("level_0"), QString("%1").arg(level_0));
-    setElement(document, QString("level_100"), QString("%1").arg(level_100));
-
-    setElement(document, QString("c1"), QString("%1").arg(c1));
-    setElement(document, QString("ck1"), QString("%1").arg(ck1));
-    setElement(document, QString("c2"), QString("%1").arg(c2));
-    setElement(document, QString("ck2"), QString("%1").arg(ck2));
-    setElement(document, QString("c3"), QString("%1").arg(c3));
-    setElement(document, QString("ck3"), QString("%1").arg(ck3));
-    setElement(document, QString("c4"), QString("%1").arg(c4));
-    setElement(document, QString("ck4"), QString("%1").arg(ck4));
-
-    CreateKoAgr::writeFile(name, document);
-    qDebug() << "CalibrationKo5::save()";
-}
-
-void CalibrationAgr2::load()
-{
-    QString value;
-    value = getElement(document, QString("reagent_date"));
-    reagent_date = QDate::fromString(value, QString("yyyyMMdd"));
-
-    value = getElement(document, QString("k_plazma_date"));
-    k_plazma_date = QDate::fromString(value, QString("yyyyMMdd"));
-
-    value = getElement(document, QString("reagent_serial"));
-    reagent_serial = value;
-
-    value = getElement(document, QString("k_plazma_serial"));
-    k_plazma_serial = value;
-
-    value = getElement(document, QString("incube_time_1"));
-    incube_time_1 = value.toDouble();
-
-    value = getElement(document, QString("incube_time_2"));
-    incube_time_2 = value.toDouble();
-
-    value = getElement(document, QString("k_plazma"));
-    k_plazma = value.toDouble();
-    value = getElement(document, QString("level_0"));
-    level_0 = value.toDouble();
-    value = getElement(document, QString("level_100"));
-    level_100 = value.toDouble();
-
-    value = getElement(document, QString("c1"));
-    c1 = value.toDouble();
-    value = getElement(document, QString("ck1"));
-    ck1 = value.toDouble();
-    value = getElement(document, QString("c2"));
-    c2 = value.toDouble();
-    value = getElement(document, QString("ck2"));
-    ck2 = value.toDouble();
-    value = getElement(document, QString("c3"));
-    c3 = value.toDouble();
-    value = getElement(document, QString("ck3"));
-    ck3 = value.toDouble();
-    value = getElement(document, QString("c4"));
-    c4 = value.toDouble();
-    value = getElement(document, QString("ck4"));
-    ck4 = value.toDouble();
 }
