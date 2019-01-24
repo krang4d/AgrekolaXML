@@ -171,6 +171,13 @@ public:
     explicit Calibration(QString n, QObject *parent = 0);
     virtual ~Calibration();
 
+    virtual void ListElement(QDomElement root, QString tagname, QString attribute);
+    virtual QString getElement(QDomDocument root, QString tagname, QString attribute = "Value");
+    virtual void setElement(QDomDocument &root, QString tagname, QString value, QString attribute = "Value");
+
+    virtual void save();
+    virtual void load();
+
     virtual QDate getDate() const;
     virtual void setDate(const QDate &value);
 
@@ -180,12 +187,17 @@ public:
     double getIncube_time() const;
     void setIncube_time(const double value);
 
-    virtual void ListElement(QDomElement root, QString tagname, QString attribute);
-    virtual QString getElement(QDomDocument root, QString tagname, QString attribute = "Value");
-    virtual void setElement(QDomDocument &root, QString tagname, QString value, QString attribute = "Value");
+    bool getK1() const;
+    void setK1(bool value);
 
-    virtual void save();
-    virtual void load();
+    bool getK2() const;
+    void setK2(bool value);
+
+    bool getK3() const;
+    void setK3(bool value);
+
+    bool getK4() const;
+    void setK4(bool value);
 
 protected:
     QDomDocument getDoc() const;
@@ -199,6 +211,7 @@ protected:
 private:
     QDate date;
     double write_time, incube_time;
+    bool k1, k2, k3, k4;
 };
 
 class CalibrationKo1 : public Calibration
@@ -240,10 +253,14 @@ public:
     double getA4tv_kp4() const;
     void setA4tv_kp4(double value);
 
+    double getK_plazma_a4tv() const;
+    void setK_plazma_a4tv(double value);
+
 private:
     //входные
     QDate reagent_date, k_plazma_date;
     QString reagent_serial, k_plazma_serial;
+    double k_plazma_a4tv;
     //выходные
     double a4tv_kp1;
     double a4tv_kp2;

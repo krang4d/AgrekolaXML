@@ -43,7 +43,12 @@ QDomDocument CreateKoAgr::createCalibration(QString name)
 {
     QDomDocument document;
     QDomElement calibration = document.createElement(name);
+    calibration.appendChild(document.createElement("k1"));
+    calibration.appendChild(document.createElement("k2"));
+    calibration.appendChild(document.createElement("k3"));
+    calibration.appendChild(document.createElement("k4"));
     document.appendChild(calibration);
+
     return document;
 }
 
@@ -832,6 +837,18 @@ void Calibration::load()
 
     value = getElement(document, QString("incube_time"));
     incube_time = value.toDouble();
+
+    value = getElement(document, QString("k1"));
+    k1  = value.toInt();
+
+    value = getElement(document, QString("k2"));
+    k2 = value.toInt();
+
+    value = getElement(document, QString("k3"));
+    k3 = value.toInt();
+
+    value = getElement(document, QString("k4"));
+    k4 = value.toInt();
 }
 
 Calibration::~Calibration()
@@ -846,6 +863,11 @@ void Calibration::save()
     setElement(document, QString("date"), QString("%1").arg(date.toString("yyyyMMdd")));
     setElement(document, QString("write_time"), QString("%1").arg(write_time));
     setElement(document, QString("incube_time"), QString("%1").arg(incube_time));
+
+    setElement(document, QString("k1"), QString("%1").arg(k1));
+    setElement(document, QString("k2"), QString("%1").arg(k2));
+    setElement(document, QString("k3"), QString("%1").arg(k3));
+    setElement(document, QString("k4"), QString("%1").arg(k4));
     CreateKoAgr::writeFile(name, document);
     //qDebug() << "Calibration::save()";
 }
@@ -897,6 +919,46 @@ QDomDocument Calibration::getDoc() const
 QString Calibration::getName() const
 {
     return name;
+}
+
+bool Calibration::getK4() const
+{
+    return k4;
+}
+
+void Calibration::setK4(bool value)
+{
+    k4 = value;
+}
+
+bool Calibration::getK3() const
+{
+    return k3;
+}
+
+void Calibration::setK3(bool value)
+{
+    k3 = value;
+}
+
+bool Calibration::getK2() const
+{
+    return k2;
+}
+
+void Calibration::setK2(bool value)
+{
+    k2 = value;
+}
+
+bool Calibration::getK1() const
+{
+    return k1;
+}
+
+void Calibration::setK1(bool value)
+{
+    k1 = value;
 }
 
 QDate Calibration::getDate() const
@@ -969,6 +1031,7 @@ CalibrationKo2::CalibrationKo2(QObject *parent)
         calibration.appendChild(document.createElement("reagent_date"));
         calibration.appendChild(document.createElement("k_plazma_serial"));
         calibration.appendChild(document.createElement("k_plazma_date"));
+        calibration.appendChild(document.createElement("k_plazma_a4tv"));
 
         QDomElement a4tv = document.createElement("a4tv_kp1");
         a4tv.setAttribute("Value", "0");
@@ -1013,6 +1076,9 @@ void CalibrationKo2::load()
     value = getElement(document, QString("k_plazma_serial"));
     k_plazma_serial = value.toInt();
 
+    value = getElement(document, QString("k_plazma_a4tv"));
+    k_plazma_a4tv = value.toDouble();
+
     value = getElement(document, QString("a4tv_kp1"));
     a4tv_kp1 = value.toDouble();
     value = getElement(document, QString("a4tv_kp2"));
@@ -1036,6 +1102,7 @@ void CalibrationKo2::save()
     setElement(document, QString("reagent_serial"), reagent_serial);
     setElement(document, QString("k_plazma_date"), k_plazma_date.toString("yyyyMMdd"));
     setElement(document, QString("k_plazma_serial"), k_plazma_serial);
+    setElement(document, QString("k_plazma_a4tv"), QString("%1").arg(k_plazma_a4tv));
     setElement(document, QString("a4tv_kp1"), QString("%1").arg(a4tv_kp1));
     setElement(document, QString("a4tv_kp2"), QString("%1").arg(a4tv_kp2));
     setElement(document, QString("a4tv_kp3"), QString("%1").arg(a4tv_kp3));
@@ -1093,6 +1160,16 @@ double CalibrationKo2::getA4tv_kp4() const
 void CalibrationKo2::setA4tv_kp4(double value)
 {
     a4tv_kp4 = value;
+}
+
+double CalibrationKo2::getK_plazma_a4tv() const
+{
+    return k_plazma_a4tv;
+}
+
+void CalibrationKo2::setK_plazma_a4tv(double value)
+{
+    k_plazma_a4tv = value;
 }
 
 double CalibrationKo2::getA4tv_kp3() const
@@ -2038,6 +2115,7 @@ CalibrationAgr2::CalibrationAgr2(QObject *parent) : Calibration("calibrationAgr2
 
 void CalibrationAgr2::load()
 {
+    Calibration::load();
     QString value;
     value = getElement(document, QString("reagent_date"));
     reagent_date = QDate::fromString(value, QString("yyyyMMdd"));
@@ -2090,6 +2168,7 @@ CalibrationAgr2::~CalibrationAgr2()
 
 void CalibrationAgr2::save()
 {
+    Calibration::save();
     setElement(document, QString("reagent_date"), reagent_date.toString("yyyyMMdd"));
     setElement(document, QString("k_plazma_date"), k_plazma_date.toString("yyyyMMdd"));
 
