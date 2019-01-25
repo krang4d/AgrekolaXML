@@ -10,10 +10,10 @@
 
 class Calibration;
 
-class CreateKoAgr
+class Creator
 {
 public:
-    CreateKoAgr() = delete;
+    Creator() = delete;
     static QDomDocument createTest(QString name);
     static QDomDocument createCalibration(QString name);
     //static QDomDocument createTestAgr(QString name);
@@ -125,6 +125,8 @@ class TestAgr1 : public Test
 public:
     explicit TestAgr1(QObject *parent = 0);
     ~TestAgr1();
+
+    double getIncubeTime2();
 };
 
 class TestAgr2 : public Test
@@ -479,9 +481,6 @@ public:
 
     QDate getK_plazma_date() const;
     void setK_plazma_date(const QDate &value);
-
-    int getIncube_time_1() const;
-    void setIncube_time_1(int value);
 
     int getIncube_time_2() const;
     void setIncube_time_2(int value);

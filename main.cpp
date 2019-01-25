@@ -26,6 +26,10 @@ int main(int argc, char *argv[])
     TestKo3 t_ko3;
     TestKo4 t_ko4;
     TestKo5 t_ko5;
+
+    c_agr1.setIncube_time(3.14);
+    c_agr1.save();
+    qDebug() << c_agr1.getIncube_time();
 //    qDebug() << QString("%1").arg(c_ko1.getIncube_time());
 //    qDebug() << QString("%1").arg(c_ko1.getWrite_time());
 
