@@ -27,9 +27,13 @@ int main(int argc, char *argv[])
     TestKo4 t_ko4;
     TestKo5 t_ko5;
 
+    setlocale(LC_ALL, "Russian");
+
+    qDebug() << "проверка";
     c_agr1.setIncube_time(3.14);
+    c_agr1.setReagent_serial("Серия");
     c_agr1.save();
-    qDebug() << c_agr1.getIncube_time();
+    qDebug() << c_agr1.getIncube_time() << "Серия" << c_agr1.getReagent_serial();
 //    qDebug() << QString("%1").arg(c_ko1.getIncube_time());
 //    qDebug() << QString("%1").arg(c_ko1.getWrite_time());
 

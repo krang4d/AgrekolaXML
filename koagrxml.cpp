@@ -61,7 +61,9 @@ int Creator::writeFile(QString name, QDomDocument doc)
         return -1;
     } else {
         QTextStream stream(&file);
+        stream.setCodec("UTF-8");
         stream << doc.toString();
+        stream.flush();
         file.close();
     }
     //QDir::setCurrent(cur_dir.path());
@@ -1031,7 +1033,7 @@ CalibrationKo4::CalibrationKo4(QObject *parent)
         calibration.appendChild(document.createElement("reagent_date"));
         calibration.appendChild(document.createElement("k_plazma_serial"));
         calibration.appendChild(document.createElement("k_plazma_date"));
-        calibration.appendChild(document.createElement("action"));
+        calibration.appendChild(document.createElement("activity"));
         calibration.appendChild(document.createElement("tv1_concentration"));
         calibration.appendChild(document.createElement("tv1_time"));
         calibration.appendChild(document.createElement("tv2_concentration"));
@@ -1067,6 +1069,9 @@ void CalibrationKo4::load()
     value = getElement(document, QString("k_plazma_serial"));
     k_plazma_serial = value;
 
+    value = getElement(document, QString("activity"));
+    activity = value.toInt();
+
     value = getElement(document, QString("tv1_concentration"));
     tv1_concentration = value.toDouble();
     value = getElement(document, QString("tv1_time"));
@@ -1097,6 +1102,8 @@ void CalibrationKo4::save()
 
     setElement(document, QString("reagent_serial"), reagent_serial);
     setElement(document, QString("k_plazma_serial"), k_plazma_serial);
+
+    setElement(document, QString("activity"), QString::number(activity));
 
     setElement(document, QString("tv1_concentration"), QString("%1").arg(tv1_concentration));
     setElement(document, QString("tv1_time"), QString("%1").arg(tv1_time));
@@ -1158,6 +1165,16 @@ double CalibrationKo4::getTv3_concentration() const
 void CalibrationKo4::setTv3_concentration(double value)
 {
     tv3_concentration = value;
+}
+
+int CalibrationKo4::getActivity() const
+{
+    return activity;
+}
+
+void CalibrationKo4::setActivity(const int &value)
+{
+    activity = value;
 }
 
 double CalibrationKo4::getTv2_concentration() const

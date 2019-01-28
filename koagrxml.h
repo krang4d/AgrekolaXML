@@ -340,11 +340,13 @@ public:
     double getTv3_concentration() const;
     void setTv3_concentration(double value);
 
+    int getActivity() const;
+    void setActivity(const int &value);
+
 private:
     QDate reagent_date, k_plazma_date;
-
     QString reagent_serial, k_plazma_serial;
-    QString action; //стартовый реагент
+    int activity; //активносит тромбина
     double trombine_time;
     double tv1_time, tv2_time, tv3_time;
     double tv1_concentration, tv2_concentration, tv3_concentration;
