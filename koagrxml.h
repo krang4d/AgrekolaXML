@@ -343,6 +343,9 @@ public:
     int getActivity() const;
     void setActivity(const int &value);
 
+    double getTrombine_time() const;
+    void setTrombine_time(double value);
+
 private:
     QDate reagent_date, k_plazma_date;
     QString reagent_serial, k_plazma_serial;
@@ -484,8 +487,8 @@ public:
     QDate getK_plazma_date() const;
     void setK_plazma_date(const QDate &value);
 
-    int getIncube_time_2() const;
-    void setIncube_time_2(int value);
+    double getIncube_time_2() const;
+    void setIncube_time_2(double value);
 
     QString getReagent_serial() const;
     void setReagent_serial(const QString &value);
@@ -530,7 +533,7 @@ private:
     QDate reagent_date, k_plazma_date;
     QString reagent_serial, k_plazma_serial;
 
-    int incube_time_1, incube_time_2;
+    int incube_time_2;
     double k_plazma, level_0, level_100;
     double c1, ck1, c2, ck2, c3, ck3, c4, ck4;
 

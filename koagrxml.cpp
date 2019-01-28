@@ -1040,6 +1040,7 @@ CalibrationKo4::CalibrationKo4(QObject *parent)
         calibration.appendChild(document.createElement("tv2_time"));
         calibration.appendChild(document.createElement("tv3_concentration"));
         calibration.appendChild(document.createElement("tv3_time"));
+        calibration.appendChild(document.createElement("trombine_time"));
         QDomElement write_time = document.createElement("write_time");
         write_time.setAttribute("Value", "10");
         calibration.appendChild(write_time);
@@ -1071,6 +1072,9 @@ void CalibrationKo4::load()
 
     value = getElement(document, QString("activity"));
     activity = value.toInt();
+
+    value = getElement(document, QString("trombine_time"));
+    trombine_time = value.toDouble();
 
     value = getElement(document, QString("tv1_concentration"));
     tv1_concentration = value.toDouble();
@@ -1104,6 +1108,7 @@ void CalibrationKo4::save()
     setElement(document, QString("k_plazma_serial"), k_plazma_serial);
 
     setElement(document, QString("activity"), QString::number(activity));
+    setElement(document, QString("trombine_time"), QString::number(trombine_time));
 
     setElement(document, QString("tv1_concentration"), QString("%1").arg(tv1_concentration));
     setElement(document, QString("tv1_time"), QString("%1").arg(tv1_time));
@@ -1175,6 +1180,16 @@ int CalibrationKo4::getActivity() const
 void CalibrationKo4::setActivity(const int &value)
 {
     activity = value;
+}
+
+double CalibrationKo4::getTrombine_time() const
+{
+    return trombine_time;
+}
+
+void CalibrationKo4::setTrombine_time(double value)
+{
+    trombine_time = value;
 }
 
 double CalibrationKo4::getTv2_concentration() const
@@ -1608,10 +1623,10 @@ void CalibrationAgr1::save()
     Calibration::save();
     setElement(document, QString("reagent_date"), reagent_date.toString("yyyyMMdd"));
     setElement(document, QString("reagent_serial"), reagent_serial);
-    setElement(document, QString("incube_time_2"), QString("%1").arg(incube_time_2));
-    setElement(document, QString("k_concentration"), QString("%1").arg(k_concentration));
-    setElement(document, QString("level_0"), QString("%1").arg(level_0));
-    setElement(document, QString("level_100"), QString("%1").arg(level_100));
+    setElement(document, QString("incube_time_2"), QString::number(incube_time_2));
+    setElement(document, QString("k_concentration"), QString::number(k_concentration));
+    setElement(document, QString("level_0"), QString::number(level_0));
+    setElement(document, QString("level_100"), QString::number(level_100));
 
     Creator::writeFile(name, document);
 }
@@ -1698,7 +1713,7 @@ CalibrationAgr2::CalibrationAgr2(QObject *parent) : Calibration("calibrationAgr2
 
         QDomElement incube_time_2 = document.createElement("incube_time_2");
         incube_time_2.setAttribute("Value", "3");
-        calibration.appendChild(incube_time);
+        calibration.appendChild(incube_time_2);
 
         calibration.appendChild(document.createElement("k_plazma_serial"));
         calibration.appendChild(document.createElement("k_plazma_date"));
@@ -1738,9 +1753,6 @@ void CalibrationAgr2::load()
 
     value = getElement(document, QString("k_plazma_serial"));
     k_plazma_serial = value;
-
-    value = getElement(document, QString("incube_time_1"));
-    incube_time_1 = value.toDouble();
 
     value = getElement(document, QString("incube_time_2"));
     incube_time_2 = value.toDouble();
@@ -1823,12 +1835,12 @@ void CalibrationAgr2::setK_plazma_date(const QDate &value)
     k_plazma_date = value;
 }
 
-int CalibrationAgr2::getIncube_time_2() const
+double CalibrationAgr2::getIncube_time_2() const
 {
     return incube_time_2;
 }
 
-void CalibrationAgr2::setIncube_time_2(int value)
+void CalibrationAgr2::setIncube_time_2(double value)
 {
     incube_time_2 = value;
 }
