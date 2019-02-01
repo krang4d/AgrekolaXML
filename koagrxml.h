@@ -135,6 +135,8 @@ class TestAgr2 : public Test
 public:
     explicit TestAgr2(QObject *parent = 0);
     ~TestAgr2();
+
+    double getIncubeTime2();
 };
 
 class Calibration : public QObject
@@ -453,25 +455,39 @@ public:
     double getK_concentration() const;
     void setK_concentration(double value);
 
-    double getLevel_0() const;
-    void setLevel_0(double value);
-
-    double getLevel_100() const;
-    void setLevel_100(double value);
-
     double getIncube_time_2() const;
     void setIncube_time_2(double value);
+
+    double getBTP1() const;
+    void setBTP1(double value);
+    double getBTP2() const;
+    void setBTP2(double value);
+    double getBTP3() const;
+    void setBTP3(double value);
+    double getBTP4() const;
+    void setBTP4(double value);
+    double getOTP1() const;
+    void setOTP1(double value);
+    double getOTP2() const;
+    void setOTP2(double value);
+    double getOTP3() const;
+    void setOTP3(double value);
+    double getOTP4() const;
+    void setOTP4(double value);
 
 private:
     QDate reagent_date;
     QString reagent_serial;
     double incube_time_2;
-    double k_concentration, level_0, level_100;
+    double k_concentration;
+    double btp1, btp2, btp3, btp4;
+    double otp1, otp2, otp3, otp4;
 
     // Calibration interface
 public:
     void save() override;
     void load() override;
+
 };
 
 class CalibrationAgr2 : public Calibration
@@ -499,11 +515,22 @@ public:
     double getK_plazma() const;
     void setK_plazma(double value);
 
-    double getLevel_0() const;
-    void setLevel_0(double value);
-
-    double getLevel_100() const;
-    void setLevel_100(double value);
+    double getBTP1() const;
+    void setBTP1(double value);
+    double getBTP2() const;
+    void setBTP2(double value);
+    double getBTP3() const;
+    void setBTP3(double value);
+    double getBTP4() const;
+    void setBTP4(double value);
+    double getOTP1() const;
+    void setOTP1(double value);
+    double getOTP2() const;
+    void setOTP2(double value);
+    double getOTP3() const;
+    void setOTP3(double value);
+    double getOTP4() const;
+    void setOTP4(double value);
 
     double getC1() const;
     void setC1(double value);
@@ -533,9 +560,11 @@ private:
     QDate reagent_date, k_plazma_date;
     QString reagent_serial, k_plazma_serial;
 
-    int incube_time_2;
+    double incube_time_2;
     double k_plazma, level_0, level_100;
     double c1, ck1, c2, ck2, c3, ck3, c4, ck4;
+    double btp1, btp2, btp3, btp4;
+    double otp1, otp2, otp3, otp4;
 
     // Calibration interface
 public:

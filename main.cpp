@@ -1,15 +1,16 @@
-#include <QCoreApplication>
+#include <QApplication>
 #include <QDomDocument>
 #include <QDebug>
 #include <QFile>
 #include <QString>
 #include <koagrxml.h>
+#include <QMessageBox>
 
 int Test();
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication a(argc, argv);
+    QApplication a(argc, argv);
 
     //QDomDocument dom = KoAgrXML::createCalibrationKo1();
     CalibrationKo1 c_ko1;
@@ -51,6 +52,13 @@ int main(int argc, char *argv[])
 //    qDebug() << QString("%1").arg(c_ko2.getIncube_time());
 //    qDebug() << QString("%1").arg(c_ko2.getWrite_time());
 
-
+    QMessageBox::StandardButton button;
+    QMessageBox test_dialog;
+    test_dialog.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+    test_dialog.setIcon(QMessageBox::Information);
+    //Проверка Перемешивания в канале 1
+    test_dialog.setWindowTitle("Канал 1 - проверка");
+    test_dialog.setText("Проконтролируте включение перемешивания в канале 1");
+    test_dialog.exec();
     return a.exec();
 }

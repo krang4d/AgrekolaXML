@@ -412,6 +412,13 @@ TestAgr2::~TestAgr2()
     qDebug() << name << " ~TestAgr2()";
 }
 
+double TestAgr2::getIncubeTime2()
+{
+    CalibrationAgr2* obj = dynamic_cast<CalibrationAgr2*>(c_ko);
+    obj->load();
+    return obj->getIncube_time_2();
+}
+
 Calibration::Calibration(QString n, QObject *parent) : QObject(parent)
 {
     name = n;
@@ -1581,8 +1588,15 @@ CalibrationAgr1::CalibrationAgr1(QObject *parent) : Calibration("calibrationAgr1
         calibration.appendChild(incube_time_2);
 
         //выходные данные
-        calibration.appendChild(document.createElement("level_0"));
-        calibration.appendChild(document.createElement("level_100"));
+        calibration.appendChild(document.createElement("BTP1"));
+        calibration.appendChild(document.createElement("BTP2"));
+        calibration.appendChild(document.createElement("BTP3"));
+        calibration.appendChild(document.createElement("BTP4"));
+
+        calibration.appendChild(document.createElement("OTP1"));
+        calibration.appendChild(document.createElement("OTP2"));
+        calibration.appendChild(document.createElement("OTP3"));
+        calibration.appendChild(document.createElement("OTP4"));
 
         Creator::writeFile(name, document);
     }
@@ -1605,17 +1619,23 @@ void CalibrationAgr1::load()
     value = getElement(document, QString("k_concentration"));
     k_concentration = value.toDouble();
 
-    value = getElement(document, QString("level_0"));
-    level_0 = value.toDouble();
+    value = getElement(document, QString("BTP1"));
+    btp1 = value.toDouble();
+    value = getElement(document, QString("BTP2"));
+    btp2 = value.toDouble();
+    value = getElement(document, QString("BTP3"));
+    btp3 = value.toDouble();
+    value = getElement(document, QString("BTP4"));
+    btp4 = value.toDouble();
 
-    value = getElement(document, QString("level_100"));
-    level_100 = value.toDouble();
-}
-
-CalibrationAgr1::~CalibrationAgr1()
-{
-    qDebug() << name << "~CalibrationAgr1()";
-    save();
+    value = getElement(document, QString("OTP1"));
+    otp1 = value.toDouble();
+    value = getElement(document, QString("OTP2"));
+    otp2 = value.toDouble();
+    value = getElement(document, QString("OTP3"));
+    otp3 = value.toDouble();
+    value = getElement(document, QString("OTP4"));
+    otp4 = value.toDouble();
 }
 
 void CalibrationAgr1::save()
@@ -1625,10 +1645,24 @@ void CalibrationAgr1::save()
     setElement(document, QString("reagent_serial"), reagent_serial);
     setElement(document, QString("incube_time_2"), QString::number(incube_time_2));
     setElement(document, QString("k_concentration"), QString::number(k_concentration));
-    setElement(document, QString("level_0"), QString::number(level_0));
-    setElement(document, QString("level_100"), QString::number(level_100));
+
+    setElement(document, QString("BTP1"), QString::number(btp1));
+    setElement(document, QString("BTP2"), QString::number(btp2));
+    setElement(document, QString("BTP3"), QString::number(btp3));
+    setElement(document, QString("BTP4"), QString::number(btp4));
+
+    setElement(document, QString("OTP1"), QString::number(otp1));
+    setElement(document, QString("OTP2"), QString::number(otp2));
+    setElement(document, QString("OTP3"), QString::number(otp3));
+    setElement(document, QString("OTP4"), QString::number(otp4));
 
     Creator::writeFile(name, document);
+}
+
+CalibrationAgr1::~CalibrationAgr1()
+{
+    qDebug() << name << "~CalibrationAgr1()";
+    save();
 }
 
 QDate CalibrationAgr1::getReagent_date() const
@@ -1661,26 +1695,6 @@ void CalibrationAgr1::setK_concentration(double value)
     k_concentration = value;
 }
 
-double CalibrationAgr1::getLevel_0() const
-{
-    return level_0;
-}
-
-void CalibrationAgr1::setLevel_0(double value)
-{
-    level_0 = value;
-}
-
-double CalibrationAgr1::getLevel_100() const
-{
-    return level_100;
-}
-
-void CalibrationAgr1::setLevel_100(double value)
-{
-    level_100 = value;
-}
-
 double CalibrationAgr1::getIncube_time_2() const
 {
     return incube_time_2;
@@ -1689,6 +1703,86 @@ double CalibrationAgr1::getIncube_time_2() const
 void CalibrationAgr1::setIncube_time_2(double value)
 {
     incube_time_2 = value;
+}
+
+double CalibrationAgr1::getOTP4() const
+{
+    return otp4;
+}
+
+void CalibrationAgr1::setOTP4(double value)
+{
+    otp4 = value;
+}
+
+double CalibrationAgr1::getOTP3() const
+{
+    return otp3;
+}
+
+void CalibrationAgr1::setOTP3(double value)
+{
+    otp3 = value;
+}
+
+double CalibrationAgr1::getOTP2() const
+{
+    return otp2;
+}
+
+void CalibrationAgr1::setOTP2(double value)
+{
+    otp2 = value;
+}
+
+double CalibrationAgr1::getOTP1() const
+{
+    return otp1;
+}
+
+void CalibrationAgr1::setOTP1(double value)
+{
+    otp1 = value;
+}
+
+double CalibrationAgr1::getBTP4() const
+{
+    return btp4;
+}
+
+void CalibrationAgr1::setBTP4(double value)
+{
+    btp4 = value;
+}
+
+double CalibrationAgr1::getBTP3() const
+{
+    return btp3;
+}
+
+void CalibrationAgr1::setBTP3(double value)
+{
+    btp3 = value;
+}
+
+double CalibrationAgr1::getBTP2() const
+{
+    return btp2;
+}
+
+void CalibrationAgr1::setBTP2(double value)
+{
+    btp2 = value;
+}
+
+double CalibrationAgr1::getBTP1() const
+{
+    return btp1;
+}
+
+void CalibrationAgr1::setBTP1(double value)
+{
+    btp1 = value;
 }
 
 CalibrationAgr2::CalibrationAgr2(QObject *parent) : Calibration("calibrationAgr2", parent)
@@ -1719,8 +1813,15 @@ CalibrationAgr2::CalibrationAgr2(QObject *parent) : Calibration("calibrationAgr2
         calibration.appendChild(document.createElement("k_plazma_date"));
         calibration.appendChild(document.createElement("k_plazma"));
         //выходные данные
-        calibration.appendChild(document.createElement("level_0"));
-        calibration.appendChild(document.createElement("level_100"));
+        calibration.appendChild(document.createElement("BTP1"));
+        calibration.appendChild(document.createElement("BTP2"));
+        calibration.appendChild(document.createElement("BTP3"));
+        calibration.appendChild(document.createElement("BTP4"));
+
+        calibration.appendChild(document.createElement("OTP1"));
+        calibration.appendChild(document.createElement("OTP2"));
+        calibration.appendChild(document.createElement("OTP3"));
+        calibration.appendChild(document.createElement("OTP4"));
 
         calibration.appendChild(document.createElement("c1"));
         calibration.appendChild(document.createElement("ck1"));
@@ -1759,10 +1860,24 @@ void CalibrationAgr2::load()
 
     value = getElement(document, QString("k_plazma"));
     k_plazma = value.toDouble();
-    value = getElement(document, QString("level_0"));
-    level_0 = value.toDouble();
-    value = getElement(document, QString("level_100"));
-    level_100 = value.toDouble();
+
+    value = getElement(document, QString("BTP1"));
+    btp1 = value.toDouble();
+    value = getElement(document, QString("BTP2"));
+    btp2 = value.toDouble();
+    value = getElement(document, QString("BTP3"));
+    btp3 = value.toDouble();
+    value = getElement(document, QString("BTP4"));
+    btp4 = value.toDouble();
+
+    value = getElement(document, QString("OTP1"));
+    otp1 = value.toDouble();
+    value = getElement(document, QString("OTP2"));
+    otp2 = value.toDouble();
+    value = getElement(document, QString("OTP3"));
+    otp3 = value.toDouble();
+    value = getElement(document, QString("OTP4"));
+    otp4 = value.toDouble();
 
     value = getElement(document, QString("c1"));
     c1 = value.toDouble();
@@ -1800,8 +1915,16 @@ void CalibrationAgr2::save()
     setElement(document, QString("incube_time_2"), QString("%1").arg(incube_time_2));
 
     setElement(document, QString("k_plazma"), QString("%1").arg(k_plazma));
-    setElement(document, QString("level_0"), QString("%1").arg(level_0));
-    setElement(document, QString("level_100"), QString("%1").arg(level_100));
+
+    setElement(document, QString("BTP1"), QString::number(btp1));
+    setElement(document, QString("BTP2"), QString::number(btp2));
+    setElement(document, QString("BTP3"), QString::number(btp3));
+    setElement(document, QString("BTP4"), QString::number(btp4));
+
+    setElement(document, QString("OTP1"), QString::number(otp1));
+    setElement(document, QString("OTP2"), QString::number(otp2));
+    setElement(document, QString("OTP3"), QString::number(otp3));
+    setElement(document, QString("OTP4"), QString::number(otp4));
 
     setElement(document, QString("c1"), QString("%1").arg(c1));
     setElement(document, QString("ck1"), QString("%1").arg(ck1));
@@ -1875,24 +1998,84 @@ void CalibrationAgr2::setK_plazma(double value)
     k_plazma = value;
 }
 
-double CalibrationAgr2::getLevel_0() const
+double CalibrationAgr2::getOTP4() const
 {
-    return level_0;
+    return otp4;
 }
 
-void CalibrationAgr2::setLevel_0(double value)
+void CalibrationAgr2::setOTP4(double value)
 {
-    level_0 = value;
+    otp4 = value;
 }
 
-double CalibrationAgr2::getLevel_100() const
+double CalibrationAgr2::getOTP3() const
 {
-    return level_100;
+    return otp3;
 }
 
-void CalibrationAgr2::setLevel_100(double value)
+void CalibrationAgr2::setOTP3(double value)
 {
-    level_100 = value;
+    otp3 = value;
+}
+
+double CalibrationAgr2::getOTP2() const
+{
+    return otp2;
+}
+
+void CalibrationAgr2::setOTP2(double value)
+{
+    otp2 = value;
+}
+
+double CalibrationAgr2::getOTP1() const
+{
+    return otp1;
+}
+
+void CalibrationAgr2::setOTP1(double value)
+{
+    otp1 = value;
+}
+
+double CalibrationAgr2::getBTP4() const
+{
+    return btp4;
+}
+
+void CalibrationAgr2::setBTP4(double value)
+{
+    btp4 = value;
+}
+
+double CalibrationAgr2::getBTP3() const
+{
+    return btp3;
+}
+
+void CalibrationAgr2::setBTP3(double value)
+{
+    btp3 = value;
+}
+
+double CalibrationAgr2::getBTP2() const
+{
+    return btp2;
+}
+
+void CalibrationAgr2::setBTP2(double value)
+{
+    btp2 = value;
+}
+
+double CalibrationAgr2::getBTP1() const
+{
+    return btp1;
+}
+
+void CalibrationAgr2::setBTP1(double value)
+{
+    btp1 = value;
 }
 
 double CalibrationAgr2::getC1() const
