@@ -32,9 +32,9 @@ int main(int argc, char *argv[])
 
     qDebug() << "проверка";
     c_agr1.setIncube_time(3.14);
-    c_agr1.setReagent_serial("Серия");
+    c_agr1.setTrombotsit_serial("Серия");
     c_agr1.save();
-    qDebug() << c_agr1.getIncube_time() << "Серия" << c_agr1.getReagent_serial();
+    qDebug() << c_agr1.getIncube_time() << "Серия" << c_agr1.getTrombotsit_serial();
 //    qDebug() << QString("%1").arg(c_ko1.getIncube_time());
 //    qDebug() << QString("%1").arg(c_ko1.getWrite_time());
 

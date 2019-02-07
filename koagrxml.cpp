@@ -295,11 +295,13 @@ void Test::setNum4(const QString &value)
 
 double Test::getIncubeTime()
 {
+    c_ko->load();
     return c_ko->getIncube_time();
 }
 
 double Test::getWriteTime()
-{
+{ 
+    c_ko->load();
     return c_ko->getWrite_time();
 }
 
@@ -430,6 +432,14 @@ Calibration::Calibration(QString n, QObject *parent) : QObject(parent)
 void Calibration::load()
 {
     QDir::setCurrent(dir.path());
+    if( QFile::exists(name  + QString(".xml")) ) {
+        Creator::readFile(name, document);
+    }
+    else {
+        document = Creator::createCalibration(name);
+        Creator::writeFile(name, document);
+    }
+
     QString value;
     value = getElement(document, QString("date"));
     date = QDate::fromString(value, QString("yyyyMMdd"));
@@ -1570,10 +1580,10 @@ CalibrationAgr1::CalibrationAgr1(QObject *parent) : Calibration("calibrationAgr1
         document = Creator::createCalibration(name);
         QDomElement calibration = document.firstChildElement();
         calibration.appendChild(document.createElement("date"));
-        calibration.appendChild(document.createElement("reagent_serial"));
-        calibration.appendChild(document.createElement("reagent_date"));
+        calibration.appendChild(document.createElement("trombotsit_serial"));
+        calibration.appendChild(document.createElement("trombotsit_date"));
 
-        calibration.appendChild(document.createElement("k_concentration"));
+        calibration.appendChild(document.createElement("trombotsit_concentration"));
 
         QDomElement write_time = document.createElement("write_time");
         write_time.setAttribute("Value", "10");
@@ -1607,17 +1617,17 @@ void CalibrationAgr1::load()
 {
     Calibration::load();
     QString value;
-    value = getElement(document, QString("reagent_date"));
-    reagent_date = QDate::fromString(value, QString("yyyyMMdd"));
+    value = getElement(document, QString("trombotsit_date"));
+    trombotsit_date = QDate::fromString(value, QString("yyyyMMdd"));
 
-    value = getElement(document, QString("reagent_serial"));
-    reagent_serial = value;
+    value = getElement(document, QString("trombotsit_serial"));
+    trombotsit_serial = value;
+
+    value = getElement(document, QString("trombotsit_concentration"));
+    trombotsit_concentration = value.toDouble();
 
     value = getElement(document, QString("incube_time_2"));
     incube_time_2 = value.toDouble();
-
-    value = getElement(document, QString("k_concentration"));
-    k_concentration = value.toDouble();
 
     value = getElement(document, QString("BTP1"));
     btp1 = value.toDouble();
@@ -1641,10 +1651,10 @@ void CalibrationAgr1::load()
 void CalibrationAgr1::save()
 {
     Calibration::save();
-    setElement(document, QString("reagent_date"), reagent_date.toString("yyyyMMdd"));
-    setElement(document, QString("reagent_serial"), reagent_serial);
+    setElement(document, QString("trombotsit_date"), trombotsit_date.toString("yyyyMMdd"));
+    setElement(document, QString("trombotsit_serial"), trombotsit_serial);
+    setElement(document, QString("trombotsit_concentration"), QString::number(trombotsit_concentration));
     setElement(document, QString("incube_time_2"), QString::number(incube_time_2));
-    setElement(document, QString("k_concentration"), QString::number(k_concentration));
 
     setElement(document, QString("BTP1"), QString::number(btp1));
     setElement(document, QString("BTP2"), QString::number(btp2));
@@ -1665,34 +1675,34 @@ CalibrationAgr1::~CalibrationAgr1()
     save();
 }
 
-QDate CalibrationAgr1::getReagent_date() const
+QDate CalibrationAgr1::getTrombotsit_date() const
 {
-    return reagent_date;
+    return trombotsit_date;
 }
 
-void CalibrationAgr1::setReagent_date(const QDate &value)
+void CalibrationAgr1::setTrombotsit_date(const QDate &value)
 {
-    reagent_date = value;
+    trombotsit_date = value;
 }
 
-QString CalibrationAgr1::getReagent_serial() const
+QString CalibrationAgr1::getTrombotsit_serial() const
 {
-    return reagent_serial;
+    return trombotsit_serial;
 }
 
-void CalibrationAgr1::setReagent_serial(const QString &value)
+void CalibrationAgr1::setTrombotsit_serial(const QString &value)
 {
-    reagent_serial = value;
+    trombotsit_serial = value;
 }
 
-double CalibrationAgr1::getK_concentration() const
+double CalibrationAgr1::getTrombotsit_concentration() const
 {
-    return k_concentration;
+    return trombotsit_concentration;
 }
 
-void CalibrationAgr1::setK_concentration(double value)
+void CalibrationAgr1::setTrombotsit_concentration(double value)
 {
-    k_concentration = value;
+    trombotsit_concentration = value;
 }
 
 double CalibrationAgr1::getIncube_time_2() const

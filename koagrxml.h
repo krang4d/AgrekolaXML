@@ -446,14 +446,14 @@ public:
     explicit CalibrationAgr1(QObject *parent = 0);
     ~CalibrationAgr1();
 
-    QDate getReagent_date() const;
-    void setReagent_date(const QDate &value);
+    QDate getTrombotsit_date() const;
+    void setTrombotsit_date(const QDate &value);
 
-    QString getReagent_serial() const;
-    void setReagent_serial(const QString &value);
+    QString getTrombotsit_serial() const;
+    void setTrombotsit_serial(const QString &value);
 
-    double getK_concentration() const;
-    void setK_concentration(double value);
+    double getTrombotsit_concentration() const;
+    void setTrombotsit_concentration(double value);
 
     double getIncube_time_2() const;
     void setIncube_time_2(double value);
@@ -476,10 +476,10 @@ public:
     void setOTP4(double value);
 
 private:
-    QDate reagent_date;
-    QString reagent_serial;
+    QDate trombotsit_date;
+    QString trombotsit_serial;
+    double trombotsit_concentration;
     double incube_time_2;
-    double k_concentration;
     double btp1, btp2, btp3, btp4;
     double otp1, otp2, otp3, otp4;
 
@@ -487,7 +487,6 @@ private:
 public:
     void save() override;
     void load() override;
-
 };
 
 class CalibrationAgr2 : public Calibration
@@ -561,7 +560,7 @@ private:
     QString reagent_serial, k_plazma_serial;
 
     double incube_time_2;
-    double k_plazma, level_0, level_100;
+    double k_plazma;
     double c1, ck1, c2, ck2, c3, ck3, c4, ck4;
     double btp1, btp2, btp3, btp4;
     double otp1, otp2, otp3, otp4;
