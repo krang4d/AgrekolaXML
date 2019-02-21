@@ -1608,6 +1608,11 @@ CalibrationAgr1::CalibrationAgr1(QObject *parent) : Calibration("calibrationAgr1
         calibration.appendChild(document.createElement("OTP3"));
         calibration.appendChild(document.createElement("OTP4"));
 
+        calibration.appendChild(document.createElement("ckA1"));
+        calibration.appendChild(document.createElement("ckA2"));
+        calibration.appendChild(document.createElement("ckA3"));
+        calibration.appendChild(document.createElement("ckA4"));
+
         Creator::writeFile(name, document);
     }
     load();
@@ -1646,6 +1651,15 @@ void CalibrationAgr1::load()
     otp3 = value.toDouble();
     value = getElement(document, QString("OTP4"));
     otp4 = value.toDouble();
+
+    value = getElement(document, QString("ckA1"));
+    ckA1 = value.toDouble();
+    value = getElement(document, QString("ckA2"));
+    ckA2 = value.toDouble();
+    value = getElement(document, QString("ckA3"));
+    ckA3 = value.toDouble();
+    value = getElement(document, QString("ckA4"));
+    ckA4 = value.toDouble();
 }
 
 void CalibrationAgr1::save()
@@ -1665,6 +1679,11 @@ void CalibrationAgr1::save()
     setElement(document, QString("OTP2"), QString::number(otp2));
     setElement(document, QString("OTP3"), QString::number(otp3));
     setElement(document, QString("OTP4"), QString::number(otp4));
+
+    setElement(document, QString("ckA1"), QString::number(ckA1));
+    setElement(document, QString("ckA2"), QString::number(ckA2));
+    setElement(document, QString("ckA3"), QString::number(ckA3));
+    setElement(document, QString("ckA4"), QString::number(ckA4));
 
     Creator::writeFile(name, document);
 }
@@ -1723,6 +1742,46 @@ double CalibrationAgr1::getOTP4() const
 void CalibrationAgr1::setOTP4(double value)
 {
     otp4 = value;
+}
+
+double CalibrationAgr1::getCkA4() const
+{
+    return ckA4;
+}
+
+void CalibrationAgr1::setCkA4(double value)
+{
+    ckA4 = value;
+}
+
+double CalibrationAgr1::getCkA3() const
+{
+    return ckA3;
+}
+
+void CalibrationAgr1::setCkA3(double value)
+{
+    ckA3 = value;
+}
+
+double CalibrationAgr1::getCkA2() const
+{
+    return ckA2;
+}
+
+void CalibrationAgr1::setCkA2(double value)
+{
+    ckA2 = value;
+}
+
+double CalibrationAgr1::getCkA1() const
+{
+    return ckA1;
+}
+
+void CalibrationAgr1::setCkA1(double value)
+{
+    ckA1 = value;
 }
 
 double CalibrationAgr1::getOTP3() const

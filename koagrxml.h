@@ -480,6 +480,7 @@ private:
     QString trombotsit_serial;
     double trombotsit_concentration;
     double incube_time_2;
+    double ckA1, ckA2, ckA3, ckA4;
     double btp1, btp2, btp3, btp4;
     double otp1, otp2, otp3, otp4;
 
@@ -487,6 +488,15 @@ private:
 public:
     void save() override;
     void load() override;
+
+    double getCkA1() const;
+    void setCkA1(double value);
+    double getCkA2() const;
+    void setCkA2(double value);
+    double getCkA3() const;
+    void setCkA3(double value);
+    double getCkA4() const;
+    void setCkA4(double value);
 };
 
 class CalibrationAgr2 : public Calibration
