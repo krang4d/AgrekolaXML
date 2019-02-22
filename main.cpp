@@ -17,6 +17,9 @@ int main(int argc, char *argv[])
     CalibrationKo2 c_ko2;
     CalibrationKo3 c_ko3;
     CalibrationKo4 c_ko4;
+    CalibrationKo4_1 c_ko4_1;
+    CalibrationKo4_2 c_ko4_2;
+    CalibrationKo4_3 c_ko4_3;
     CalibrationKo5 c_ko5;
 
     CalibrationAgr1 c_agr1;

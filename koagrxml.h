@@ -310,7 +310,8 @@ class CalibrationKo4 : public Calibration
     Q_OBJECT
 public:
     explicit CalibrationKo4(QObject *parent = 0);
-    ~CalibrationKo4();
+    CalibrationKo4(QString name);
+    virtual ~CalibrationKo4();
 
     QDate getReagent_date() const;
     void setReagent_date(const QDate &value);
@@ -348,11 +349,17 @@ public:
     double getTrombine_time() const;
     void setTrombine_time(double value);
 
+    double getTrombine() const;
+    void setTrombine(double value);
+
+protected:
+    void createElements();
+
 private:
     QDate reagent_date, k_plazma_date;
     QString reagent_serial, k_plazma_serial;
     int activity; //активносит тромбина
-    double trombine_time;
+    double trombine_time, trombine;
     double tv1_time, tv2_time, tv3_time;
     double tv1_concentration, tv2_concentration, tv3_concentration;
 
@@ -360,6 +367,33 @@ private:
 public:
     void save() override;
     void load() override;
+};
+
+class CalibrationKo4_1 : public CalibrationKo4
+{
+    Q_OBJECT
+public:
+    explicit CalibrationKo4_1(QObject *parent = 0);
+    ~CalibrationKo4_1();
+
+};
+
+class CalibrationKo4_2 : public CalibrationKo4
+{
+    Q_OBJECT
+public:
+    explicit CalibrationKo4_2(QObject *parent = 0);
+    ~CalibrationKo4_2();
+
+};
+
+class CalibrationKo4_3 : public CalibrationKo4
+{
+    Q_OBJECT
+public:
+    explicit CalibrationKo4_3(QObject *parent = 0);
+    ~CalibrationKo4_3();
+
 };
 
 class CalibrationKo5 : public Calibration

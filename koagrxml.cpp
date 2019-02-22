@@ -1043,32 +1043,51 @@ CalibrationKo4::CalibrationKo4(QObject *parent)
         Creator::readFile(name, document);
     }
     else {
-        document = Creator::createCalibration(name);
-        QDomElement calibration = document.firstChildElement();
-        calibration.appendChild(document.createElement("date"));
-        calibration.appendChild(document.createElement("reagent_serial"));
-        calibration.appendChild(document.createElement("reagent_date"));
-        calibration.appendChild(document.createElement("k_plazma_serial"));
-        calibration.appendChild(document.createElement("k_plazma_date"));
-        calibration.appendChild(document.createElement("activity"));
-        calibration.appendChild(document.createElement("tv1_concentration"));
-        calibration.appendChild(document.createElement("tv1_time"));
-        calibration.appendChild(document.createElement("tv2_concentration"));
-        calibration.appendChild(document.createElement("tv2_time"));
-        calibration.appendChild(document.createElement("tv3_concentration"));
-        calibration.appendChild(document.createElement("tv3_time"));
-        calibration.appendChild(document.createElement("trombine_time"));
-        QDomElement write_time = document.createElement("write_time");
-        write_time.setAttribute("Value", "10");
-        calibration.appendChild(write_time);
-
-        QDomElement incube_time = document.createElement("incube_time");
-        incube_time.setAttribute("Value", "3");
-        calibration.appendChild(incube_time);
-
-        Creator::writeFile(name, document);
+        createElements();
     }
     load();
+}
+
+CalibrationKo4::CalibrationKo4(QString name)
+    : Calibration(name)
+{
+    if( QFile::exists(name  + QString(".xml")) ) {
+        Creator::readFile(name, document);
+    }
+    else {
+        createElements();
+    }
+    load();
+}
+
+
+void CalibrationKo4::createElements()
+{
+    document = Creator::createCalibration(name);
+    QDomElement calibration = document.firstChildElement();
+    calibration.appendChild(document.createElement("date"));
+    calibration.appendChild(document.createElement("reagent_serial"));
+    calibration.appendChild(document.createElement("reagent_date"));
+    calibration.appendChild(document.createElement("k_plazma_serial"));
+    calibration.appendChild(document.createElement("k_plazma_date"));
+    calibration.appendChild(document.createElement("activity"));
+    calibration.appendChild(document.createElement("tv1_concentration"));
+    calibration.appendChild(document.createElement("tv1_time"));
+    calibration.appendChild(document.createElement("tv2_concentration"));
+    calibration.appendChild(document.createElement("tv2_time"));
+    calibration.appendChild(document.createElement("tv3_concentration"));
+    calibration.appendChild(document.createElement("tv3_time"));
+    calibration.appendChild(document.createElement("trombine_time"));
+    calibration.appendChild(document.createElement("trombine"));
+    QDomElement write_time = document.createElement("write_time");
+    write_time.setAttribute("Value", "10");
+    calibration.appendChild(write_time);
+
+    QDomElement incube_time = document.createElement("incube_time");
+    incube_time.setAttribute("Value", "3");
+    calibration.appendChild(incube_time);
+
+    Creator::writeFile(name, document);
 }
 
 void CalibrationKo4::load()
@@ -1092,6 +1111,9 @@ void CalibrationKo4::load()
 
     value = getElement(document, QString("trombine_time"));
     trombine_time = value.toDouble();
+
+    value = getElement(document, QString("trombine"));
+    trombine = value.toDouble();
 
     value = getElement(document, QString("tv1_concentration"));
     tv1_concentration = value.toDouble();
@@ -1126,6 +1148,7 @@ void CalibrationKo4::save()
 
     setElement(document, QString("activity"), QString::number(activity));
     setElement(document, QString("trombine_time"), QString::number(trombine_time));
+    setElement(document, QString("trombine"), QString::number(trombine));
 
     setElement(document, QString("tv1_concentration"), QString("%1").arg(tv1_concentration));
     setElement(document, QString("tv1_time"), QString("%1").arg(tv1_time));
@@ -1207,6 +1230,16 @@ double CalibrationKo4::getTrombine_time() const
 void CalibrationKo4::setTrombine_time(double value)
 {
     trombine_time = value;
+}
+
+double CalibrationKo4::getTrombine() const
+{
+    return trombine;
+}
+
+void CalibrationKo4::setTrombine(double value)
+{
+    trombine = value;
 }
 
 double CalibrationKo4::getTv2_concentration() const
@@ -2225,4 +2258,34 @@ double CalibrationAgr2::getCk4() const
 void CalibrationAgr2::setCk4(double value)
 {
     ck4 = value;
+}
+
+CalibrationKo4_1::CalibrationKo4_1(QObject *parent) : CalibrationKo4("calibrationKo4_1")
+{
+
+}
+
+CalibrationKo4_1::~CalibrationKo4_1()
+{
+
+}
+
+CalibrationKo4_2::CalibrationKo4_2(QObject *parent) : CalibrationKo4("calibrationKo4_2")
+{
+
+}
+
+CalibrationKo4_2::~CalibrationKo4_2()
+{
+
+}
+
+CalibrationKo4_3::CalibrationKo4_3(QObject *parent) : CalibrationKo4("calibrationKo4_3")
+{
+
+}
+
+CalibrationKo4_3::~CalibrationKo4_3()
+{
+
 }
