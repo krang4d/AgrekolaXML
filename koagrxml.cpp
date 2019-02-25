@@ -504,9 +504,152 @@ TestKo4::TestKo4(QObject *parent)
     load();
 }
 
+TestKo4::TestKo4(WithoutCalibration, QObject *parent) : Test("testKo4_1", NULL)
+{
+    if( QFile::exists(name  + QString(".xml")) ) {
+        Creator::readFile(name, document);
+    }
+    else {
+        document = Creator::createTest(name);
+        QDomElement calibration = document.firstChildElement();
+        calibration.appendChild(document.createElement("date"));
+        calibration.appendChild(document.createElement("reagent_serial"));
+        calibration.appendChild(document.createElement("reagent_date"));
+        calibration.appendChild(document.createElement("trombine"));
+        calibration.appendChild(document.createElement("trombine_time"));
+
+        QDomElement write_time = document.createElement("write_time");
+        write_time.setAttribute("Value", "10");
+        calibration.appendChild(write_time);
+
+        QDomElement incube_time = document.createElement("incube_time");
+        incube_time.setAttribute("Value", "3");
+        calibration.appendChild(incube_time);
+
+        Creator::writeFile(name, document);
+    }
+    load();
+}
+
 TestKo4::~TestKo4()
 {
     qDebug() << name << " ~TestKo4()";
+    save();
+}
+
+double TestKo4::getIncubeTime()
+{
+    return this->incube_time;
+}
+
+double TestKo4::getWriteTime()
+{
+    return this->write_time;
+}
+
+void TestKo4::save()
+{
+    if(c_ko != NULL) {
+        Test::save();
+    }
+    else {
+        Test::save();
+        setElement(document, QString("date"), date.toString("yyyyMMdd"));
+        setElement(document, QString("reagent_date"), reagent_date.toString("yyyyMMdd"));
+        setElement(document, QString("reagent_serial"), reagent_serial);
+        setElement(document, QString("write_time"), QString::number(write_time));
+        setElement(document, QString("incube_time"), QString::number(incube_time));
+        setElement(document, QString("trombine"), QString::number(trombine));
+        setElement(document, QString("trombine_time"), QString::number(trombine_time));
+        Creator::writeFile(name, document);
+    }
+}
+
+void TestKo4::load()
+{
+    if(c_ko != NULL) {
+        Test::load();
+    }
+    else {
+        Test::load();
+        date = QDate::fromString(getElement(document, QString("date"), QString("yyyyMMdd")));
+        reagent_date = QDate::fromString(getElement(document, QString("reagent_date"), QString("yyyyMMdd")));
+        reagent_serial = getElement(document, QString("reagent_serial"));
+        write_time = getElement(document, QString("write_time")).toDouble();
+        incube_time = getElement(document, QString("incube_time")).toDouble();
+        trombine = getElement(document, QString("trombine")).toDouble();
+        trombine_time = getElement(document, QString("trombine_time")).toDouble();
+    }
+}
+
+QDate TestKo4::getDate() const
+{
+    return date;
+}
+
+void TestKo4::setDate(const QDate &value)
+{
+    date = value;
+}
+
+QDate TestKo4::getReagent_date() const
+{
+    return reagent_date;
+}
+
+void TestKo4::setReagent_date(const QDate &value)
+{
+    reagent_date = value;
+}
+
+QString TestKo4::getReagent_serial() const
+{
+    return reagent_serial;
+}
+
+void TestKo4::setReagent_serial(const QString &value)
+{
+    reagent_serial = value;
+}
+
+double TestKo4::getWrite_time() const
+{
+    return write_time;
+}
+
+void TestKo4::setWrite_time(double value)
+{
+    write_time = value;
+}
+
+double TestKo4::getIncube_time() const
+{
+    return incube_time;
+}
+
+void TestKo4::setIncube_time(double value)
+{
+    incube_time = value;
+}
+
+double TestKo4::getTrombine() const
+{
+    return trombine;
+}
+
+void TestKo4::setTrombine(double value)
+{
+    trombine = value;
+}
+
+double TestKo4::getTrombine_time() const
+{
+    return trombine_time;
+}
+
+void TestKo4::setTrombine_time(double value)
+{
+    trombine_time = value;
 }
 
 TestKo5::TestKo5(QObject *parent)

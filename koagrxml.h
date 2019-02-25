@@ -144,7 +144,42 @@ class TestKo4 : public Test
     Q_OBJECT
 public:
     explicit TestKo4(QObject *parent = 0);
+    explicit TestKo4(WithoutCalibration, QObject *parent = 0);
     ~TestKo4();
+
+    QDate getDate() const;
+    void setDate(const QDate &value);
+
+    QDate getReagent_date() const;
+    void setReagent_date(const QDate &value);
+
+    QString getReagent_serial() const;
+    void setReagent_serial(const QString &value);
+
+    double getWrite_time() const;
+    void setWrite_time(double value);
+
+    double getIncube_time() const;
+    void setIncube_time(double value);
+
+    double getTrombine() const;
+    void setTrombine(double value);
+
+    double getTrombine_time() const;
+    void setTrombine_time(double value);
+
+    // Test interface
+public:
+    double getIncubeTime() override;
+    double getWriteTime() override;
+    void save() override;
+    void load() override;
+
+private:
+    QDate date;
+    QDate reagent_date;
+    QString reagent_serial;
+    double write_time, incube_time, trombine, trombine_time;
 };
 
 class TestKo5 : public Test
