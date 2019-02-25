@@ -124,7 +124,7 @@ Test::Test(QString n, Calibration *c, QObject *parent) : QObject(parent)
     dir = Creator::getXMLDir();
     QDir::setCurrent(dir.path());
     qDebug() << "name" << name << "dir" << dir.currentPath();
-    load();
+    //load();
     //document = KoAgrXML::openTest();
 }
 
@@ -338,7 +338,7 @@ void Test::setNum1(const QString &value)
 TestKo1::TestKo1(QObject *parent)
     : Test("testKo1", new CalibrationKo1)
 {
-
+    load();
 }
 
 TestKo1::~TestKo1()
@@ -348,17 +348,149 @@ TestKo1::~TestKo1()
 
 TestKo2::TestKo2(QObject *parent)
     : Test("testKo2", new CalibrationKo2)
-{}
+{
+    load();
+}
+
+TestKo2::TestKo2(WithoutCalibration, QObject *parent) : Test("testKo2_1", NULL)
+{
+    if( QFile::exists(name  + QString(".xml")) ) {
+        Creator::readFile(name, document);
+    }
+    else {
+        document = Creator::createTest(name);
+        QDomElement calibration = document.firstChildElement();
+        calibration.appendChild(document.createElement("date"));
+        calibration.appendChild(document.createElement("reagent_serial"));
+        calibration.appendChild(document.createElement("reagent_date"));
+        calibration.appendChild(document.createElement("a4tv_kp"));
+
+        QDomElement write_time = document.createElement("write_time");
+        write_time.setAttribute("Value", "10");
+        calibration.appendChild(write_time);
+
+        QDomElement incube_time = document.createElement("incube_time");
+        incube_time.setAttribute("Value", "3");
+        calibration.appendChild(incube_time);
+
+        Creator::writeFile(name, document);
+    }
+    load();
+}
 
 TestKo2::~TestKo2()
 {
     qDebug() << name << " ~TestKo2()";
+    save();
+}
+
+double TestKo2::getIncubeTime()
+{
+    return this->incube_time;
+}
+
+double TestKo2::getWriteTime()
+{
+    return this->write_time;
+}
+
+void TestKo2::save()
+{
+    if(c_ko != NULL) {
+        Test::save();
+    }
+    else {
+        Test::save();
+        setElement(document, QString("date"), date.toString("yyyyMMdd"));
+        setElement(document, QString("reagent_date"), reagent_date.toString("yyyyMMdd"));
+        setElement(document, QString("reagent_serial"), reagent_serial);
+        setElement(document, QString("write_time"), QString::number(write_time));
+        setElement(document, QString("incube_time"), QString::number(incube_time));
+        setElement(document, QString("a4tv_kp"), QString::number(a4tv_kp));
+        Creator::writeFile(name, document);
+    }
+}
+
+void TestKo2::load()
+{
+    if(c_ko != NULL) {
+        Test::load();
+    }
+    else {
+        Test::load();
+        date = QDate::fromString(getElement(document, QString("date"), QString("yyyyMMdd")));
+        reagent_date = QDate::fromString(getElement(document, QString("reagent_date"), QString("yyyyMMdd")));
+        reagent_serial = getElement(document, QString("reagent_serial"));
+        write_time = getElement(document, QString("write_time")).toDouble();
+        incube_time = getElement(document, QString("incube_time")).toDouble();
+        a4tv_kp = getElement(document, QString("a4tv_kp")).toDouble();
+    }
+}
+
+QDate TestKo2::getDate() const
+{
+    return date;
+}
+
+void TestKo2::setDate(const QDate &value)
+{
+    date = value;
+}
+
+QDate TestKo2::getReagent_date() const
+{
+    return reagent_date;
+}
+
+void TestKo2::setReagent_date(const QDate &value)
+{
+    reagent_date = value;
+}
+
+QString TestKo2::getReagent_serial() const
+{
+    return reagent_serial;
+}
+
+void TestKo2::setReagent_serial(const QString &value)
+{
+    reagent_serial = value;
+}
+
+double TestKo2::getWrite_time() const
+{
+    return write_time;
+}
+
+void TestKo2::setWrite_time(double value)
+{
+    write_time = value;
+}
+
+double TestKo2::getIncube_time() const
+{
+    return incube_time;
+}
+
+void TestKo2::setIncube_time(double value)
+{
+    incube_time = value;
+}
+
+double TestKo2::getA4tv_kp() const
+{
+    return a4tv_kp;
+}
+
+void TestKo2::setA4tv_kp(double value)
+{
+    a4tv_kp = value;
 }
 
 TestKo3::TestKo3(QObject *parent)
     : Test("testKo3", new CalibrationKo3)
 {
-
+    load();
 }
 
 TestKo3::~TestKo3()
@@ -368,7 +500,9 @@ TestKo3::~TestKo3()
 
 TestKo4::TestKo4(QObject *parent)
     : Test("testKo4", new CalibrationKo4)
-{}
+{
+    load();
+}
 
 TestKo4::~TestKo4()
 {
@@ -377,7 +511,9 @@ TestKo4::~TestKo4()
 
 TestKo5::TestKo5(QObject *parent)
     : Test("testKo5", new CalibrationKo5)
-{}
+{
+    load();
+}
 
 TestKo5::~TestKo5()
 {
@@ -386,7 +522,9 @@ TestKo5::~TestKo5()
 
 TestAgr1::TestAgr1(QObject *parent)
     : Test("testAgr1", new CalibrationAgr1)
-{}
+{
+    load();
+}
 
 TestAgr1::~TestAgr1()
 {
@@ -407,7 +545,9 @@ double TestAgr1::getIncubeTime2()
 
 TestAgr2::TestAgr2(QObject *parent)
     : Test("testAgr2", new CalibrationAgr2)
-{}
+{
+    load();
+}
 
 TestAgr2::~TestAgr2()
 {
@@ -481,7 +621,6 @@ void Calibration::save()
     setElement(document, QString("k3"), QString("%1").arg(k3));
     setElement(document, QString("k4"), QString("%1").arg(k4));
     Creator::writeFile(name, document);
-    //qDebug() << "Calibration::save()";
 }
 
 void Calibration::ListElement(QDomElement root, QString tagname, QString attribute)

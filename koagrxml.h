@@ -29,36 +29,36 @@ class Test : public QObject
 public:
     explicit Test(QString n, Calibration *c, QObject *parent = 0);
     virtual ~Test();
-    virtual void setK1(const int value);
-    virtual int getK1() const;
-    virtual void setK2(const int value);
-    virtual int getK2() const;
-    virtual void setK3(const int value);
-    virtual int getK3() const;
-    virtual void setK4(const int value);
-    virtual int getK4() const;
-    virtual void setSingle(const int value);
-    virtual int getSingle() const ;
-    virtual QString getText() const;
+    void setK1(const int value);
+    int getK1() const;
+    void setK2(const int value);
+    int getK2() const;
+    void setK3(const int value);
+    int getK3() const;
+    void setK4(const int value);
+    int getK4() const;
+    void setSingle(const int value);
+    int getSingle() const ;
+    QString getText() const;
 
-    virtual QString getNum1() const;
-    virtual void setNum1(const QString &value);
+    QString getNum1() const;
+    void setNum1(const QString &value);
 
-    virtual QString getNum2() const;
-    virtual void setNum2(const QString &value);
+    QString getNum2() const;
+    void setNum2(const QString &value);
 
-    virtual QString getNum3() const;
-    virtual void setNum3(const QString &value);
+    QString getNum3() const;
+    void setNum3(const QString &value);
 
-    virtual QString getNum4() const;
-    virtual void setNum4(const QString &value);
+    QString getNum4() const;
+    void setNum4(const QString &value);
 
-    double getIncubeTime();
-    double getWriteTime();
+    virtual double getIncubeTime();
+    virtual double getWriteTime();
 
-    virtual void ListElement(QDomElement root, QString tagname, QString attribute);
-    virtual QString getElement(QDomDocument root, QString tagname, QString attribute = "Value");
-    virtual void setElement(QDomDocument &root, QString tagname, QString value, QString attribute = "Value");
+    void ListElement(QDomElement root, QString tagname, QString attribute);
+    QString getElement(QDomDocument root, QString tagname, QString attribute = "Value");
+    void setElement(QDomDocument &root, QString tagname, QString value, QString attribute = "Value");
 
     virtual void save();
     virtual void load();
@@ -87,12 +87,48 @@ public:
     virtual ~TestKo1();
 };
 
+class WithoutCalibration {
+
+};
+
 class TestKo2 : public Test
 {
     Q_OBJECT
 public:
     explicit TestKo2(QObject *parent = 0);
+    explicit TestKo2(WithoutCalibration, QObject *parent = 0);
     ~TestKo2();
+
+    QDate getDate() const;
+    void setDate(const QDate &value);
+
+    QDate getReagent_date() const;
+    void setReagent_date(const QDate &value);
+
+    QString getReagent_serial() const;
+    void setReagent_serial(const QString &value);
+
+    double getWrite_time() const;
+    void setWrite_time(double value);
+
+    double getIncube_time() const;
+    void setIncube_time(double value);
+
+    double getA4tv_kp() const;
+    void setA4tv_kp(double value);
+
+    // Test interface
+public:
+    double getIncubeTime() override;
+    double getWriteTime() override;
+    void save() override;
+    void load() override;
+
+private:
+    QDate date;
+    QDate reagent_date;
+    QString reagent_serial;
+    double write_time, incube_time, a4tv_kp;
 };
 
 class TestKo3 : public Test
