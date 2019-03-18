@@ -38,45 +38,58 @@ public:
     void setK4(const int value);
     int getK4() const;
     void setSingle(const int value);
-    int getSingle() const ;
-    QString getText() const;
+    int getSingle() const;
 
     QString getNum1() const;
     void setNum1(const QString &value);
-
     QString getNum2() const;
     void setNum2(const QString &value);
-
     QString getNum3() const;
     void setNum3(const QString &value);
-
     QString getNum4() const;
     void setNum4(const QString &value);
 
+    QDate getDate() const;
+    void setDate(const QDate &value);
+
+    double getT1() const;
+    void setT1(double value);
+    double getT2() const;
+    void setT2(double value);
+    double getT3() const;
+    void setT3(double value);
+    double getT4() const;
+    void setT4(double value);
+
     virtual double getIncubeTime();
     virtual double getWriteTime();
+    virtual void save();
+    virtual void load();
+
+    QString getText() const;
+    virtual QString print() = 0;
 
     void ListElement(QDomElement root, QString tagname, QString attribute);
     QString getElement(QDomDocument root, QString tagname, QString attribute = "Value");
     void setElement(QDomDocument &root, QString tagname, QString value, QString attribute = "Value");
 
-    virtual void save();
-    virtual void load();
-
 protected:
     QDomDocument getDoc() const;
     QString getName() const;
-
 
 protected:
     QDomDocument document;
     QString name;
     QDir dir;
+    QDate date;
 
     int k1, k2, k3, k4, single;
     QString num1, num2, num3, num4;
 
     Calibration *c_ko;
+
+private:
+    double t1, t2, t3, t4;
 };
 
 class TestKo1 : public Test
@@ -85,6 +98,10 @@ class TestKo1 : public Test
 public:
     explicit TestKo1(QObject *parent = 0);
     virtual ~TestKo1();
+
+    // Test interface
+public:
+    QString print() override;
 };
 
 class WithoutCalibration {
@@ -101,19 +118,14 @@ public:
 
     QDate getDate() const;
     void setDate(const QDate &value);
-
     QDate getReagent_date() const;
     void setReagent_date(const QDate &value);
-
     QString getReagent_serial() const;
     void setReagent_serial(const QString &value);
-
     double getWrite_time() const;
     void setWrite_time(double value);
-
     double getIncube_time() const;
     void setIncube_time(double value);
-
     double getA4tv_kp() const;
     void setA4tv_kp(double value);
 
@@ -123,6 +135,7 @@ public:
     double getWriteTime() override;
     void save() override;
     void load() override;
+    QString print() override;
 
 private:
     QDate date;
@@ -137,6 +150,10 @@ class TestKo3 : public Test
 public:
     explicit TestKo3(QObject *parent = 0);
     ~TestKo3();
+
+    // Test interface
+public:
+    QString print() override;
 };
 
 class TestKo4 : public Test
@@ -149,22 +166,16 @@ public:
 
     QDate getDate() const;
     void setDate(const QDate &value);
-
     QDate getReagent_date() const;
     void setReagent_date(const QDate &value);
-
     QString getReagent_serial() const;
     void setReagent_serial(const QString &value);
-
     double getWrite_time() const;
     void setWrite_time(double value);
-
     double getIncube_time() const;
     void setIncube_time(double value);
-
     double getTrombine() const;
     void setTrombine(double value);
-
     double getTrombine_time() const;
     void setTrombine_time(double value);
 
@@ -174,6 +185,7 @@ public:
     double getWriteTime() override;
     void save() override;
     void load() override;
+    QString print() override;
 
 private:
     QDate date;
@@ -188,6 +200,10 @@ class TestKo5 : public Test
 public:
     explicit TestKo5(QObject *parent = 0);
     ~TestKo5();
+
+    // Test interface
+public:
+    QString print() override;
 };
 
 class TestAgr1 : public Test
@@ -198,6 +214,10 @@ public:
     ~TestAgr1();
 
     double getIncubeTime2();
+
+    // Test interface
+public:
+    QString print() override;
 };
 
 class TestAgr2 : public Test
@@ -208,41 +228,39 @@ public:
     ~TestAgr2();
 
     double getIncubeTime2();
+
+    // Test interface
+public:
+    QString print() override;
 };
 
 class Calibration : public QObject
 {
+    Q_OBJECT
 public:
     explicit Calibration(QString n, QObject *parent = 0);
     virtual ~Calibration();
-
     virtual void ListElement(QDomElement root, QString tagname, QString attribute);
     virtual QString getElement(QDomDocument root, QString tagname, QString attribute = "Value");
     virtual void setElement(QDomDocument &root, QString tagname, QString value, QString attribute = "Value");
-
     virtual void save();
     virtual void load();
-
     virtual QDate getDate() const;
     virtual void setDate(const QDate &value);
-
     double getWrite_time() const;
     void setWrite_time(const double value);
-
     double getIncube_time() const;
     void setIncube_time(const double value);
-
     bool getK1() const;
     void setK1(bool value);
-
     bool getK2() const;
     void setK2(bool value);
-
     bool getK3() const;
     void setK3(bool value);
-
     bool getK4() const;
     void setK4(bool value);
+
+    virtual QString print() = 0;
 
 protected:
     QDomDocument getDoc() const;
@@ -265,6 +283,10 @@ class CalibrationKo1 : public Calibration
 public:
     explicit CalibrationKo1(QObject *parent = 0);
     virtual ~CalibrationKo1();
+
+    // Calibration interface
+public:
+    QString print() override;
 };
 
 class CalibrationKo2 : public Calibration
@@ -276,28 +298,20 @@ public:
 
     QDate getReagent_date() const;
     void setReagent_date(const QDate &value);
-
     QDate getK_plazma_date() const;
     void setK_plazma_date(const QDate &value);
-
     QString getReagent_serial() const;
     void setReagent_serial(const QString &value);
-
     QString getK_plazma_serial() const;
     void setK_plazma_serial(const QString &value);
-
     double getA4tv_kp1() const;
     void setA4tv_kp1(double value);
-
     double getA4tv_kp2() const;
     void setA4tv_kp2(double value);
-
     double getA4tv_kp3() const;
     void setA4tv_kp3(double value);
-
     double getA4tv_kp4() const;
     void setA4tv_kp4(double value);
-
     double getK_plazma_a4tv() const;
     void setK_plazma_a4tv(double value);
 
@@ -316,6 +330,7 @@ private:
 public:
     void save() override;
     void load() override;
+    QString print() override;
 };
 
 class CalibrationKo3 : public Calibration
@@ -327,37 +342,26 @@ public:
 
     QDate getReagent_date() const;
     void setReagent_date(const QDate &value);
-
     QString getReagent_serial() const;
     void setReagent_serial(const QString &value);
-
     QDate getK_plazma_date() const;
     void setK_plazma_date(const QDate &value);
-
     QString getK_plazma_serial() const;
     void setK_plazma_serial(const QString &value);
-
     double getFibrinogen_k_plazma() const;
     void setFibrinogen_k_plazma(double value);
-
     double getTime_k_plazma() const;
     void setTime_k_plazma(double value);
-
     double getFibrinogen_200_plazma() const;
     void setFibrinogen_200_plazma(double value);
-
     double getTime_200_plazma() const;
     void setTime_200_plazma(double value);
-
     double getFibrinogen_50_plazma() const;
     void setFibrinogen_50_plazma(double value);
-
     double getTime_50_plazma() const;
     void setTime_50_plazma(double value);
-
     double getFibrinogen_25_plazma() const;
     void setFibrinogen_25_plazma(double value);
-
     double getTime_25_plazma() const;
     void setTime_25_plazma(double value);
 
@@ -374,6 +378,7 @@ private:
 public:
     void save() override;
     void load() override;
+    QString print() override;
 };
 
 class CalibrationKo4 : public Calibration
@@ -386,40 +391,28 @@ public:
 
     QDate getReagent_date() const;
     void setReagent_date(const QDate &value);
-
     QDate getK_plazma_date() const;
     void setK_plazma_date(const QDate &value);
-
     QString getReagent_serial() const;
     void setReagent_serial(const QString &value);
-
     QString getK_plazma_serial() const;
     void setK_plazma_serial(const QString &value);
-
     double getTv1_time() const;
     void setTv1_time(double value);
-
     double getTv2_time() const;
     void setTv2_time(double value);
-
     double getTv3_time() const;
     void setTv3_time(double value);
-
     double getTv1_concentration() const;
     void setTv1_concentration(double value);
-
     double getTv2_concentration() const;
     void setTv2_concentration(double value);
-
     double getTv3_concentration() const;
     void setTv3_concentration(double value);
-
     int getActivity() const;
     void setActivity(const int &value);
-
     double getTrombine_time() const;
     void setTrombine_time(double value);
-
     double getTrombine() const;
     void setTrombine(double value);
 
@@ -438,6 +431,7 @@ private:
 public:
     void save() override;
     void load() override;
+    QString print() override;
 };
 
 class CalibrationKo4_1 : public CalibrationKo4
@@ -446,7 +440,6 @@ class CalibrationKo4_1 : public CalibrationKo4
 public:
     explicit CalibrationKo4_1(QObject *parent = 0);
     ~CalibrationKo4_1();
-
 };
 
 class CalibrationKo4_2 : public CalibrationKo4
@@ -455,7 +448,6 @@ class CalibrationKo4_2 : public CalibrationKo4
 public:
     explicit CalibrationKo4_2(QObject *parent = 0);
     ~CalibrationKo4_2();
-
 };
 
 class CalibrationKo4_3 : public CalibrationKo4
@@ -464,7 +456,6 @@ class CalibrationKo4_3 : public CalibrationKo4
 public:
     explicit CalibrationKo4_3(QObject *parent = 0);
     ~CalibrationKo4_3();
-
 };
 
 class CalibrationKo5 : public Calibration
@@ -476,55 +467,38 @@ public:
 
     QDate getReagent_date() const;
     void setReagent_date(const QDate &value);
-
     QString getReagent_serial() const;
     void setReagent_serial(const QString &value);
-
     QDate getTromboplastin_date() const;
     void setTromboplastin_date(const QDate &value);
-
     QDate getK_plazma_date() const;
     void setK_plazma_date(const QDate &value);
-
     QString getTromboplastin_serial() const;
     void setTromboplastin_serial(const QString &value);
-
     QString getK_plazma_serial() const;
     void setK_plazma_serial(const QString &value);
-
     double getK_protrombine_index() const;
     void setK_protrombine_index(double value);
-
     double getK_protrombine_otn() const;
     void setK_protrombine_otn(double value);
-
     double getProtrombine_k_Kvik() const;
     void setProtrombine_k_Kvik(double value);
-
     double getTime_k_Kvik() const;
     void setTime_k_Kvik(double value);
-
     double getProtrombine_50_Kvik() const;
     void setProtrombine_50_Kvik(double value);
-
     double getTime_50_Kvik() const;
     void setTime_50_Kvik(double value);
-
     double getProtrombine_25_Kvik() const;
     void setProtrombine_25_Kvik(double value);
-
     double getTime_25_Kvik() const;
     void setTime_25_Kvik(double value);
-
     double getProtrombine_12_Kvik() const;
     void setProtrombine_12_Kvik(double value);
-
     double getTime_12_Kvik() const;
     void setTime_12_Kvik(double value);
-
     double getProtrombine_index() const;
     void setProtrombine_index(double value);
-
     double getProtrombine_otn() const;
     void setProtrombine_otn(double value);
 
@@ -542,6 +516,7 @@ private:
 public:
     void save() override;
     void load() override;
+    QString print() override;
 };
 
 class CalibrationAgr1 : public Calibration
@@ -553,16 +528,12 @@ public:
 
     QDate getTrombotsit_date() const;
     void setTrombotsit_date(const QDate &value);
-
     QString getTrombotsit_serial() const;
     void setTrombotsit_serial(const QString &value);
-
     double getTrombotsit_concentration() const;
     void setTrombotsit_concentration(double value);
-
     double getIncube_time_2() const;
     void setIncube_time_2(double value);
-
     double getBTP1() const;
     void setBTP1(double value);
     double getBTP2() const;
@@ -579,6 +550,14 @@ public:
     void setOTP3(double value);
     double getOTP4() const;
     void setOTP4(double value);
+    double getCkA1() const;
+    void setCkA1(double value);
+    double getCkA2() const;
+    void setCkA2(double value);
+    double getCkA3() const;
+    void setCkA3(double value);
+    double getCkA4() const;
+    void setCkA4(double value);
 
 private:
     QDate trombotsit_date;
@@ -593,15 +572,7 @@ private:
 public:
     void save() override;
     void load() override;
-
-    double getCkA1() const;
-    void setCkA1(double value);
-    double getCkA2() const;
-    void setCkA2(double value);
-    double getCkA3() const;
-    void setCkA3(double value);
-    double getCkA4() const;
-    void setCkA4(double value);
+    QString print() override;
 };
 
 class CalibrationAgr2 : public Calibration
@@ -613,22 +584,16 @@ public:
 
     QDate getReagent_date() const;
     void setReagent_date(const QDate &value);
-
     QDate getK_plazma_date() const;
     void setK_plazma_date(const QDate &value);
-
     double getIncube_time_2() const;
     void setIncube_time_2(double value);
-
     QString getReagent_serial() const;
     void setReagent_serial(const QString &value);
-
     QString getK_plazma_serial() const;
     void setK_plazma_serial(const QString &value);
-
     double getK_plazma() const;
     void setK_plazma(double value);
-
     double getBTP1() const;
     void setBTP1(double value);
     double getBTP2() const;
@@ -645,28 +610,20 @@ public:
     void setOTP3(double value);
     double getOTP4() const;
     void setOTP4(double value);
-
     double getC1() const;
     void setC1(double value);
-
     double getCk1() const;
     void setCk1(double value);
-
     double getC2() const;
     void setC2(double value);
-
     double getCk2() const;
     void setCk2(double value);
-
     double getC3() const;
     void setC3(double value);
-
     double getCk3() const;
     void setCk3(double value);
-
     double getC4() const;
     void setC4(double value);
-
     double getCk4() const;
     void setCk4(double value);
 
@@ -684,5 +641,6 @@ private:
 public:
     void save() override;
     void load() override;
+    QString print() override;
 };
 #endif // KOAGRXML_H

@@ -10,26 +10,34 @@ QDomDocument Creator::createTest(QString name) {
     QDomElement k1 = document.createElement("k1");
     k1.setAttribute("Value", "1");
     k1.setAttribute("Num", "num1");
+    k1.setAttribute("t1", "NaN");
     test.appendChild(k1);
 
     QDomElement k2 = document.createElement("k2");
     k2.setAttribute("Value", "1");
     k2.setAttribute("Num", "num2");
+    k2.setAttribute("t2", "NaN");
     test.appendChild(k2);
 
     QDomElement k3 = document.createElement("k3");
     k3.setAttribute("Value", "1");
     k3.setAttribute("Num", "num3");
+    k2.setAttribute("t3", "NaN");
     test.appendChild(k3);
 
     QDomElement k4 = document.createElement("k4");
     k4.setAttribute("Value", "1");
     k4.setAttribute("Num", "num4");
+    k2.setAttribute("t4", "NaN");
     test.appendChild(k4);
 
     QDomElement single = document.createElement("single");
     single.setAttribute("Value", "1");
     test.appendChild(single);
+
+    QDate d = QDate::currentDate();
+    QDomElement date = document.createElement("date");
+    date.setAttribute("Value", d.toString("yyyyMMdd"));
 
     return document;
 }
@@ -107,12 +115,12 @@ QDir Creator::getXMLDir()
     {
         if(dir.mkdir("Agrekola4k")) dir.cd("Agrekola4k");
         //QDir::setCurrent(dir.path());
-        qDebug() << "mkdir(Agrekola4k)";
+        //qDebug() << "mkdir(Agrekola4k)";
     }
     if(!dir.cd("XML"))
     {
         if(dir.mkdir("XML")) dir.cd("XML");
-        qDebug() << "mkdir(XML)";
+        //qDebug() << "mkdir(XML)";
     }
     return dir;
 }
@@ -123,7 +131,7 @@ Test::Test(QString n, Calibration *c, QObject *parent) : QObject(parent)
     c_ko = c;
     dir = Creator::getXMLDir();
     QDir::setCurrent(dir.path());
-    qDebug() << "name" << name << "dir" << dir.currentPath();
+    //qDebug() << "name" << name << "dir" << dir.currentPath();
     //load();
     //document = KoAgrXML::openTest();
 }
@@ -139,31 +147,28 @@ void Test::load()
         Creator::writeFile(name, document);
     }
 
-    QString value;
-    value = getElement(document, QString("k1"));
-    k1 = value.toInt();
-
-    value = getElement(document, QString("k2"));
-    k2 = value.toInt();
-
-    value = getElement(document, QString("k3"));
-    k3 = value.toInt();
-
-    value = getElement(document, QString("k4"));
-    k4 = value.toInt();
-
-    value = getElement(document, QString("single"));
-    single = value.toInt();
-
+    k1 = getElement(document, QString("k1")).toInt();
     num1 = getElement(document, QString("k1"), "Num");
+    t1 = getElement(document, QString("k1"), "t1").toDouble();
+
+    k2 = getElement(document, QString("k2")).toInt();
     num2 = getElement(document, QString("k2"), "Num");
+    t2 = getElement(document, QString("k2"), "t2").toDouble();
+
+    k3 = getElement(document, QString("k3")).toInt();
     num3 = getElement(document, QString("k3"), "Num");
+    t3 = getElement(document, QString("k3"), "t3").toDouble();
+
+    k4 = getElement(document, QString("k4")).toInt();
     num4 = getElement(document, QString("k4"), "Num");
+    t4 = getElement(document, QString("k4"), "t4").toDouble();
+
+    single = getElement(document, QString("single")).toInt();
 }
 
 Test::~Test()
 {
-    qDebug() << name << " ~Test()";
+    //qDebug() << name << " ~Test()";
     save();
 }
 
@@ -171,15 +176,23 @@ void Test::save()
 {
     QDir::setCurrent(dir.path());
     setElement(document, QString("k1"), QString("%1").arg(k1));
-    setElement(document, QString("k2"), QString("%1").arg(k2));
-    setElement(document, QString("k3"), QString("%1").arg(k3));
-    setElement(document, QString("k4"), QString("%1").arg(k4));
-    setElement(document, QString("single"), QString("%1").arg(single));
-
     setElement(document, QString("k1"), num1, "Num");
+    setElement(document, QString("k1"), "t1", QString::number(t1));
+
+    setElement(document, QString("k2"), QString("%1").arg(k2));
     setElement(document, QString("k2"), num2, "Num");
+    setElement(document, QString("k2"), "t2", QString::number(t2));
+
+    setElement(document, QString("k3"), QString("%1").arg(k3));
     setElement(document, QString("k3"), num3, "Num");
+    setElement(document, QString("k3"), "t3", QString::number(t3));
+
+    setElement(document, QString("k4"), QString("%1").arg(k4));
     setElement(document, QString("k4"), num4, "Num");
+    setElement(document, QString("k4"), "t4", QString::number(t4));
+
+    setElement(document, QString("single"), QString("%1").arg(single));
+    setElement(document, QString("date"), date.toString("yyyyMMdd"));
 
     Creator::writeFile(name, document);
 }
@@ -283,6 +296,56 @@ QString Test::getName() const
     return name;
 }
 
+double Test::getT4() const
+{
+    return t4;
+}
+
+void Test::setT4(double value)
+{
+    t4 = value;
+}
+
+double Test::getT3() const
+{
+    return t3;
+}
+
+void Test::setT3(double value)
+{
+    t3 = value;
+}
+
+double Test::getT2() const
+{
+    return t2;
+}
+
+void Test::setT2(double value)
+{
+    t2 = value;
+}
+
+double Test::getT1() const
+{
+    return t1;
+}
+
+void Test::setT1(double value)
+{
+    t1 = value;
+}
+
+QDate Test::getDate() const
+{
+    return date;
+}
+
+void Test::setDate(const QDate &value)
+{
+    date = value;
+}
+
 QString Test::getNum4() const
 {
     return num4;
@@ -343,7 +406,7 @@ TestKo1::TestKo1(QObject *parent)
 
 TestKo1::~TestKo1()
 {
-    qDebug() << name << " ~TestKo1()";
+    //qDebug() << name << " ~TestKo1()";
 }
 
 TestKo2::TestKo2(QObject *parent)
@@ -380,7 +443,7 @@ TestKo2::TestKo2(WithoutCalibration, QObject *parent) : Test("testKo2_1", NULL)
 
 TestKo2::~TestKo2()
 {
-    qDebug() << name << " ~TestKo2()";
+    //qDebug() << name << " ~TestKo2()";
     save();
 }
 
@@ -495,7 +558,7 @@ TestKo3::TestKo3(QObject *parent)
 
 TestKo3::~TestKo3()
 {
-    qDebug() << name << " ~TestKo3()";
+    //qDebug() << name << " ~TestKo3()";
 }
 
 TestKo4::TestKo4(QObject *parent)
@@ -533,7 +596,7 @@ TestKo4::TestKo4(WithoutCalibration, QObject *parent) : Test("testKo4_1", NULL)
 
 TestKo4::~TestKo4()
 {
-    qDebug() << name << " ~TestKo4()";
+    //qDebug() << name << " ~TestKo4()";
     save();
 }
 
@@ -660,7 +723,7 @@ TestKo5::TestKo5(QObject *parent)
 
 TestKo5::~TestKo5()
 {
-    qDebug() << name << " ~TestKo5()";
+    //qDebug() << name << " ~TestKo5()";
 }
 
 TestAgr1::TestAgr1(QObject *parent)
@@ -671,7 +734,7 @@ TestAgr1::TestAgr1(QObject *parent)
 
 TestAgr1::~TestAgr1()
 {
-    qDebug() << name << " ~TestAgr1()";
+    //qDebug() << name << " ~TestAgr1()";
 }
 
 double TestAgr1::getIncubeTime2()
@@ -694,7 +757,7 @@ TestAgr2::TestAgr2(QObject *parent)
 
 TestAgr2::~TestAgr2()
 {
-    qDebug() << name << " ~TestAgr2()";
+    //qDebug() << name << " ~TestAgr2()";
 }
 
 double TestAgr2::getIncubeTime2()
@@ -748,7 +811,7 @@ void Calibration::load()
 
 Calibration::~Calibration()
 {
-    qDebug() << name << " ~Calibration()";
+    //qDebug() << name << " ~Calibration()";
     save();
 }
 
@@ -907,7 +970,7 @@ CalibrationKo1::CalibrationKo1(QObject *parent) : Calibration("calibrationKo1", 
 
 CalibrationKo1::~CalibrationKo1()
 {
-    qDebug() << name << "~CalibrationKo1()";
+    //qDebug() << name << "~CalibrationKo1()";
     save();
 }
 
@@ -982,7 +1045,7 @@ void CalibrationKo2::load()
 
 CalibrationKo2::~CalibrationKo2()
 {
-    qDebug() << name << "~CalibrationKo2()";
+    //qDebug() << name << "~CalibrationKo2()";
     save();
 }
 
@@ -1170,7 +1233,7 @@ void CalibrationKo3::load()
 
 CalibrationKo3::~CalibrationKo3()
 {
-    qDebug() << name << "~CalibrationKo3()";
+    //qDebug() << name << "~CalibrationKo3()";
     save();
 }
 
@@ -1415,7 +1478,7 @@ void CalibrationKo4::load()
 
 CalibrationKo4::~CalibrationKo4()
 {
-    qDebug() << name << "~CalibrationKo4()";
+    //qDebug() << name << "~CalibrationKo4()";
     save();
 }
 
@@ -1674,7 +1737,7 @@ void CalibrationKo5::load()
 
 CalibrationKo5::~CalibrationKo5()
 {
-    qDebug() << name << "~CalibrationKo5()";
+    //qDebug() << name << "~CalibrationKo5()";
     save();
 }
 
@@ -2005,7 +2068,7 @@ void CalibrationAgr1::save()
 
 CalibrationAgr1::~CalibrationAgr1()
 {
-    qDebug() << name << "~CalibrationAgr1()";
+    //qDebug() << name << "~CalibrationAgr1()";
     save();
 }
 
@@ -2283,7 +2346,7 @@ void CalibrationAgr2::load()
 
 CalibrationAgr2::~CalibrationAgr2()
 {
-    qDebug() << name << "~CalibrationAgr2()";
+    //qDebug() << name << "~CalibrationAgr2()";
     save();
 }
 
@@ -2570,4 +2633,196 @@ CalibrationKo4_3::CalibrationKo4_3(QObject *parent) : CalibrationKo4("calibratio
 CalibrationKo4_3::~CalibrationKo4_3()
 {
 
+}
+
+QString TestKo1::print()
+{
+//    хх.хх.хх   хх-хх
+//    Режим коагулометра
+//    Время свертывания
+//    Проба №                         Тсв, сек
+//    xxxxxxxxxxxxx                     хx,x
+//    xxxxxxxxxxxxx                     хx,x
+//    xxxxxxxxxxxxx                     хx,x
+//    xxxxxxxxxxxxx                     хx,x
+//    {Сообщения об ошибках}
+    QString str =
+    QString("%1 %2\n").arg(getDate().toString("yyyyMMdd")).arg("") +
+    QString("Режим коагулометра\nВремя свертывания\nПроба №\tТсв, сек\n") +
+    QString("%1\t%2\n").arg(getNum1()).arg("Тсв1") +
+    QString("%1\t%2\n").arg(getNum2()).arg("Тсв2") +
+    QString("%1\t%2\n").arg(getNum3()).arg("Тсв3") +
+    QString("%1\t%2\n").arg(getNum4()).arg("Тсв4");
+    return str;
+}
+
+QString TestKo2::print()
+{
+//    хх.хх.хх   хх-хх
+//    Режим коагулометра
+//          АЧТВ
+//    Результаты измерений:
+//    Проба №                           Tсв,  сек       ОТН
+//    xxxxxxxxxxxxx                     хx,x            хх,хх
+//    xxxxxxxxxxxxx                     хx,x            хх,хх
+//    xxxxxxxxxxxxx                     хx,x            хх,хх
+//    xxxxxxxxxxxxx                     хx,x            хх,хх
+//    {Сообщения об ошибках}
+    QString str =
+    QString("%1 %2\n").arg(getDate().toString("yyyyMMdd")).arg("") +
+    QString("Режим коагулометра\nАЧТВ\nРезультаты измерений:\nПроба №\tТсв, сек\tОТН\n") +
+    QString("%1\t%2\t%3\n").arg(getNum1()).arg("AЧТВ1").arg("ОТН1") +
+    QString("%1\t%2\t%3\n").arg(getNum2()).arg("AЧТВ2").arg("ОТН2") +
+    QString("%1\t%2\t%3\n").arg(getNum3()).arg("AЧТВ3").arg("ОТН3") +
+    QString("%1\t%2\t%3\n").arg(getNum4()).arg("AЧТВ4").arg("ОТН4");
+    return str;
+}
+
+QString TestKo3::print()
+{
+//    хх.хх.хх   хх-хх
+//    Режим коагулометра
+//    Фибриноген
+//    Результаты измерений:
+//    Проба №              С, г/л
+//    xxxxxxxxxxxxx        хх,хх
+//    xxxxxxxxxxxxx        хх,хх
+//    xxxxxxxxxxxxx        хх,хх
+//    xxxxxxxxxxxxx        хх,хх
+    QString str =
+    QString("%1 %2\n").arg(getDate().toString("yyyyMMdd")).arg("") +
+    QString("Режим коагулометра\nФибриноген\nРезультаты измерений:\nПроба №\tТВ, сек\tОТН\n") +
+    QString("%1\t%2\t%3\n").arg(getNum1()).arg("Фибриноген1").arg("ОТН1") +
+    QString("%1\t%2\t%3\n").arg(getNum2()).arg("Фибриноген2").arg("ОТН2") +
+    QString("%1\t%2\t%3\n").arg(getNum3()).arg("Фибриноген3").arg("ОТН3") +
+    QString("%1\t%2\t%3\n").arg(getNum4()).arg("Фибриноген4").arg("ОТН4");
+    return str;
+}
+
+QString TestKo4::print()
+{
+    QString str =
+    QString("%1 %2\n").arg(getDate().toString("yyyyMMdd")).arg("") +
+    QString("Режим коагулометра\nТромбин\nРезультаты измерений:\nПроба №\tС, г/л\n") +
+    QString("%1\t%2\n").arg(getNum1()).arg("Тромбин1") +
+    QString("%1\t%2\n").arg(getNum2()).arg("Тромбин2") +
+    QString("%1\t%2\n").arg(getNum3()).arg("Тромбин3") +
+    QString("%1\t%2\n").arg(getNum4()).arg("Тромбин4");
+    return str;
+}
+
+QString TestKo5::print()
+{
+    QString str =
+    QString("%1 %2\n").arg(getDate().toString("yyyyMMdd")).arg("") +
+    QString("Режим агрегометра\nПротромбиновый комплекс\nРезультаты измерений:\nПроба №\tПВ, сек\tПИ, \%\tПО\tПРкв, \%\t") +
+    QString("%1\t%2\t%3\t%4\t%5\n").arg(getNum1()).arg("ПВ1").arg("ПИ1").arg("ПО1").arg("ПРкв1") +
+    QString("%1\t%2\t%3\t%4\t%5\n").arg(getNum2()).arg("ПВ2").arg("ПИ2").arg("ПО2").arg("ПРкв2") +
+    QString("%1\t%2\t%3\t%4\t%5\n").arg(getNum3()).arg("ПВ3").arg("ПИ3").arg("ПО3").arg("ПРкв3") +
+    QString("%1\t%2\t%3\t%4\t%5\n").arg(getNum4()).arg("ПВ4").arg("ПИ4").arg("ПО4").arg("ПРкв4");
+    return str;
+}
+
+QString TestAgr1::print()
+{
+    QString str =
+    QString("%1 %2\n").arg(getDate().toString("yyyyMMdd")).arg("") +
+    QString("Режим агрегометра\nПараметры агрегации тромбоцитов\nРезультаты измерений:\nПроба №\tСтА\tСкА\tС, тр/мкл\t") +
+    QString("%1\t%2\t%3\t%4\n").arg(getNum1()).arg("СтА1").arg("СкА1").arg("С1").arg("ПРкв1") +
+    QString("%1\t%2\t%3\t%4\n").arg(getNum2()).arg("СтА2").arg("СкА2").arg("С2").arg("ПРкв2") +
+    QString("%1\t%2\t%3\t%4\n").arg(getNum3()).arg("СтА3").arg("СкА3").arg("С3").arg("ПРкв3") +
+    QString("%1\t%2\t%3\t%4\n").arg(getNum4()).arg("СтА4").arg("СкА4").arg("С4").arg("ПРкв4");
+    ///еще здесь нужны графики
+    return str;
+}
+
+QString TestAgr2::print()
+{
+    QString str =
+    QString("%1 %2\n").arg(getDate().toString("yyyyMMdd")).arg("") +
+    QString("Режим агрегометра\nОпределение активности ф-ра Виллебранда\nРезультаты измерений:\nПроба №\tСк, \%/мин\tС, г/л\t") +
+    QString("%1\t%2\t%3\n").arg(getNum1()).arg("Ск1").arg("С1") +
+    QString("%1\t%2\t%3\n").arg(getNum2()).arg("Ск2").arg("С2") +
+    QString("%1\t%2\t%3\n").arg(getNum3()).arg("Ск3").arg("С3") +
+    QString("%1\t%2\t%3\n").arg(getNum4()).arg("Ск4").arg("С4");
+    return str;
+}
+
+
+QString CalibrationKo1::print()
+{
+//  не проводится
+}
+
+QString CalibrationKo2::print()
+{
+//    хх.хх.хх   хх-хх
+//    Режим коагулометра
+//          АЧТВ
+//    Результаты калибровки:
+//    Реагенты: хххххх (до хх.хх.хххх)
+//    Плазма «К»: хххххх (до хх.хх.хххх)
+//    АЧТВ к/плазмы (измеренное среднее), сек: хх,х
+//    Время инкубации, сек: ххх
+}
+
+QString CalibrationKo3::print()
+{
+//    хх.хх.хх   хх-хх
+//    Режим коагулометра
+//      Фибриноген
+//    Результаты калибровки:
+//    Реагенты: хххххх (до хх.хх.хххх)
+//    Плазма «К»: хххххх (до хх.хх.хххх)
+//    Фибриноген в к/плазме, г/л: хх,хх
+//    Разведение,%  200   100      50      25
+//    Тсв.,сек           хх,х   хх,х    хх,х   хх,х
+//    Время инкубации, сек: ххх
+}
+
+QString CalibrationKo4::print()
+{
+//    хх.хх.хх   хх-хх
+//    Режим коагулометра
+//      Тромбин
+//    Результаты калибровки:
+//    Реагенты: хххххх (до хх.хх.хххх)
+//    Плазма «К»: хххххх (до хх.хх.хххх)
+//    АЧТВ к/плазмы (измеренное), сек: хх,х
+//    Время инкубации, сек: ххх
+}
+
+QString CalibrationKo5::print()
+{
+//    22.02.07   12-00
+//     Протромбиновый комплекс
+//    Результаты калибровки:
+//    Реагенты: хххххх (до хх.хх.хххх)
+//    Протромбин по Квику п/калибр, %: хх
+//    МИЧ:хх,хх
+//    ПО п/калибр: хх,хх
+//    Время инкубации, сек: ххх
+//    Разведение в %:           100     50     25     12,5
+//    Тсв, сек:                       хх,х   хх,х  хх,х   хх,х
+}
+
+QString CalibrationAgr1::print()
+{
+//  не проводится
+}
+
+QString CalibrationAgr2::print()
+{
+//    хх.хх.хх   хх-хх
+//    Режим агрегометра
+//    Определение активности ф-ра Виллебранда
+//      Результаты калибровки:
+//    Реагенты: хххххх (до хх.хх.хххх)
+//    Плазма «К»: хххххх (до хх.хх.хххх)
+//    Активность фактора Виллебранда контрольной плазмы, %: хх,х
+//    Разведение, %: 100    50      25
+//    Ск, %/мин:        хх,х  хх,х  хх,х
+//    Время записи агрегатограмм, мин: хх
+//    Время инкубации №1, сек: ххх
+//    Время инкубации №2, сек: ххх
 }
