@@ -391,30 +391,27 @@ public:
 
     QDate getReagent_date() const;
     void setReagent_date(const QDate &value);
-    QDate getK_plazma_date() const;
-    void setK_plazma_date(const QDate &value);
     QString getReagent_serial() const;
     void setReagent_serial(const QString &value);
+    QDate getK_plazma_date() const;
+    void setK_plazma_date(const QDate &value);
     QString getK_plazma_serial() const;
     void setK_plazma_serial(const QString &value);
-    double getTv1_time() const;
-    void setTv1_time(double value);
-    double getTv2_time() const;
-    void setTv2_time(double value);
-    double getTv3_time() const;
-    void setTv3_time(double value);
-    double getTv1_concentration() const;
-    void setTv1_concentration(double value);
-    double getTv2_concentration() const;
-    void setTv2_concentration(double value);
-    double getTv3_concentration() const;
-    void setTv3_concentration(double value);
+
+    double getTv1() const;
+    void setTv1(double value);
+    double getTv2() const;
+    void setTv2(double value);
+    double getTv3() const;
+    void setTv3(double value);
+    double getTv4() const;
+    void setTv4(double value);
     int getActivity() const;
     void setActivity(const int &value);
-    double getTrombine_time() const;
-    void setTrombine_time(double value);
-    double getTrombine() const;
-    void setTrombine(double value);
+
+    void save() override;
+    void load() override;
+    virtual QString print() override;
 
 protected:
     void createElements();
@@ -423,15 +420,7 @@ private:
     QDate reagent_date, k_plazma_date;
     QString reagent_serial, k_plazma_serial;
     int activity; //активносит тромбина
-    double trombine_time, trombine;
-    double tv1_time, tv2_time, tv3_time;
-    double tv1_concentration, tv2_concentration, tv3_concentration;
-
-    // Calibration interface
-public:
-    void save() override;
-    void load() override;
-    QString print() override;
+    double tv1, tv2, tv3, tv4;
 };
 
 class CalibrationKo4_1 : public CalibrationKo4

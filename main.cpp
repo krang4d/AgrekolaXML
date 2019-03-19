@@ -33,6 +33,12 @@ int main(int argc, char *argv[])
 
     setlocale(LC_ALL, "Russian");
 
+    QMessageBox::information(0, "Info c_ko1", c_ko1.print());
+    QMessageBox::information(0, "Info c_ko2", c_ko2.print());
+    QMessageBox::information(0, "Info c_ko3", c_ko3.print());
+    QMessageBox::information(0, "Info c_ko4", c_ko4.print());
+    QMessageBox::information(0, "Info c_ko5", c_ko5.print());
+
     qDebug() << "проверка";
     c_agr1.setIncube_time(3.14);
     c_agr1.setTrombotsit_serial("Серия");
