@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
     CalibrationKo5 c_ko5;
 
     CalibrationAgr1 c_agr1;
-    CalibrationAgr2 c_Agr2;
+    CalibrationAgr2 c_agr2;
 
     TestKo1 t_ko1;
     TestKo2 t_ko2;
@@ -38,6 +38,8 @@ int main(int argc, char *argv[])
     QMessageBox::information(0, "Info c_ko3", c_ko3.print());
     QMessageBox::information(0, "Info c_ko4", c_ko4.print());
     QMessageBox::information(0, "Info c_ko5", c_ko5.print());
+    QMessageBox::information(0, "Info c_agr1", c_agr1.print());
+    QMessageBox::information(0, "Info c_agr2", c_agr2.print());
 
     qDebug() << "проверка";
     c_agr1.setIncube_time(3.14);

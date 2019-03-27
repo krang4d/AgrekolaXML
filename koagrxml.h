@@ -174,8 +174,10 @@ public:
     void setWrite_time(double value);
     double getIncube_time() const;
     void setIncube_time(double value);
-    double getTrombine() const;
-    void setTrombine(double value);
+
+    double getActivity() const;
+    void setActivity(double value);
+
     double getTrombine_time() const;
     void setTrombine_time(double value);
 
@@ -191,7 +193,7 @@ private:
     QDate date;
     QDate reagent_date;
     QString reagent_serial;
-    double write_time, incube_time, trombine, trombine_time;
+    double write_time, incube_time, activity, trombine_time;
 };
 
 class TestKo5 : public Test
