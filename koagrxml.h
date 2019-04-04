@@ -51,6 +51,8 @@ public:
 
     QDate getDate() const;
     void setDate(const QDate &value);
+    QTime getTime() const;
+    void setTime(const QTime &value);
 
     double getT1() const;
     void setT1(double value);
@@ -73,6 +75,7 @@ public:
     QString getElement(QDomDocument root, QString tagname, QString attribute = "Value");
     void setElement(QDomDocument &root, QString tagname, QString value, QString attribute = "Value");
 
+
 protected:
     QDomDocument getDoc() const;
     QString getName() const;
@@ -82,6 +85,7 @@ protected:
     QString name;
     QDir dir;
     QDate date;
+    QTime time;
 
     int k1, k2, k3, k4, single;
     QString num1, num2, num3, num4;
@@ -247,8 +251,12 @@ public:
     virtual void setElement(QDomDocument &root, QString tagname, QString value, QString attribute = "Value");
     virtual void save();
     virtual void load();
-    virtual QDate getDate() const;
-    virtual void setDate(const QDate &value);
+
+    QDate getDate() const;
+    void setDate(const QDate &value);
+    QTime getTime() const;
+    void setTime(const QTime &value);
+
     double getWrite_time() const;
     void setWrite_time(const double value);
     double getIncube_time() const;
@@ -275,6 +283,7 @@ protected:
 
 private:
     QDate date;
+    QTime time;
     double write_time, incube_time;
     bool k1, k2, k3, k4;
 };
