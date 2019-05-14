@@ -179,8 +179,8 @@ public:
     double getIncube_time() const;
     void setIncube_time(double value);
 
-    double getActivity() const;
-    void setActivity(double value);
+    int getActivity() const;
+    void setActivity(int value);
 
     double getTrombine_time() const;
     void setTrombine_time(double value);
@@ -197,7 +197,8 @@ private:
     QDate date;
     QDate reagent_date;
     QString reagent_serial;
-    double write_time, incube_time, activity, trombine_time;
+    int activity;
+    double write_time, incube_time, trombine_time;
 };
 
 class TestKo5 : public Test
@@ -221,8 +222,38 @@ public:
 
     double getIncubeTime2();
 
+    double getBtp1() const;
+    void setBtp1(double value);
+
+    double getBtp2() const;
+    void setBtp2(double value);
+
+    double getBtp3() const;
+    void setBtp3(double value);
+
+    double getBtp4() const;
+    void setBtp4(double value);
+
+    double getOtp1() const;
+    void setOtp1(double value);
+
+    double getOtp2() const;
+    void setOtp2(double value);
+
+    double getOtp3() const;
+    void setOtp3(double value);
+
+    double getOtp4() const;
+    void setOtp4(double value);
+
+private:
+    double btp1, btp2, btp3, btp4;
+    double otp1, otp2, otp3, otp4;
+
     // Test interface
 public:
+    void save() override;
+    void load() override;
     QString print() override;
 };
 
@@ -417,8 +448,8 @@ public:
     void setTv3(double value);
     double getTv4() const;
     void setTv4(double value);
-    int getActivity() const;
-    void setActivity(const int &value);
+    double getActivity() const;
+    void setActivity(const double &value);
 
     void save() override;
     void load() override;
@@ -430,7 +461,7 @@ protected:
 private:
     QDate reagent_date, k_plazma_date;
     QString reagent_serial, k_plazma_serial;
-    int activity; //активносит тромбина
+    double activity; //активносит тромбина
     double tv1, tv2, tv3, tv4;
 };
 
