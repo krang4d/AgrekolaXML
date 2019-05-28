@@ -10,25 +10,39 @@
 
 class Calibration;
 
-class Creator
-{
-public:
-    Creator() = delete;
-    static QDomDocument createTest(QString name);
-    static QDomDocument createCalibration(QString name);
-    //static QDomDocument createTestAgr(QString name);
-    static int writeFile(QString name, QDomDocument doc);
-    static int readFile(QString name, QDomDocument &doc);
-
-    static QDir getXMLDir();
-};
-
-class Test : public QObject
+class Creator : public QObject
 {
     Q_OBJECT
 public:
-    explicit Test(QString n, Calibration *c, QObject *parent = 0);
+    explicit Creator(QObject *parent = 0);
+    //static QDomDocument createTestAgr(QString name);
+    int writeFile();
+    int readFile();
+
+    void ListElement(QString tagname, QString attribute);
+    QString getElement(QString tagname, QString attribute = "Value");
+    void setElement(QString tagname, QString value, QString attribute = "Value");
+
+    QDir getXMLDir();
+    QString getText() const;
+
+    QDomDocument getDoc() const;
+    QString getName() const;
+
+protected:
+    QDomDocument document;
+    QString name;
+    QDir dir;
+};
+
+class Test : public Creator
+{
+    Q_OBJECT
+public:
+    explicit Test(QString n, QObject *parent = 0);
+    QDomDocument createTest(QString name);
     virtual ~Test();
+
     void setK1(const int value);
     int getK1() const;
     void setK2(const int value);
@@ -49,11 +63,6 @@ public:
     QString getNum4() const;
     void setNum4(const QString &value);
 
-    QDate getDate() const;
-    void setDate(const QDate &value);
-    QTime getTime() const;
-    void setTime(const QTime &value);
-
     double getT1() const;
     void setT1(double value);
     double getT2() const;
@@ -63,34 +72,22 @@ public:
     double getT4() const;
     void setT4(double value);
 
-    virtual double getIncubeTime();
-    virtual double getWriteTime();
-    virtual void save();
-    virtual void load();
+    QDate getDate() const;
+    void setDate(const QDate &value);
+    QTime getTime() const;
+    void setTime(const QTime &value);
 
-    QString getText() const;
+    void save();
+    void load();
+
     virtual QString print() = 0;
 
-    void ListElement(QDomElement root, QString tagname, QString attribute);
-    QString getElement(QDomDocument root, QString tagname, QString attribute = "Value");
-    void setElement(QDomDocument &root, QString tagname, QString value, QString attribute = "Value");
-
-
 protected:
-    QDomDocument getDoc() const;
-    QString getName() const;
-
-protected:
-    QDomDocument document;
-    QString name;
-    QDir dir;
     QDate date;
     QTime time;
 
     int k1, k2, k3, k4, single;
     QString num1, num2, num3, num4;
-
-    Calibration *c_ko;
 
 private:
     double t1, t2, t3, t4;
@@ -120,8 +117,6 @@ public:
     explicit TestKo2(WithoutCalibration, QObject *parent = 0);
     ~TestKo2();
 
-    QDate getDate() const;
-    void setDate(const QDate &value);
     QDate getReagent_date() const;
     void setReagent_date(const QDate &value);
     QString getReagent_serial() const;
@@ -133,19 +128,17 @@ public:
     double getA4tv_kp() const;
     void setA4tv_kp(double value);
 
-    // Test interface
-public:
-    double getIncubeTime() override;
-    double getWriteTime() override;
-    void save() override;
-    void load() override;
+    void save();
+    void load();
+// Test interface
     QString print() override;
 
 private:
     QDate date;
     QDate reagent_date;
     QString reagent_serial;
-    double write_time, incube_time, a4tv_kp;
+    double a4tv_kp;
+    double write_time, incube_time;
 };
 
 class TestKo3 : public Test
@@ -185,12 +178,10 @@ public:
     double getTrombine_time() const;
     void setTrombine_time(double value);
 
+    void save();
+    void load();
     // Test interface
 public:
-    double getIncubeTime() override;
-    double getWriteTime() override;
-    void save() override;
-    void load() override;
     QString print() override;
 
 private:
@@ -220,7 +211,9 @@ public:
     explicit TestAgr1(QObject *parent = 0);
     ~TestAgr1();
 
+    double getIncubeTime1();
     double getIncubeTime2();
+    double getWriteTime();
 
     double getBtp1() const;
     void setBtp1(double value);
@@ -246,15 +239,17 @@ public:
     double getOtp4() const;
     void setOtp4(double value);
 
-private:
-    double btp1, btp2, btp3, btp4;
-    double otp1, otp2, otp3, otp4;
+    void save();
+    void load();
 
     // Test interface
 public:
-    void save() override;
-    void load() override;
     QString print() override;
+
+private:
+    double incube_time1, incube_time2, write_time;
+    double btp1, btp2, btp3, btp4;
+    double otp1, otp2, otp3, otp4;
 };
 
 class TestAgr2 : public Test
@@ -264,22 +259,20 @@ public:
     explicit TestAgr2(QObject *parent = 0);
     ~TestAgr2();
 
-    double getIncubeTime2();
+    //double getIncubeTime2();
 
     // Test interface
 public:
     QString print() override;
 };
 
-class Calibration : public QObject
+class Calibration : public Creator
 {
     Q_OBJECT
 public:
     explicit Calibration(QString n, QObject *parent = 0);
+    QDomDocument createCalibration(QString name);
     virtual ~Calibration();
-    virtual void ListElement(QDomElement root, QString tagname, QString attribute);
-    virtual QString getElement(QDomDocument root, QString tagname, QString attribute = "Value");
-    virtual void setElement(QDomDocument &root, QString tagname, QString value, QString attribute = "Value");
     virtual void save();
     virtual void load();
 
@@ -303,14 +296,13 @@ public:
 
     virtual QString print() = 0;
 
+//    void ListElement(QDomElement root, QString tagname, QString attribute);
+//    QString getElement(QDomDocument root, QString tagname, QString attribute = "Value");
+//    void setElement(QDomDocument &root, QString tagname, QString value, QString attribute = "Value");
+
 protected:
     QDomDocument getDoc() const;
     QString getName() const;
-
-protected:
-    QDomDocument document;
-    QString name;
-    QDir dir;
 
 private:
     QDate date;
@@ -563,6 +555,7 @@ public:
     void setTrombotsit_serial(const QString &value);
     double getTrombotsit_concentration() const;
     void setTrombotsit_concentration(double value);
+
     double getIncube_time_2() const;
     void setIncube_time_2(double value);
     double getBTP1() const;
