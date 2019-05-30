@@ -15,7 +15,6 @@ class Creator : public QObject
     Q_OBJECT
 public:
     explicit Creator(QObject *parent = 0);
-    //static QDomDocument createTestAgr(QString name);
     int writeFile();
     int readFile();
 
@@ -40,8 +39,8 @@ class Test : public Creator
     Q_OBJECT
 public:
     explicit Test(QString n, QObject *parent = 0);
-    QDomDocument createTest(QString name);
     virtual ~Test();
+    void create(Test *);
 
     void setK1(const int value);
     int getK1() const;
@@ -77,9 +76,9 @@ public:
     QTime getTime() const;
     void setTime(const QTime &value);
 
-    void save();
-    void load();
-
+    virtual QDomDocument createTest(const QString &name);
+    virtual void save();
+    virtual void load();
     virtual QString print() = 0;
 
 protected:
@@ -98,7 +97,7 @@ class TestKo1 : public Test
     Q_OBJECT
 public:
     explicit TestKo1(QObject *parent = 0);
-    virtual ~TestKo1();
+    ~TestKo1();
 
     // Test interface
 public:
@@ -115,7 +114,7 @@ class TestKo2 : public Test
 public:
     explicit TestKo2(QObject *parent = 0);
     explicit TestKo2(WithoutCalibration, QObject *parent = 0);
-    ~TestKo2();
+    ~TestKo2() override;
 
     QDate getReagent_date() const;
     void setReagent_date(const QDate &value);
@@ -128,8 +127,9 @@ public:
     double getA4tv_kp() const;
     void setA4tv_kp(double value);
 
-    void save();
-    void load();
+    void save() override;
+    void load() override;
+    QDomDocument createTest(const QString &name) override;
 // Test interface
     QString print() override;
 
@@ -146,7 +146,7 @@ class TestKo3 : public Test
     Q_OBJECT
 public:
     explicit TestKo3(QObject *parent = 0);
-    ~TestKo3();
+    ~TestKo3() override;
 
     // Test interface
 public:
@@ -159,7 +159,7 @@ class TestKo4 : public Test
 public:
     explicit TestKo4(QObject *parent = 0);
     explicit TestKo4(WithoutCalibration, QObject *parent = 0);
-    ~TestKo4();
+    ~TestKo4() override;
 
     QDate getDate() const;
     void setDate(const QDate &value);
@@ -171,17 +171,16 @@ public:
     void setWrite_time(double value);
     double getIncube_time() const;
     void setIncube_time(double value);
-
     int getActivity() const;
     void setActivity(int value);
-
     double getTrombine_time() const;
     void setTrombine_time(double value);
 
-    void save();
-    void load();
     // Test interface
 public:
+    QDomDocument createTest(const QString &name) override;
+    void save() override;
+    void load() override;
     QString print() override;
 
 private:
@@ -197,7 +196,7 @@ class TestKo5 : public Test
     Q_OBJECT
 public:
     explicit TestKo5(QObject *parent = 0);
-    ~TestKo5();
+    ~TestKo5() override;
 
     // Test interface
 public:
@@ -209,11 +208,7 @@ class TestAgr1 : public Test
     Q_OBJECT
 public:
     explicit TestAgr1(QObject *parent = 0);
-    ~TestAgr1();
-
-    double getIncubeTime1();
-    double getIncubeTime2();
-    double getWriteTime();
+    ~TestAgr1() override;
 
     double getBtp1() const;
     void setBtp1(double value);
@@ -239,15 +234,19 @@ public:
     double getOtp4() const;
     void setOtp4(double value);
 
-    void save();
-    void load();
+    QString getInductor() const;
+    void setInductor(const QString &value);
 
     // Test interface
 public:
+    QDomDocument createTest(const QString &name) override;
+    void save() override;
+    void load() override;
     QString print() override;
 
 private:
-    double incube_time1, incube_time2, write_time;
+    //double incube_time1, incube_time2, write_time;
+    QString inductor;
     double btp1, btp2, btp3, btp4;
     double otp1, otp2, otp3, otp4;
 };
@@ -257,13 +256,46 @@ class TestAgr2 : public Test
     Q_OBJECT
 public:
     explicit TestAgr2(QObject *parent = 0);
-    ~TestAgr2();
+    ~TestAgr2() override;
 
-    //double getIncubeTime2();
+    double getBtp1() const;
+    void setBtp1(double value);
+
+    double getBtp2() const;
+    void setBtp2(double value);
+
+    double getBtp3() const;
+    void setBtp3(double value);
+
+    double getBtp4() const;
+    void setBtp4(double value);
+
+    double getOtp1() const;
+    void setOtp1(double value);
+
+    double getOtp2() const;
+    void setOtp2(double value);
+
+    double getOtp3() const;
+    void setOtp3(double value);
+
+    double getOtp4() const;
+    void setOtp4(double value);
+
+    QString getInductor() const;
+    void setInductor(const QString &value);
 
     // Test interface
 public:
+    QDomDocument createTest(const QString &name) override;
+    void save() override;
+    void load() override;
     QString print() override;
+
+private:
+    QString inductor;
+    double btp1, btp2, btp3, btp4;
+    double otp1, otp2, otp3, otp4;
 };
 
 class Calibration : public Creator
@@ -271,10 +303,8 @@ class Calibration : public Creator
     Q_OBJECT
 public:
     explicit Calibration(QString n, QObject *parent = 0);
-    QDomDocument createCalibration(QString name);
     virtual ~Calibration();
-    virtual void save();
-    virtual void load();
+    void create( Calibration *);
 
     QDate getDate() const;
     void setDate(const QDate &value);
@@ -285,30 +315,17 @@ public:
     void setWrite_time(const double value);
     double getIncube_time() const;
     void setIncube_time(const double value);
-    bool getK1() const;
-    void setK1(bool value);
-    bool getK2() const;
-    void setK2(bool value);
-    bool getK3() const;
-    void setK3(bool value);
-    bool getK4() const;
-    void setK4(bool value);
 
+public:
+    virtual QDomDocument createCalibration(const QString &name);
+    virtual void save();
+    virtual void load();
     virtual QString print() = 0;
-
-//    void ListElement(QDomElement root, QString tagname, QString attribute);
-//    QString getElement(QDomDocument root, QString tagname, QString attribute = "Value");
-//    void setElement(QDomDocument &root, QString tagname, QString value, QString attribute = "Value");
-
-protected:
-    QDomDocument getDoc() const;
-    QString getName() const;
 
 private:
     QDate date;
     QTime time;
     double write_time, incube_time;
-    bool k1, k2, k3, k4;
 };
 
 class CalibrationKo1 : public Calibration
@@ -316,7 +333,7 @@ class CalibrationKo1 : public Calibration
     Q_OBJECT
 public:
     explicit CalibrationKo1(QObject *parent = 0);
-    virtual ~CalibrationKo1();
+    virtual ~CalibrationKo1() override;
 
     // Calibration interface
 public:
@@ -328,7 +345,7 @@ class CalibrationKo2 : public Calibration
     Q_OBJECT
 public:
     explicit CalibrationKo2(QObject *parent = 0);
-    ~CalibrationKo2();
+    ~CalibrationKo2() override;
 
     QDate getReagent_date() const;
     void setReagent_date(const QDate &value);
@@ -362,9 +379,11 @@ private:
 
     // Calibration interface
 public:
+    QDomDocument createCalibration(const QString &name) override;
     void save() override;
     void load() override;
     QString print() override;
+
 };
 
 class CalibrationKo3 : public Calibration
@@ -372,7 +391,7 @@ class CalibrationKo3 : public Calibration
     Q_OBJECT
 public:
     explicit CalibrationKo3(QObject *parent = 0);
-    ~CalibrationKo3();
+    ~CalibrationKo3() override;
 
     QDate getReagent_date() const;
     void setReagent_date(const QDate &value);
@@ -410,6 +429,7 @@ private:
 
     // Calibration interface
 public:
+    QDomDocument createCalibration(const QString &name) override;
     void save() override;
     void load() override;
     QString print() override;
@@ -419,9 +439,9 @@ class CalibrationKo4 : public Calibration
 {
     Q_OBJECT
 public:
-    explicit CalibrationKo4(QObject *parent = 0);
-    CalibrationKo4(QString name);
-    virtual ~CalibrationKo4();
+    explicit CalibrationKo4(QObject *parent = nullptr);
+    CalibrationKo4(QString name, QObject *parent = nullptr);
+    virtual ~CalibrationKo4() override;
 
     QDate getReagent_date() const;
     void setReagent_date(const QDate &value);
@@ -443,14 +463,14 @@ public:
     double getActivity() const;
     void setActivity(const double &value);
 
+    // Calibration interface
+public:
+    QDomDocument createCalibration(const QString &name) override;
     void save() override;
     void load() override;
     virtual QString print() override;
 
-protected:
-    void createElements();
-
-private:
+public:
     QDate reagent_date, k_plazma_date;
     QString reagent_serial, k_plazma_serial;
     double activity; //активносит тромбина
@@ -461,24 +481,24 @@ class CalibrationKo4_1 : public CalibrationKo4
 {
     Q_OBJECT
 public:
-    explicit CalibrationKo4_1(QObject *parent = 0);
-    ~CalibrationKo4_1();
+    inline explicit CalibrationKo4_1(QObject *parent = 0)
+        : CalibrationKo4("calibrationKo4_1", parent) {}
 };
 
 class CalibrationKo4_2 : public CalibrationKo4
 {
     Q_OBJECT
 public:
-    explicit CalibrationKo4_2(QObject *parent = 0);
-    ~CalibrationKo4_2();
+    inline explicit CalibrationKo4_2(QObject *parent = 0)
+        : CalibrationKo4("calibrationKo4_2", parent) {}
 };
 
 class CalibrationKo4_3 : public CalibrationKo4
 {
     Q_OBJECT
 public:
-    explicit CalibrationKo4_3(QObject *parent = 0);
-    ~CalibrationKo4_3();
+    inline explicit CalibrationKo4_3(QObject *parent = 0)
+        : CalibrationKo4("calibrationKo4_3", parent) {}
 };
 
 class CalibrationKo5 : public Calibration
@@ -537,6 +557,7 @@ private:
 
     // Calibration interface
 public:
+    QDomDocument createCalibration(const QString &name) override;
     void save() override;
     void load() override;
     QString print() override;
@@ -594,6 +615,7 @@ private:
 
     // Calibration interface
 public:
+    QDomDocument createCalibration(const QString &name) override;
     void save() override;
     void load() override;
     QString print() override;
@@ -663,6 +685,7 @@ private:
 
     // Calibration interface
 public:
+    QDomDocument createCalibration(const QString &name) override;
     void save() override;
     void load() override;
     QString print() override;
