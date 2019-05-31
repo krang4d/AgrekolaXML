@@ -127,10 +127,10 @@ public:
     double getA4tv_kp() const;
     void setA4tv_kp(double value);
 
+    // Test interface
+    QDomDocument createTest(const QString &name) override;
     void save() override;
     void load() override;
-    QDomDocument createTest(const QString &name) override;
-// Test interface
     QString print() override;
 
 private:

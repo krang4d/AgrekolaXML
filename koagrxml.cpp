@@ -1,5 +1,7 @@
 #include "koagrxml.h"
 //#include "typeinfo"
+#define R_VAL 10
+#define ROUND(x) ( round(x * 100) / 100 )
 
 Creator::Creator(QObject *parent) : QObject(parent)
 {
@@ -1981,10 +1983,18 @@ QString TestKo1::print()
     QString str =
     QString("%1 г., %2\n").arg(getDate().toString("d MMMM yyyy")).arg(getTime().toString("hh-mm")) +
     QString("Режим коагулометра\nВремя свертывания\nПроба №\tТсв, сек\n");
-    if (getK1()) str += QString("%1\t\t%2\n").arg(getNum1()).arg(getT1());
-    if (getK2()) str += QString("%1\t\t%2\n").arg(getNum2()).arg(getT2());
-    if (getK3()) str += QString("%1\t\t%2\n").arg(getNum3()).arg(getT3());
-    if (getK4()) str += QString("%1\t\t%2\n").arg(getNum4()).arg(getT4());
+    if (getK1()) str += QString("%1\t\t%2\n")
+            .arg(getNum1())
+            .arg(ROUND(getT1()));
+    if (getK2()) str += QString("%1\t\t%2\n")
+            .arg(getNum2())
+            .arg(ROUND(getT2()));
+    if (getK3()) str += QString("%1\t\t%2\n")
+            .arg(getNum3())
+            .arg(ROUND(getT3()));
+    if (getK4()) str += QString("%1\t\t%2\n")
+            .arg(getNum4())
+            .arg(ROUND(getT4()));
     return str;
 }
 
@@ -2003,10 +2013,22 @@ QString TestKo2::print()
     QString str =
     QString("%1 г., %2\n").arg(getDate().toString("d MMMM yyyy")).arg(getTime().toString("hh-mm")) +
     QString("Режим коагулометра\nАЧТВ\nРезультаты измерений:\nПроба №\tТсв, сек\tОТН\n");
-    if(getK1()) str += QString("%1\t%2\t%3\n").arg(getNum1()).arg(getT1()).arg(getT1()/getA4tv_kp());
-    if(getK2()) str += QString("%1\t%2\t%3\n").arg(getNum2()).arg(getT2()).arg(getT1()/getA4tv_kp());
-    if(getK3()) str += QString("%1\t%2\t%3\n").arg(getNum3()).arg(getT3()).arg(getT1()/getA4tv_kp());
-    if(getK4()) str += QString("%1\t%2\t%3\n").arg(getNum4()).arg(getT4()).arg(getT1()/getA4tv_kp());
+    if(getK1()) str += QString("%1\t%2\t%3\n")
+            .arg(getNum1())
+            .arg(ROUND(getT1()))
+            .arg(ROUND(getT1()/getA4tv_kp()));
+    if(getK2()) str += QString("%1\t%2\t%3\n")
+            .arg(getNum2())
+            .arg(ROUND(getT2()))
+            .arg(ROUND(getT2()/getA4tv_kp()));
+    if(getK3()) str += QString("%1\t%2\t%3\n")
+            .arg(getNum3())
+            .arg(ROUND(getT3()))
+            .arg(ROUND(getT3()/getA4tv_kp()));
+    if(getK4()) str += QString("%1\t%2\t%3\n")
+            .arg(getNum4())
+            .arg(ROUND(getT4()))
+            .arg(ROUND(getT4()/getA4tv_kp()));
     return str;
 }
 
@@ -2024,10 +2046,10 @@ QString TestKo3::print()
     QString str =
     QString("%1 г., %2\n").arg(getDate().toString("d MMMM yyyy")).arg(getTime().toString("hh-mm")) +
     QString("Режим коагулометра\nФибриноген\nРезультаты измерений:\nПроба №\tТВ, сек\tОТН\n");
-    if(getK1()) str += QString("%1\t%2\t%3\n").arg(getNum1()).arg("Фибриноген1").arg("ОТН1");
-    if(getK2()) str += QString("%1\t%2\t%3\n").arg(getNum2()).arg("Фибриноген2").arg("ОТН2");
-    if(getK3()) str += QString("%1\t%2\t%3\n").arg(getNum3()).arg("Фибриноген3").arg("ОТН3");
-    if(getK4()) str += QString("%1\t%2\t%3\n").arg(getNum4()).arg("Фибриноген4").arg("ОТН4");
+    if(getK1()) str += QString("%1\t%2\n").arg(getNum1()).arg(ROUND(getT1()));
+    if(getK2()) str += QString("%1\t%2\n").arg(getNum2()).arg(ROUND(getT2()));
+    if(getK3()) str += QString("%1\t%2\n").arg(getNum3()).arg(ROUND(getT3()));
+    if(getK4()) str += QString("%1\t%2\n").arg(getNum4()).arg(ROUND(getT4()));
     return str;
 }
 
@@ -2046,10 +2068,10 @@ QString TestKo4::print()
     QString str =
     QString("%1 г., %2\n").arg(getDate().toString("d MMMM yyyy")).arg(getTime().toString("hh-mm")) +
     QString("Режим коагулометра\nТромбин\nРезультаты измерений:\nПроба №\tС, г/л\n");
-    if(getK1()) str += QString("%1\t%2\n").arg(getNum1()).arg("Тромбин1");
-    if(getK2()) str += QString("%1\t%2\n").arg(getNum2()).arg("Тромбин2");
-    if(getK3()) str += QString("%1\t%2\n").arg(getNum3()).arg("Тромбин3");
-    if(getK4()) str += QString("%1\t%2\n").arg(getNum4()).arg("Тромбин4");
+    if(getK1()) str += QString("%1\t%2\n").arg(getNum1()).arg(ROUND(getT1()));
+    if(getK2()) str += QString("%1\t%2\n").arg(getNum2()).arg(ROUND(getT2()));
+    if(getK3()) str += QString("%1\t%2\n").arg(getNum3()).arg(ROUND(getT3()));
+    if(getK4()) str += QString("%1\t%2\n").arg(getNum4()).arg(ROUND(getT4()));
     return str;
 }
 
@@ -2198,10 +2220,10 @@ QString TestAgr2::print()
     QString str =
     QString("%1 года, %2\n").arg(getDate().toString("d MMMM yyyy")).arg(getTime().toString("hh-mm")) +
     QString("Режим агрегометра\nОпределение активности ф-ра Виллебранда\nРезультаты измерений:\nПроба №\tСк, \%/мин\tС, г/л\t");
-    if(getK1()) str += QString("%1\t%2\t%3\n").arg(getNum1()).arg("Ск1").arg("С1");
-    if(getK2()) str += QString("%1\t%2\t%3\n").arg(getNum2()).arg("Ск2").arg("С2");
-    if(getK3()) str += QString("%1\t%2\t%3\n").arg(getNum3()).arg("Ск3").arg("С3");
-    if(getK4()) str += QString("%1\t%2\t%3\n").arg(getNum4()).arg("Ск4").arg("С4");
+    if(getK1()) str += QString("%1\t%2\t%3\n").arg(getNum1()).arg(ROUND(getT1())).arg("С1");
+    if(getK2()) str += QString("%1\t%2\t%3\n").arg(getNum2()).arg(ROUND(getT2())).arg("С2");
+    if(getK3()) str += QString("%1\t%2\t%3\n").arg(getNum3()).arg(ROUND(getT3())).arg("С3");
+    if(getK4()) str += QString("%1\t%2\t%3\n").arg(getNum4()).arg(ROUND(getT4())).arg("С4");
     return str;
 }
 
@@ -2320,6 +2342,7 @@ QString CalibrationKo2::print()
         QString("Реагенты: %1\t(до %2)\n").arg(getReagent_serial()).arg(getReagent_date().toString("yyyyMMdd")) +
         QString("Плазма «К»: %1\t(до %2)\n").arg(getK_plazma_serial()).arg(getK_plazma_date().toString("yyyyMMdd"));
         double a4tv = (getA4tv_kp1() + getA4tv_kp2() + getA4tv_kp3() + getA4tv_kp4())/4;
+        a4tv = ROUND(a4tv);
         str += QString("АЧТВ к/плазмы (измеренное среднее), сек:  %1\n").arg(QString::number(a4tv)) +
         QString("Время инкубации, сек: %1\n").arg(QString::number(getIncube_time()));
     } else return QString("Калибровка не проводилась");
@@ -2350,10 +2373,14 @@ QString CalibrationKo3::print()
         QString("Разведение,%\t200\t100\t50\t25\n") +
         QString("в частях,1+\t4\t9\t19\t39\n");
 
-        const double t1 = getTime_200_plazma();
-        const double t2 = getTime_k_plazma();
-        const double t3 = getTime_50_plazma();
-        const double t4 = getTime_25_plazma();
+        double t1 = getTime_200_plazma();
+        double t2 = getTime_k_plazma();
+        double t3 = getTime_50_plazma();
+        double t4 = getTime_25_plazma();
+        t1 = ROUND(t1);
+        t2 = ROUND(t2);
+        t3 = ROUND(t3);
+        t4 = ROUND(t4);
         str += QString("Тсв, сек\t%1\t%2\t%3\t%4\n").arg(t1).arg(t2).arg(t3).arg(t4);
         str += QString("Время инкубации, сек: %1\n").arg(getIncube_time());
         if( (t1 >= t2*1.2) && (t2 >= t3*1.2) && (t3 >= t4*1.2) ) ;
@@ -2380,7 +2407,7 @@ QString CalibrationKo4::print()
         QString("Реагенты: %1\t(до %2)\n").arg(getReagent_serial()).arg(getReagent_date().toString("yyyyMMdd")) +
         QString("Плазма «К»: %1\t(до %2)\n").arg(getK_plazma_serial()).arg(getK_plazma_date().toString("yyyyMMdd"));
         double tv = (getTv1() + getTv2() + getTv3() + getTv4())/4;
-        str += QString("Тромбин в к/плазме, г/л: %1\n").arg(QString::number(tv)) +
+        str += QString("Тромбин в к/плазме, г/л: %1\n").arg(QString::number(ROUND(tv))) +
         QString("Время инкубации, сек: %1\n").arg(QString::number(getIncube_time())) +
         QString("Активность тромбина %1\n").arg(QString::number(getActivity()));
     } else return QString("Калибровка для активноти тромбина %1 не проводилась").arg(QString::number(getActivity()));
@@ -2410,10 +2437,10 @@ QString CalibrationKo5::print()
         QString("ПО п/калибр: %1\n").arg(getK_protrombine_otn()) +
         QString("Разведение,%\t100\t50\t25\t12,5\n") +
         QString("Тсв, сек\t%1\t%2\t%3\t%4\n")
-                .arg(QString::number(getProtrombine_k_Kvik()))
-                .arg(QString::number(getProtrombine_50_Kvik()))
-                .arg(QString::number(getProtrombine_25_Kvik()))
-                .arg(QString::number(getProtrombine_12_Kvik())) +
+                .arg(QString::number(ROUND(getProtrombine_k_Kvik())))
+                .arg(QString::number(ROUND(getProtrombine_50_Kvik())))
+                .arg(QString::number(ROUND(getProtrombine_25_Kvik())))
+                .arg(QString::number(ROUND(getProtrombine_12_Kvik()))) +
         QString("Время инкубации, сек: %1\n").arg(QString::number(getIncube_time()));
     } else return QString("Калибровка не проводилась");
     return str;
@@ -2433,7 +2460,7 @@ QString CalibrationAgr2::print()
 //    Реагенты: хххххх (до хх.хх.хххх)
 //    Плазма «К»: хххххх (до хх.хх.хххх)
 //    Активность фактора Виллебранда контрольной плазмы, %: хх,х
-//    Разведение, %: 100    50      25
+//    Разведение, %: 100    50     25  12.5
 //    Ск, %/мин:        хх,х  хх,х  хх,х
 //    Время записи агрегатограмм, мин: хх
 //    Время инкубации №1, сек: ххх
@@ -2446,12 +2473,12 @@ QString CalibrationAgr2::print()
         QString("Реагенты: %1\t(до %2)\n").arg(getReagent_serial()).arg(getReagent_date().toString("yyyyMMdd")) +
         QString("Плазма «К»: %1\t(до %2)\n").arg(getK_plazma()).arg(getK_plazma_date().toString("yyyyMMdd")) +
         QString("Активность фактора Виллебранда контрольной плазмы, %: %1\n").arg(getC2()) +
-        QString("Разведение,%\t200\t100\t50\t25\n");
+        QString("Разведение,%\t100\t50\t25\t12.5\n");
         str += QString("Тсв, сек\t%1\t%2\t%3\t%4\n")
-                .arg(QString::number(getCk1()))
-                .arg(QString::number(getCk2()))
-                .arg(QString::number(getCk3()))
-                .arg(QString::number(getCk4()));
+                .arg(QString::number(ROUND(getCk1())))
+                .arg(QString::number(ROUND(getCk2())))
+                .arg(QString::number(ROUND(getCk3())))
+                .arg(QString::number(ROUND(getCk4())));
         str += QString("Время инкубации №1, сек: %1\n").arg(QString::number(getIncube_time())) +
         QString("Время инкубации №2, сек: %1\n").arg(QString::number(getIncube_time_2()));
     } else return QString("Калибровка не проводилась");
@@ -2494,8 +2521,6 @@ QDomDocument TestKo2::createTest(const QString &name)
 {
     Test::createTest(name);
     QDomElement calibration = document.firstChildElement();
-
-    calibration.appendChild(document.createElement("date"));
     calibration.appendChild(document.createElement("reagent_serial"));
     calibration.appendChild(document.createElement("reagent_date"));
     calibration.appendChild(document.createElement("a4tv_kp"));
@@ -2515,7 +2540,6 @@ QDomDocument TestKo4::createTest(const QString &name)
 {
     Test::createTest(name);
     QDomElement calibration = document.firstChildElement();
-    calibration.appendChild(document.createElement("date"));
     calibration.appendChild(document.createElement("reagent_serial"));
     calibration.appendChild(document.createElement("reagent_date"));
     calibration.appendChild(document.createElement("activity"));
