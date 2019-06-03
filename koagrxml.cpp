@@ -97,7 +97,7 @@ QString Creator::getElement(QString tagname, QString attribute)
     if( itemnode.isElement()) {
         QDomElement itemelement = itemnode.toElement();
         return itemelement.attribute(attribute);
-    } else return QString("not find!");
+    } else return QString("element is not found!");
 }
 
 void Creator::setElement(QString tagname, QString value, QString attribute)
@@ -408,23 +408,23 @@ TestKo2::~TestKo2()
 
 void TestKo2::save()
 {
-    setElement("date", date.toString("yyyyMMdd"));
-    setElement("reagent_date", reagent_date.toString("yyyyMMdd"));
-    setElement("reagent_serial", reagent_serial);
-    setElement("write_time", QString::number(write_time));
-    setElement("incube_time", QString::number(incube_time));
-    setElement("a4tv_kp", QString::number(a4tv_kp));
+//    setElement("date", date.toString("yyyyMMdd"));
+//    setElement("reagent_date", reagent_date.toString("yyyyMMdd"));
+//    setElement("reagent_serial", reagent_serial);
+//    setElement("write_time", QString::number(write_time));
+//    setElement("incube_time", QString::number(incube_time));
+//    setElement("a4tv_kp", QString::number(a4tv_kp));
     Test::save();
 }
 
 void TestKo2::load()
 {
-    date = QDate::fromString(getElement("date"), "yyyyMMdd");
-    reagent_date = QDate::fromString(getElement("reagent_date"), "yyyyMMdd");
-    reagent_serial = getElement("reagent_serial");
-    write_time = getElement("write_time").toDouble();
-    incube_time = getElement("incube_time").toDouble();
-    a4tv_kp = getElement("a4tv_kp").toDouble();
+//    date = QDate::fromString(getElement("date"), "yyyyMMdd");
+//    reagent_date = QDate::fromString(getElement("reagent_date"), "yyyyMMdd");
+//    reagent_serial = getElement("reagent_serial");
+//    write_time = getElement("write_time").toDouble();
+//    incube_time = getElement("incube_time").toDouble();
+//    a4tv_kp = getElement("a4tv_kp").toDouble();
     Test::load();
 }
 
@@ -495,7 +495,8 @@ TestKo4::TestKo4(QObject *parent)
     create(this);
 }
 
-TestKo4::TestKo4(WithoutCalibration, QObject *parent) : Test("testKo4_2", parent)
+TestKo4::TestKo4(WithoutCalibration, QObject *parent)
+    : Test("testKo4_2", parent)
 {
     create(this);
 }
@@ -505,99 +506,99 @@ TestKo4::~TestKo4()
     save();
 }
 
-void TestKo4::save()
-{
-    setElement("date", date.toString("yyyyMMdd"));
-    setElement("reagent_date", reagent_date.toString("yyyyMMdd"));
-    setElement("reagent_serial", reagent_serial);
-    setElement("write_time", QString::number(write_time));
-    setElement("incube_time", QString::number(incube_time));
-    setElement("activity", QString::number(activity));
-    setElement("trombine_time", QString::number(trombine_time));
-    Test::save();
-}
+//void TestKo4::save()
+//{
+//    setElement("date", date.toString("yyyyMMdd"));
+//    setElement("reagent_date", reagent_date.toString("yyyyMMdd"));
+//    setElement("reagent_serial", reagent_serial);
+//    setElement("write_time", QString::number(write_time));
+//    setElement("incube_time", QString::number(incube_time));
+//    setElement("activity", QString::number(activity));
+//    setElement("trombine_time", QString::number(trombine_time));
+//    Test::save();
+//}
 
-void TestKo4::load()
-{
-    date = QDate::fromString(getElement("date"), "yyyyMMdd");
-    reagent_date = QDate::fromString(getElement("reagent_date"), "yyyyMMdd");
-    reagent_serial = getElement("reagent_serial");
-    write_time = getElement("write_time").toDouble();
-    incube_time = getElement("incube_time").toDouble();
-    activity = getElement("activity").toInt();
-    trombine_time = getElement("trombine_time").toDouble();
-    Test::load();
-}
+//void TestKo4::load()
+//{
+//    date = QDate::fromString(getElement("date"), "yyyyMMdd");
+//    reagent_date = QDate::fromString(getElement("reagent_date"), "yyyyMMdd");
+//    reagent_serial = getElement("reagent_serial");
+//    write_time = getElement("write_time").toDouble();
+//    incube_time = getElement("incube_time").toDouble();
+//    activity = getElement("activity").toInt();
+//    trombine_time = getElement("trombine_time").toDouble();
+//    Test::load();
+//}
 
-QDate TestKo4::getDate() const
-{
-    return date;
-}
+//QDate TestKo4::getDate() const
+//{
+//    return date;
+//}
 
-void TestKo4::setDate(const QDate &value)
-{
-    date = value;
-}
+//void TestKo4::setDate(const QDate &value)
+//{
+//    date = value;
+//}
 
-QDate TestKo4::getReagent_date() const
-{
-    return reagent_date;
-}
+//QDate TestKo4::getReagent_date() const
+//{
+//    return reagent_date;
+//}
 
-void TestKo4::setReagent_date(const QDate &value)
-{
-    reagent_date = value;
-}
+//void TestKo4::setReagent_date(const QDate &value)
+//{
+//    reagent_date = value;
+//}
 
-QString TestKo4::getReagent_serial() const
-{
-    return reagent_serial;
-}
+//QString TestKo4::getReagent_serial() const
+//{
+//    return reagent_serial;
+//}
 
-void TestKo4::setReagent_serial(const QString &value)
-{
-    reagent_serial = value;
-}
+//void TestKo4::setReagent_serial(const QString &value)
+//{
+//    reagent_serial = value;
+//}
 
-double TestKo4::getWrite_time() const
-{
-    return write_time;
-}
+//double TestKo4::getWrite_time() const
+//{
+//    return write_time;
+//}
 
-void TestKo4::setWrite_time(double value)
-{
-    write_time = value;
-}
+//void TestKo4::setWrite_time(double value)
+//{
+//    write_time = value;
+//}
 
-double TestKo4::getIncube_time() const
-{
-    return incube_time;
-}
+//double TestKo4::getIncube_time() const
+//{
+//    return incube_time;
+//}
 
-void TestKo4::setIncube_time(double value)
-{
-    incube_time = value;
-}
+//void TestKo4::setIncube_time(double value)
+//{
+//    incube_time = value;
+//}
 
-int TestKo4::getActivity() const
-{
-    return activity;
-}
+//int TestKo4::getActivity() const
+//{
+//    return activity;
+//}
 
-void TestKo4::setActivity(int value)
-{
-    activity = value;
-}
+//void TestKo4::setActivity(int value)
+//{
+//    activity = value;
+//}
 
-double TestKo4::getTrombine_time() const
-{
-    return trombine_time;
-}
+//double TestKo4::getTrombine_time() const
+//{
+//    return trombine_time;
+//}
 
-void TestKo4::setTrombine_time(double value)
-{
-    trombine_time = value;
-}
+//void TestKo4::setTrombine_time(double value)
+//{
+//    trombine_time = value;
+//}
 
 TestKo5::TestKo5(QObject *parent)
     : Test("testKo5", parent)
@@ -768,6 +769,12 @@ CalibrationKo1::~CalibrationKo1()
 
 CalibrationKo2::CalibrationKo2(QObject *parent)
     : Calibration("calibrationKo2", parent)
+{
+    create(this);
+}
+
+CalibrationKo2::CalibrationKo2(const QString &name, QObject *parent)
+    : Calibration(name, parent)
 {
     create(this);
 }
@@ -1087,6 +1094,7 @@ QDomDocument CalibrationKo4::createCalibration(const QString &name)
     calibration.appendChild(document.createElement("k_plazma_serial"));
     calibration.appendChild(document.createElement("k_plazma_date"));
     calibration.appendChild(document.createElement("activity"));
+    calibration.appendChild(document.createElement("trombin"));
     calibration.appendChild(document.createElement("tv1"));
     calibration.appendChild(document.createElement("tv2"));
     calibration.appendChild(document.createElement("tv3"));
@@ -1141,7 +1149,8 @@ void CalibrationKo4::load()
     reagent_serial = getElement("reagent_serial");
     k_plazma_date = QDate::fromString(getElement("k_plazma_date"), "yyyyMMdd");
     k_plazma_serial = getElement("k_plazma_serial");
-    activity = getElement("activity").toDouble();
+    activity = getElement("activity").toInt();
+    activity = getElement("trombin").toDouble();
     tv1 = getElement("tv1").toDouble();
     tv2 = getElement("tv2").toDouble();
     tv3 = getElement("tv3").toDouble();
@@ -1160,6 +1169,7 @@ void CalibrationKo4::save()
     setElement("reagent_serial", reagent_serial);
     setElement("k_plazma_serial", k_plazma_serial);
     setElement("activity", QString::number(activity));
+    setElement("trombin", QString::number(trombin));
     setElement("tv1", QString::number(tv1));
     setElement("tv2", QString::number(tv2));
     setElement("tv3", QString::number(tv3));
@@ -2409,17 +2419,27 @@ QString CalibrationKo4::print()
         double tv = (getTv1() + getTv2() + getTv3() + getTv4())/4;
         str += QString("Тромбин в к/плазме, г/л: %1\n").arg(QString::number(ROUND(tv))) +
         QString("Время инкубации, сек: %1\n").arg(QString::number(getIncube_time())) +
-        QString("Активность тромбина %1\n").arg(QString::number(getActivity()));
+        QString("Активность тромбина %1\n").arg(QString::number(getTrombin()));
     } else return QString("Калибровка для активноти тромбина %1 не проводилась").arg(QString::number(getActivity()));
     return str;
 }
 
+double CalibrationKo4::getTrombin() const
+{
+    return trombin;
+}
+
+void CalibrationKo4::setTrombin(double value)
+{
+    trombin = value;
+}
+
 QString CalibrationKo5::print()
 {
-//    22.02.07   12-00
-//      Протромбиновый комплекс
-//    Результаты калибровки:
-//    Реагенты: хххххх (до хх.хх.хххх)
+    //    22.02.07   12-00
+    //      Протромбиновый комплекс
+    //    Результаты калибровки:
+    //    Реагенты: хххххх (до хх.хх.хххх)
 //    Протромбин по Квику п/калибр, %: хх
 //    МИЧ:хх,хх
 //    ПО п/калибр: хх,хх
@@ -2520,31 +2540,31 @@ void TestAgr1::load()
 QDomDocument TestKo2::createTest(const QString &name)
 {
     Test::createTest(name);
-    QDomElement calibration = document.firstChildElement();
-    calibration.appendChild(document.createElement("reagent_serial"));
-    calibration.appendChild(document.createElement("reagent_date"));
-    calibration.appendChild(document.createElement("a4tv_kp"));
+//    QDomElement calibration = document.firstChildElement();
+//    calibration.appendChild(document.createElement("reagent_serial"));
+//    calibration.appendChild(document.createElement("reagent_date"));
+//    calibration.appendChild(document.createElement("a4tv_kp"));
 
-    QDomElement write_time = document.createElement("write_time");
-    write_time.setAttribute("Value", "10");
-    calibration.appendChild(write_time);
+//    QDomElement write_time = document.createElement("write_time");
+//    write_time.setAttribute("Value", "10");
+//    calibration.appendChild(write_time);
 
-    QDomElement incube_time = document.createElement("incube_time");
-    incube_time.setAttribute("Value", "3");
-    calibration.appendChild(incube_time);
-    document.appendChild(calibration);
+//    QDomElement incube_time = document.createElement("incube_time");
+//    incube_time.setAttribute("Value", "3");
+//    calibration.appendChild(incube_time);
+//    document.appendChild(calibration);
     return document;
 }
 
 QDomDocument TestKo4::createTest(const QString &name)
 {
     Test::createTest(name);
-    QDomElement calibration = document.firstChildElement();
-    calibration.appendChild(document.createElement("reagent_serial"));
-    calibration.appendChild(document.createElement("reagent_date"));
-    calibration.appendChild(document.createElement("activity"));
-    calibration.appendChild(document.createElement("trombine_time"));
-    document.appendChild(calibration);
+//    QDomElement calibration = document.firstChildElement();
+//    calibration.appendChild(document.createElement("reagent_serial"));
+//    calibration.appendChild(document.createElement("reagent_date"));
+//    calibration.appendChild(document.createElement("activity"));
+//    calibration.appendChild(document.createElement("trombine_time"));
+//    document.appendChild(calibration);
     return document;
 }
 

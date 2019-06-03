@@ -161,34 +161,35 @@ public:
     explicit TestKo4(WithoutCalibration, QObject *parent = 0);
     ~TestKo4() override;
 
-    QDate getDate() const;
-    void setDate(const QDate &value);
-    QDate getReagent_date() const;
-    void setReagent_date(const QDate &value);
-    QString getReagent_serial() const;
-    void setReagent_serial(const QString &value);
-    double getWrite_time() const;
-    void setWrite_time(double value);
-    double getIncube_time() const;
-    void setIncube_time(double value);
-    int getActivity() const;
-    void setActivity(int value);
-    double getTrombine_time() const;
-    void setTrombine_time(double value);
+//    QDate getDate() const;
+//    void setDate(const QDate &value);
+//    QDate getReagent_date() const;
+//    void setReagent_date(const QDate &value);
+//    QString getReagent_serial() const;
+//    void setReagent_serial(const QString &value);
+//    double getWrite_time() const;
+//    void setWrite_time(double value);
+//    double getIncube_time() const;
+//    void setIncube_time(double value);
+//    int getActivity() const;
+//    void setActivity(int value);
+//    double getTrombine_time() const;
+//    void setTrombine_time(double value);
 
     // Test interface
 public:
     QDomDocument createTest(const QString &name) override;
-    void save() override;
-    void load() override;
+//    void save() override;
+//    void load() override;
     QString print() override;
 
-private:
-    QDate date;
-    QDate reagent_date;
-    QString reagent_serial;
-    int activity;
-    double write_time, incube_time, trombine_time;
+//private:
+//    QDate date;
+//    QDate reagent_date;
+//    QString reagent_serial;
+//    int activity;
+//    double trombine;
+//    double write_time, incube_time, trombine_time;
 };
 
 class TestKo5 : public Test
@@ -345,6 +346,7 @@ class CalibrationKo2 : public Calibration
     Q_OBJECT
 public:
     explicit CalibrationKo2(QObject *parent = 0);
+    explicit CalibrationKo2(const QString &, QObject *parent = 0);
     ~CalibrationKo2() override;
 
     QDate getReagent_date() const;
@@ -384,6 +386,22 @@ public:
     void load() override;
     QString print() override;
 
+};
+
+class CalibrationKo2_1 : public CalibrationKo2
+{
+    Q_OBJECT
+public:
+    inline explicit CalibrationKo2_1(QObject *parent = 0)
+        : CalibrationKo2("calibrationKo2_1", parent) {}
+};
+
+class CalibrationKo2_2 : public CalibrationKo2
+{
+    Q_OBJECT
+public:
+    inline explicit CalibrationKo2_2(QObject *parent = 0)
+        : CalibrationKo2("calibrationKo2_2", parent) {}
 };
 
 class CalibrationKo3 : public Calibration
@@ -462,6 +480,8 @@ public:
     void setTv4(double value);
     double getActivity() const;
     void setActivity(const double &value);
+    double getTrombin() const;
+    void setTrombin(double value);
 
     // Calibration interface
 public:
@@ -473,7 +493,8 @@ public:
 public:
     QDate reagent_date, k_plazma_date;
     QString reagent_serial, k_plazma_serial;
-    double activity; //активносит тромбина
+    int activity;  //номер активносити тромбина
+    double trombin;//активносити тромбина сответствующая номеру
     double tv1, tv2, tv3, tv4;
 };
 
@@ -499,6 +520,14 @@ class CalibrationKo4_3 : public CalibrationKo4
 public:
     inline explicit CalibrationKo4_3(QObject *parent = 0)
         : CalibrationKo4("calibrationKo4_3", parent) {}
+};
+
+class CalibrationKo4_4 : public CalibrationKo4
+{
+    Q_OBJECT
+public:
+    inline explicit CalibrationKo4_4(QObject *parent = 0)
+        : CalibrationKo4("calibrationKo4_4", parent) {}
 };
 
 class CalibrationKo5 : public Calibration
