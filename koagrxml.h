@@ -541,48 +541,41 @@ public:
     void setReagent_date(const QDate &value);
     QString getReagent_serial() const;
     void setReagent_serial(const QString &value);
-    QDate getTromboplastin_date() const;
-    void setTromboplastin_date(const QDate &value);
+
     QDate getK_plazma_date() const;
     void setK_plazma_date(const QDate &value);
-    QString getTromboplastin_serial() const;
-    void setTromboplastin_serial(const QString &value);
+
     QString getK_plazma_serial() const;
     void setK_plazma_serial(const QString &value);
+
     double getK_protrombine_index() const;
     void setK_protrombine_index(double value);
+
     double getK_protrombine_otn() const;
     void setK_protrombine_otn(double value);
+
     double getProtrombine_k_Kvik() const;
     void setProtrombine_k_Kvik(double value);
     double getTime_k_Kvik() const;
     void setTime_k_Kvik(double value);
-    double getProtrombine_50_Kvik() const;
-    void setProtrombine_50_Kvik(double value);
+
     double getTime_50_Kvik() const;
     void setTime_50_Kvik(double value);
-    double getProtrombine_25_Kvik() const;
-    void setProtrombine_25_Kvik(double value);
+
     double getTime_25_Kvik() const;
     void setTime_25_Kvik(double value);
-    double getProtrombine_12_Kvik() const;
-    void setProtrombine_12_Kvik(double value);
+
     double getTime_12_Kvik() const;
     void setTime_12_Kvik(double value);
-    double getProtrombine_index() const;
-    void setProtrombine_index(double value);
-    double getProtrombine_otn() const;
-    void setProtrombine_otn(double value);
 
 private:
-    QDate reagent_date, tromboplastin_date, k_plazma_date;
-    QString reagent_serial, tromboplastin_serial, k_plazma_serial;
+    QDate reagent_date, k_plazma_date;
+    QString reagent_serial, k_plazma_serial;
     double k_protrombine_index, k_protrombine_otn;
     double protrombine_k_Kvik, time_k_Kvik;
-    double protrombine_50_Kvik, time_50_Kvik;
-    double protrombine_25_Kvik, time_25_Kvik;
-    double protrombine_12_Kvik, time_12_Kvik;
-    double protrombine_index, protrombine_otn;
+    double time_50_Kvik;
+    double time_25_Kvik;
+    double time_12_Kvik;
 
     // Calibration interface
 public:

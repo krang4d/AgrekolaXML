@@ -1238,22 +1238,22 @@ void CalibrationKo5::load()
     Calibration::load();
     reagent_date = QDate::fromString(getElement("reagent_date"), "yyyyMMdd");
     reagent_serial = getElement("reagent_serial");
-    tromboplastin_date = QDate::fromString(getElement("tromboplastin_date"), "yyyyMMdd");
-    tromboplastin_serial = getElement("tromboplastin_serial");
+//    tromboplastin_date = QDate::fromString(getElement("tromboplastin_date"), "yyyyMMdd");
+//    tromboplastin_serial = getElement("tromboplastin_serial");
     k_plazma_date = QDate::fromString(getElement("k_plazma_date"), "yyyyMMdd");
     k_plazma_serial = getElement("k_plazma_serial");
     k_protrombine_index = getElement("k_protrombine_index").toDouble();
     k_protrombine_otn = getElement("k_protrombine_otn").toDouble();
     protrombine_k_Kvik = getElement("protrombine_k_Kvik").toDouble();
     time_k_Kvik = getElement("time_k_Kvik").toDouble();
-    protrombine_50_Kvik = getElement("protrombine_50_Kvik").toDouble();
+//    protrombine_50_Kvik = getElement("protrombine_50_Kvik").toDouble();
     time_50_Kvik = getElement("time_50_Kvik").toDouble();
-    protrombine_25_Kvik = getElement("protrombine_25_Kvik").toDouble();
+//    protrombine_25_Kvik = getElement("protrombine_25_Kvik").toDouble();
     time_25_Kvik = getElement("time_25_Kvik").toDouble();
-    protrombine_12_Kvik = getElement("protrombine_12_Kvik").toDouble();
+//    protrombine_12_Kvik = getElement("protrombine_12_Kvik").toDouble();
     time_12_Kvik = getElement("time_12_Kvik").toDouble();
-    protrombine_index = getElement("protrombine_index").toDouble();
-    protrombine_otn = getElement("protrombine_otn").toDouble();
+//    protrombine_index = getElement("protrombine_index").toDouble();
+//    protrombine_otn = getElement("protrombine_otn").toDouble();
 }
 
 CalibrationKo5::~CalibrationKo5()
@@ -1266,8 +1266,8 @@ void CalibrationKo5::save()
     setElement("reagent_date",  reagent_date.toString("yyyyMMdd"));
     setElement("reagent_serial", reagent_serial);
 
-    setElement("tromboplastin_date", tromboplastin_date.toString("yyyyMMdd"));
-    setElement("tromboplastin_serial", tromboplastin_serial);
+//    setElement("tromboplastin_date", tromboplastin_date.toString("yyyyMMdd"));
+//    setElement("tromboplastin_serial", tromboplastin_serial);
 
     setElement("k_plazma_date", k_plazma_date.toString("yyyyMMdd"));
     setElement("k_plazma_serial", k_plazma_serial);
@@ -1276,26 +1276,26 @@ void CalibrationKo5::save()
     setElement("k_protrombine_otn", QString::number(k_protrombine_otn));
     setElement("protrombine_k_Kvik", QString::number(protrombine_k_Kvik));
     setElement("time_k_Kvik", QString::number(time_k_Kvik));
-    setElement("protrombine_50_Kvik", QString::number(protrombine_50_Kvik));
+//    setElement("protrombine_50_Kvik", QString::number(protrombine_50_Kvik));
     setElement("time_50_Kvik", QString::number(time_50_Kvik));
-    setElement("protrombine_25_Kvik", QString::number(protrombine_25_Kvik));
+//    setElement("protrombine_25_Kvik", QString::number(protrombine_25_Kvik));
     setElement("time_25_Kvik", QString::number(time_25_Kvik));
-    setElement("protrombine_12_Kvik", QString::number(protrombine_12_Kvik));
+//    setElement("protrombine_12_Kvik", QString::number(protrombine_12_Kvik));
     setElement("time_12_Kvik", QString::number(time_12_Kvik));
-    setElement("protrombine_index", QString::number(protrombine_index));
-    setElement("protrombine_otn", QString::number(protrombine_otn));
+//    setElement("protrombine_index", QString::number(protrombine_index));
+//    setElement("protrombine_otn", QString::number(protrombine_otn));
     Calibration::save();
 }
 
-QDate CalibrationKo5::getTromboplastin_date() const
-{
-    return tromboplastin_date;
-}
+//QDate CalibrationKo5::getTromboplastin_date() const
+//{
+//    return tromboplastin_date;
+//}
 
-void CalibrationKo5::setTromboplastin_date(const QDate &value)
-{
-    tromboplastin_date = value;
-}
+//void CalibrationKo5::setTromboplastin_date(const QDate &value)
+//{
+//    tromboplastin_date = value;
+//}
 
 QDate CalibrationKo5::getK_plazma_date() const
 {
@@ -1307,15 +1307,15 @@ void CalibrationKo5::setK_plazma_date(const QDate &value)
     k_plazma_date = value;
 }
 
-QString CalibrationKo5::getTromboplastin_serial() const
-{
-    return tromboplastin_serial;
-}
+//QString CalibrationKo5::getTromboplastin_serial() const
+//{
+//    return tromboplastin_serial;
+//}
 
-void CalibrationKo5::setTromboplastin_serial(const QString &value)
-{
-    tromboplastin_serial = value;
-}
+//void CalibrationKo5::setTromboplastin_serial(const QString &value)
+//{
+//    tromboplastin_serial = value;
+//}
 
 QString CalibrationKo5::getK_plazma_serial() const
 {
@@ -1367,15 +1367,15 @@ void CalibrationKo5::setTime_k_Kvik(double value)
     time_k_Kvik = value;
 }
 
-double CalibrationKo5::getProtrombine_50_Kvik() const
-{
-    return protrombine_50_Kvik;
-}
+//double CalibrationKo5::getProtrombine_50_Kvik() const
+//{
+//    return protrombine_50_Kvik;
+//}
 
-void CalibrationKo5::setProtrombine_50_Kvik(double value)
-{
-    protrombine_50_Kvik = value;
-}
+//void CalibrationKo5::setProtrombine_50_Kvik(double value)
+//{
+//    protrombine_50_Kvik = value;
+//}
 
 double CalibrationKo5::getTime_50_Kvik() const
 {
@@ -1387,15 +1387,15 @@ void CalibrationKo5::setTime_50_Kvik(double value)
     time_50_Kvik = value;
 }
 
-double CalibrationKo5::getProtrombine_25_Kvik() const
-{
-    return protrombine_25_Kvik;
-}
+//double CalibrationKo5::getProtrombine_25_Kvik() const
+//{
+//    return protrombine_25_Kvik;
+//}
 
-void CalibrationKo5::setProtrombine_25_Kvik(double value)
-{
-    protrombine_25_Kvik = value;
-}
+//void CalibrationKo5::setProtrombine_25_Kvik(double value)
+//{
+//    protrombine_25_Kvik = value;
+//}
 
 double CalibrationKo5::getTime_25_Kvik() const
 {
@@ -1407,15 +1407,15 @@ void CalibrationKo5::setTime_25_Kvik(double value)
     time_25_Kvik = value;
 }
 
-double CalibrationKo5::getProtrombine_12_Kvik() const
-{
-    return protrombine_12_Kvik;
-}
+//double CalibrationKo5::getProtrombine_12_Kvik() const
+//{
+//    return protrombine_12_Kvik;
+//}
 
-void CalibrationKo5::setProtrombine_12_Kvik(double value)
-{
-    protrombine_12_Kvik = value;
-}
+//void CalibrationKo5::setProtrombine_12_Kvik(double value)
+//{
+//    protrombine_12_Kvik = value;
+//}
 
 double CalibrationKo5::getTime_12_Kvik() const
 {
@@ -1427,25 +1427,25 @@ void CalibrationKo5::setTime_12_Kvik(double value)
     time_12_Kvik = value;
 }
 
-double CalibrationKo5::getProtrombine_index() const
-{
-    return protrombine_index;
-}
+//double CalibrationKo5::getProtrombine_index() const
+//{
+//    return protrombine_index;
+//}
 
-void CalibrationKo5::setProtrombine_index(double value)
-{
-    protrombine_index = value;
-}
+//void CalibrationKo5::setProtrombine_index(double value)
+//{
+//    protrombine_index = value;
+//}
 
-double CalibrationKo5::getProtrombine_otn() const
-{
-    return protrombine_otn;
-}
+//double CalibrationKo5::getProtrombine_otn() const
+//{
+//    return protrombine_otn;
+//}
 
-void CalibrationKo5::setProtrombine_otn(double value)
-{
-    protrombine_otn = value;
-}
+//void CalibrationKo5::setProtrombine_otn(double value)
+//{
+//    protrombine_otn = value;
+//}
 
 QString CalibrationKo5::getReagent_serial() const
 {
@@ -2097,11 +2097,11 @@ QString TestKo5::print()
 //    хxxxxxxxxxxxx хх,х        хх,х      хх,х х     хх,х
     QString str =
     QString("%1 г., %2\n").arg(getDate().toString("d MMMM yyyy")).arg(getTime().toString("hh-mm")) +
-    QString("Режим агрегометра\nПротромбиновый комплекс\nРезультаты измерений:\nПроба №\tПВ, сек\tПИ, \%\tПО\tПРкв, \%\t");
-    if(getK1()) str += QString("%1\t%2\t%3\t%4\t%5\n").arg(getNum1()).arg("ПВ1").arg("ПИ1").arg("ПО1").arg("ПРкв1");
-    if(getK2()) str += QString("%1\t%2\t%3\t%4\t%5\n").arg(getNum2()).arg("ПВ2").arg("ПИ2").arg("ПО2").arg("ПРкв2");
-    if(getK3()) str += QString("%1\t%2\t%3\t%4\t%5\n").arg(getNum3()).arg("ПВ3").arg("ПИ3").arg("ПО3").arg("ПРкв3");
-    if(getK4()) str += QString("%1\t%2\t%3\t%4\t%5\n").arg(getNum4()).arg("ПВ4").arg("ПИ4").arg("ПО4").arg("ПРкв4");
+    QString("Режим агрегометра\nПротромбиновый комплекс\nРезультаты измерений:\nПроба №\tПВ, сек\tПИ, \%\tПО\tПРкв, \%\n");
+    if(getK1()) str += QString("%1\t%2\t%3\t%4\t%5\n").arg(getNum1()).arg(getT1()).arg("ПИ1").arg("ПО1").arg("ПРкв1");
+    if(getK2()) str += QString("%1\t%2\t%3\t%4\t%5\n").arg(getNum2()).arg(getT2()).arg("ПИ2").arg("ПО2").arg("ПРкв2");
+    if(getK3()) str += QString("%1\t%2\t%3\t%4\t%5\n").arg(getNum3()).arg(getT3()).arg("ПИ3").arg("ПО3").arg("ПРкв3");
+    if(getK4()) str += QString("%1\t%2\t%3\t%4\t%5\n").arg(getNum4()).arg(getT4()).arg("ПИ4").arg("ПО4").arg("ПРкв4");
     return str;
 }
 
@@ -2115,10 +2115,9 @@ QString TestAgr1::print()
 //    xxxxxxxxxxxxx         хх,х   хх,х  хх,х
 //    xxxxxxxxxxxxx         хх,х   хх,х  хх,х
 //    xxxxxxxxxxxxx         хх,х   хх,х  хх,х
-///   нужны графики
     QString str =
     QString("%1 г., %2\n").arg(getDate().toString("d MMMM yyyy")).arg(getTime().toString("hh-mm")) +
-    QString("Режим агрегометра\nПараметры агрегации тромбоцитов\nРезультаты измерений:\nПроба №\tСтА\tСкА\tС, тр/мкл\t");
+    QString("Режим агрегометра\nПараметры агрегации тромбоцитов\nРезультаты измерений:\nПроба №\tСтА\tСкА\tС, тр/мкл\n");
     if(getK1()) str += QString("%1\t%2\t%3\t%4\n").arg(getNum1()).arg("СтА1").arg("СкА1").arg("С1").arg("ПРкв1");
     if(getK2()) str += QString("%1\t%2\t%3\t%4\n").arg(getNum2()).arg("СтА2").arg("СкА2").arg("С2").arg("ПРкв2");
     if(getK3()) str += QString("%1\t%2\t%3\t%4\n").arg(getNum3()).arg("СтА3").arg("СкА3").arg("С3").arg("ПРкв3");
@@ -2349,8 +2348,8 @@ QString CalibrationKo2::print()
         str =
         QString("%1 г., %2\n").arg(getDate().toString("d MMMM yyyy")).arg(getTime().toString("hh-mm")) +
         QString("Режим коагулометра\nАЧТВ\nРезультаты калибровки:\n") +
-        QString("Реагенты: %1\t(до %2)\n").arg(getReagent_serial()).arg(getReagent_date().toString("yyyyMMdd")) +
-        QString("Плазма «К»: %1\t(до %2)\n").arg(getK_plazma_serial()).arg(getK_plazma_date().toString("yyyyMMdd"));
+        QString("Реагенты: %1\t(до %2)\n").arg(getReagent_serial()).arg(getReagent_date().toString("dd.MM.yyyy")) +
+        QString("Плазма «К»: %1\t(до %2)\n").arg(getK_plazma_serial()).arg(getK_plazma_date().toString("dd.MM.yyyy"));
         double a4tv = (getA4tv_kp1() + getA4tv_kp2() + getA4tv_kp3() + getA4tv_kp4())/4;
         a4tv = ROUND(a4tv);
         str += QString("АЧТВ к/плазмы (измеренное среднее), сек:  %1\n").arg(QString::number(a4tv)) +
@@ -2363,7 +2362,7 @@ QString CalibrationKo3::print()
 {
 //    хх.хх.хх   хх-хх
 //    Режим коагулометра
-//      Фибриноген
+//    Фибриноген
 //    Результаты калибровки:
 //    Реагенты: хххххх (до хх.хх.хххх)
 //    Плазма «К»: хххххх (до хх.хх.хххх)
@@ -2394,7 +2393,7 @@ QString CalibrationKo3::print()
         str += QString("Тсв, сек\t%1\t%2\t%3\t%4\n").arg(t1).arg(t2).arg(t3).arg(t4);
         str += QString("Время инкубации, сек: %1\n").arg(getIncube_time());
         if( (t1 >= t2*1.2) && (t2 >= t3*1.2) && (t3 >= t4*1.2) ) ;
-        else str += QString("Ошибка: Нет соответствия критерию возрастания\n");
+        else str += QString("Ошибка 04: Нет соответствия критерию возрастания\n");
     } else return QString("Калибровка не проводилась");
     return str;
 }
@@ -2414,8 +2413,8 @@ QString CalibrationKo4::print()
         str =
         QString("%1 г., %2\n").arg(getDate().toString("d MMMM yyyy")).arg(getTime().toString("hh-mm")) +
         QString("Режим коагулометра\nТромбин\nРезультаты калибровки:\n") +
-        QString("Реагенты: %1\t(до %2)\n").arg(getReagent_serial()).arg(getReagent_date().toString("yyyyMMdd")) +
-        QString("Плазма «К»: %1\t(до %2)\n").arg(getK_plazma_serial()).arg(getK_plazma_date().toString("yyyyMMdd"));
+        QString("Реагенты: %1\t(до %2)\n").arg(getReagent_serial()).arg(getReagent_date().toString("dd.MM.yyyy")) +
+        QString("Плазма «К»: %1\t(до %2)\n").arg(getK_plazma_serial()).arg(getK_plazma_date().toString("dd.MM.yyyy"));
         double tv = (getTv1() + getTv2() + getTv3() + getTv4())/4;
         str += QString("Тромбин в к/плазме, г/л: %1\n").arg(QString::number(ROUND(tv))) +
         QString("Время инкубации, сек: %1\n").arg(QString::number(getIncube_time())) +
@@ -2436,10 +2435,10 @@ void CalibrationKo4::setTrombin(double value)
 
 QString CalibrationKo5::print()
 {
-    //    22.02.07   12-00
-    //      Протромбиновый комплекс
-    //    Результаты калибровки:
-    //    Реагенты: хххххх (до хх.хх.хххх)
+//    22.02.07   12-00
+//    Протромбиновый комплекс
+//    Результаты калибровки:
+//    Реагенты: хххххх (до хх.хх.хххх)
 //    Протромбин по Квику п/калибр, %: хх
 //    МИЧ:хх,хх
 //    ПО п/калибр: хх,хх
@@ -2451,17 +2450,24 @@ QString CalibrationKo5::print()
         str =
         QString("%1 г., %2\n").arg(getDate().toString("d MMMM yyyy")).arg(getTime().toString("hh-mm")) +
         QString("Режим коагулометра\nПротромбиновый комплекс\nРезультаты калибровки:\n") +
-        QString("Реагенты: %1\t(до %2)\n").arg(getReagent_serial()).arg(getReagent_date().toString("yyyyMMdd")) +
-        QString("Протромбин по Квику п/калибр, %: %1\t(до %2)\n").arg(getTromboplastin_serial()).arg(getTromboplastin_date().toString("yyyyMMdd")) +
-        QString("МИЧ: %1\n").arg(getK_protrombine_index()) +
-        QString("ПО п/калибр: %1\n").arg(getK_protrombine_otn()) +
-        QString("Разведение,%\t100\t50\t25\t12,5\n") +
-        QString("Тсв, сек\t%1\t%2\t%3\t%4\n")
-                .arg(QString::number(ROUND(getProtrombine_k_Kvik())))
-                .arg(QString::number(ROUND(getProtrombine_50_Kvik())))
-                .arg(QString::number(ROUND(getProtrombine_25_Kvik())))
-                .arg(QString::number(ROUND(getProtrombine_12_Kvik()))) +
+        QString("Реагенты: %1\t(до %2)\n").arg(getReagent_serial()).arg(getReagent_date().toString("dd.MM.yyyy")) +
+        QString("Протромбин по Квику, %: %1\n").arg(getProtrombine_k_Kvik()) + //.arg(getTromboplastin_date().toString("dd.MM.yyyy")) +
+        QString("ПИ: %1\n").arg(getK_protrombine_index()) +
+        QString("ПО: %1\n").arg(getK_protrombine_otn()) +
+        QString("Разведение,%\t100\t50\t25\t12,5\n");
+
+        double t1 = ROUND(getTime_k_Kvik());
+        double t2 = ROUND(getTime_50_Kvik());
+        double t3 = ROUND(getTime_25_Kvik());
+        double t4 = ROUND(getTime_12_Kvik());
+        str += QString("Тсв, сек\t%1\t%2\t%3\t%4\n")
+                .arg(QString::number(t1))
+                .arg(QString::number(t2))
+                .arg(QString::number(t3))
+                .arg(QString::number(t4)) +
         QString("Время инкубации, сек: %1\n").arg(QString::number(getIncube_time()));
+        if( (t1 >= t2*1.2) && (t2 >= t3*1.2) && (t3 >= t4*1.2) ) ;
+        else str += QString("Ошибка 04: Нет соответствия критерию возрастания\n");
     } else return QString("Калибровка не проводилась");
     return str;
 }
@@ -2490,8 +2496,8 @@ QString CalibrationAgr2::print()
         str =
         QString("%1 г., %2\n").arg(getDate().toString("d MMMM yyyy")).arg(getTime().toString("hh-mm")) +
         QString("Режим коагулометра\nОпределение активности ф-ра Виллебранда\nРезультаты калибровки:\n") +
-        QString("Реагенты: %1\t(до %2)\n").arg(getReagent_serial()).arg(getReagent_date().toString("yyyyMMdd")) +
-        QString("Плазма «К»: %1\t(до %2)\n").arg(getK_plazma()).arg(getK_plazma_date().toString("yyyyMMdd")) +
+        QString("Реагенты: %1\t(до %2)\n").arg(getReagent_serial()).arg(getReagent_date().toString("dd.MM.yyyy")) +
+        QString("Плазма «К»: %1\t(до %2)\n").arg(getK_plazma()).arg(getK_plazma_date().toString("dd.MM.yyyy")) +
         QString("Активность фактора Виллебранда контрольной плазмы, %: %1\n").arg(getC2()) +
         QString("Разведение,%\t100\t50\t25\t12.5\n");
         str += QString("Тсв, сек\t%1\t%2\t%3\t%4\n")
@@ -2535,7 +2541,6 @@ void TestAgr1::load()
     otp4 = getElement("OTP4").toDouble();
     Test::load();
 }
-
 
 QDomDocument TestKo2::createTest(const QString &name)
 {
@@ -2692,8 +2697,8 @@ QDomDocument CalibrationKo5::createCalibration(const QString &name)
     calibration.appendChild(document.createElement("reagent_serial"));
     calibration.appendChild(document.createElement("reagent_date"));
 
-    calibration.appendChild(document.createElement("tromboplastin_serial"));
-    calibration.appendChild(document.createElement("tromboplastin_date"));
+//    calibration.appendChild(document.createElement("tromboplastin_serial"));
+//    calibration.appendChild(document.createElement("tromboplastin_date"));
     calibration.appendChild(document.createElement("k_plazma_serial"));
     calibration.appendChild(document.createElement("k_plazma_date"));
     calibration.appendChild(document.createElement("k_protrombine_index"));
@@ -2701,17 +2706,17 @@ QDomDocument CalibrationKo5::createCalibration(const QString &name)
     calibration.appendChild(document.createElement("protrombine_k_Kvik"));
     calibration.appendChild(document.createElement("time_k_Kvik"));
 
-    calibration.appendChild(document.createElement("protrombine_50_Kvik"));
+//    calibration.appendChild(document.createElement("protrombine_50_Kvik"));
     calibration.appendChild(document.createElement("time_50_Kvik"));
 
-    calibration.appendChild(document.createElement("protrombine_25_Kvik"));
+//    calibration.appendChild(document.createElement("protrombine_25_Kvik"));
     calibration.appendChild(document.createElement("time_25_Kvik"));
 
-    calibration.appendChild(document.createElement("protrombine_12_Kvik"));
+//    calibration.appendChild(document.createElement("protrombine_12_Kvik"));
     calibration.appendChild(document.createElement("time_12_Kvik"));
 
-    calibration.appendChild(document.createElement("protrombine_index"));
-    calibration.appendChild(document.createElement("protrombine_otn"));
+//    calibration.appendChild(document.createElement("protrombine_index"));
+//    calibration.appendChild(document.createElement("protrombine_otn"));
     return document;
 }
 
