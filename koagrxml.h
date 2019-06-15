@@ -7,6 +7,7 @@
 #include <QDate>
 #include <QObject>
 #include <QDir>
+#include <globalvalue.h>
 
 class Calibration;
 
@@ -42,6 +43,11 @@ public:
     virtual ~Test();
     void create(Test *);
 
+    virtual QDomDocument createTest(const QString &name);
+    virtual void save();
+    virtual void load();
+    virtual QString print() = 0;
+
     void setK1(const int value);
     int getK1() const;
     void setK2(const int value);
@@ -76,14 +82,29 @@ public:
     QTime getTime() const;
     void setTime(const QTime &value);
 
-    virtual QDomDocument createTest(const QString &name);
-    virtual void save();
-    virtual void load();
-    virtual QString print() = 0;
+    double getStop_dx(int index) const;
+    void setStop_dx(int index, const double &value);
+
+    double getStart_dx(int index) const;
+    void setStart_dx(int index, const double &value);
+
+    double getMin() const;
+    void setMin(double value);
+
+    double getMax() const;
+    void setMax(double value);
 
 protected:
     QDate date;
     QTime time;
+
+    //рапаметры настройки порогов автоматического
+    //запуска и остановки сбора данных при исследовании
+    QVector<double> stop_dx = QVector<double>(4, 0.0);
+    QVector<double> start_dx = QVector<double>(4, 0.0);
+
+    //параметры отображения графикаов
+    double min, max;
 
     int k1, k2, k3, k4, single;
     QString num1, num2, num3, num4;
@@ -199,9 +220,27 @@ public:
     explicit TestKo5(QObject *parent = 0);
     ~TestKo5() override;
 
+    double getKvik(Channel_ID ch) const;
+    void setKvik(double value, Channel_ID ch);
+
+    double getIndex(Channel_ID ch) const;
+    void setIndex(double value, Channel_ID ch);
+
+    double getOtn(Channel_ID ch) const;
+    void setOtn(double value, Channel_ID ch);
+
     // Test interface
 public:
+    QDomDocument createTest(const QString &name) override;
+    void save() override;
+    void load() override;
     QString print() override;
+
+private:
+    double kvik1, kvik2, kvik3, kvik4;
+    double index1, index2, index3, index4;
+    double otn1, otn2, otn3, otn4;
+
 };
 
 class TestAgr1 : public Test

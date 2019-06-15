@@ -121,25 +121,33 @@ QDomDocument Test::createTest(const QString &name)
     QDomElement k1 = document.createElement("k1");
     k1.setAttribute("Value", "0");
     k1.setAttribute("Num", "0");
-    k1.setAttribute("t1", "0");
+    k1.setAttribute("t", "0");
+    k1.setAttribute("stop_dx", "0.1");
+    k1.setAttribute("start_dx", "0.1");
     test.appendChild(k1);
 
     QDomElement k2 = document.createElement("k2");
     k2.setAttribute("Value", "0");
     k2.setAttribute("Num", "0");
-    k2.setAttribute("t2", "0");
+    k2.setAttribute("t", "0");
+    k2.setAttribute("stop_dx", "0.1");
+    k2.setAttribute("start_dx", "0.1");
     test.appendChild(k2);
 
     QDomElement k3 = document.createElement("k3");
     k3.setAttribute("Value", "0");
     k3.setAttribute("Num", "0");
-    k3.setAttribute("t3", "0");
+    k3.setAttribute("t", "0");
+    k3.setAttribute("stop_dx", "0.1");
+    k3.setAttribute("start_dx", "0.1");
     test.appendChild(k3);
 
     QDomElement k4 = document.createElement("k4");
     k4.setAttribute("Value", "0");
     k4.setAttribute("Num", "0");
-    k4.setAttribute("t4", "0");
+    k4.setAttribute("t", "0");
+    k4.setAttribute("stop_dx", "0.1");
+    k4.setAttribute("start_dx", "0.1");
     test.appendChild(k4);
 
     QDomElement single = document.createElement("single");
@@ -148,6 +156,24 @@ QDomDocument Test::createTest(const QString &name)
 
     test.appendChild(document.createElement("date"));
     test.appendChild(document.createElement("time"));
+
+    QDomElement min = document.createElement("min");
+    min.setAttribute("Value", "-5.5");
+    test.appendChild(min);
+
+    QDomElement max = document.createElement("max");
+    max.setAttribute("Value", "5.5");
+    test.appendChild(max);
+
+    test.appendChild(document.createElement("max"));
+//    test.appendChild(document.createElement("stop_dx1"));
+//    test.appendChild(document.createElement("start_dx1"));
+//    test.appendChild(document.createElement("stop_dx2"));
+//    test.appendChild(document.createElement("start_dx2"));
+//    test.appendChild(document.createElement("stop_dx3"));
+//    test.appendChild(document.createElement("start_dx3"));
+//    test.appendChild(document.createElement("stop_dx4"));
+//    test.appendChild(document.createElement("start_dx4"));
     document.appendChild(test);
 
     return document;
@@ -158,23 +184,110 @@ void Test::load()
     Creator::readFile();
     k1 = getElement("k1").toInt();
     num1 = getElement("k1", "Num");
-    t1 = getElement("k1", "t1").toDouble();
+    t1 = getElement("k1", "t").toDouble();
+    stop_dx.replace(0, getElement("k1", "stop_dx").toDouble());
+    start_dx.replace(0, getElement("k1", "start_dx").toDouble());
 
     k2 = getElement("k2").toInt();
     num2 = getElement("k2", "Num");
-    t2 = getElement("k2", "t2").toDouble();
+    t2 = getElement("k2", "t").toDouble();
+    stop_dx.replace(1, getElement("k2", "stop_dx").toDouble());
+    start_dx.replace(1, getElement("k2", "start_dx").toDouble());
 
     k3 = getElement("k3").toInt();
     num3 = getElement("k3", "Num");
-    t3 = getElement("k3", "t3").toDouble();
+    t3 = getElement("k3", "t").toDouble();
+    stop_dx.replace(2, getElement("k3", "stop_dx").toDouble());
+    start_dx.replace(2, getElement("k3", "start_dx").toDouble());
 
     k4 = getElement("k4").toInt();
     num4 = getElement("k4", "Num");
-    t4 = getElement("k4", "t4").toDouble();
+    t4 = getElement("k4", "t").toDouble();
+    stop_dx.replace(3, getElement("k4", "stop_dx").toDouble());
+    start_dx.replace(3, getElement("k4", "start_dx").toDouble());
 
     single = getElement("single").toInt();
     date = QDate::fromString(getElement("date"), "yyyyMMdd");
     time = QTime::fromString(getElement("time"), "hhmm");
+
+    min = getElement("min").toDouble();
+    max = getElement("max").toDouble();
+}
+
+double Test::getStop_dx(int index) const
+{
+    return stop_dx.at(index);
+}
+
+void Test::setStop_dx(int index, const double &value)
+{
+    stop_dx.replace(index, value);
+}
+
+double Test::getStart_dx(int index) const
+{
+    return start_dx.at(index);
+}
+
+void Test::setStart_dx(int index, const double &value)
+{
+    start_dx.replace(index, value);
+}
+
+double Test::getMin() const
+{
+    return min;
+}
+
+void Test::setMin(double value)
+{
+    min = value;
+}
+
+double Test::getMax() const
+{
+    return max;
+}
+
+void Test::setMax(double value)
+{
+    max = value;
+}
+
+void Test::save()
+{
+    setElement("k1", QString("%1").arg(k1));
+    setElement("k1", num1, "Num");
+    setElement("k1", QString::number(t1), "t");
+    setElement("k1", QString::number(stop_dx.at(0)), "stop_dx");
+    setElement("k1", QString::number(start_dx.at(0)), "start_dx");
+
+    setElement("k2", QString("%1").arg(k2));
+    setElement("k2", num2, "Num");
+    setElement("k2", QString::number(t2), "t");
+    setElement("k2", QString::number(stop_dx.at(1)), "stop_dx");
+    setElement("k2", QString::number(start_dx.at(1)), "start_dx");
+
+    setElement("k3", QString("%1").arg(k3));
+    setElement("k3", num3, "Num");
+    setElement("k3", QString::number(t3), "t");
+    setElement("k3", QString::number(stop_dx.at(2)), "stop_dx");
+    setElement("k3", QString::number(start_dx.at(2)), "start_dx");
+
+    setElement("k4", QString("%1").arg(k4));
+    setElement("k4", num4, "Num");
+    setElement("k4", QString::number(t4), "t");
+    setElement("k4", QString::number(stop_dx.at(3)), "stop_dx");
+    setElement("k4", QString::number(start_dx.at(3)), "start_dx");
+
+    setElement("single", QString("%1").arg(single));
+    setElement("date", date.toString("yyyyMMdd"));
+    setElement("time", time.toString("hhmm"));
+
+    setElement("min", QString::number(min));
+    setElement("max", QString::number(max));
+
+    Creator::writeFile();
 }
 
 Test::~Test()
@@ -184,37 +297,11 @@ Test::~Test()
 
 void Test::create(Test *c)
 {
-    if( QFile::exists(name  + QString(".xml")) ) {
-        c->load();
-    }
-    else {
+    if( !QFile::exists(name  + QString(".xml")) ) {
         c->createTest(name);
         Creator::writeFile();
     }
-}
-
-void Test::save()
-{
-    setElement("k1", QString("%1").arg(k1));
-    setElement("k1", num1, "Num");
-    setElement("k1", QString::number(t1), "t1");
-
-    setElement("k2", QString("%1").arg(k2));
-    setElement("k2", num2, "Num");
-    setElement("k2", QString::number(t2), "t2");
-
-    setElement("k3", QString("%1").arg(k3));
-    setElement("k3", num3, "Num");
-    setElement("k3", QString::number(t3), "t3");
-
-    setElement("k4", QString("%1").arg(k4));
-    setElement("k4", num4, "Num");
-    setElement("k4", QString::number(t4), "t4");
-
-    setElement("single", QString("%1").arg(single));
-    setElement("date", date.toString("yyyyMMdd"));
-    setElement("time", time.toString("hhmm"));
-    Creator::writeFile();
+    c->load();
 }
 
 void Test::setK1(const int value)
@@ -684,13 +771,11 @@ QDomDocument Calibration::createCalibration(const QString &name)
 
 void Calibration::create(Calibration *c)
 {
-    if( QFile::exists(name  + QString(".xml")) ) {
-        c->load();
-    }
-    else {
+    if( !QFile::exists(name  + QString(".xml")) ) {
         c->createCalibration(name);
         Creator::writeFile();
     }
+    c->load();
 }
 
 void Calibration::load()
@@ -2098,18 +2183,150 @@ QString TestKo5::print()
     QString str =
     QString("%1 г., %2\n").arg(getDate().toString("d MMMM yyyy")).arg(getTime().toString("hh-mm")) +
     QString("Режим агрегометра\nПротромбиновый комплекс\nРезультаты измерений:\nПроба №\tПВ, сек\tПИ, \%\tПО\tПРкв, \%\n");
-    if(getK1()) str += QString("%1\t%2\t%3\t%4\t%5\n").arg(getNum1()).arg(getT1()).arg("ПИ1").arg("ПО1").arg("ПРкв1");
-    if(getK2()) str += QString("%1\t%2\t%3\t%4\t%5\n").arg(getNum2()).arg(getT2()).arg("ПИ2").arg("ПО2").arg("ПРкв2");
-    if(getK3()) str += QString("%1\t%2\t%3\t%4\t%5\n").arg(getNum3()).arg(getT3()).arg("ПИ3").arg("ПО3").arg("ПРкв3");
-    if(getK4()) str += QString("%1\t%2\t%3\t%4\t%5\n").arg(getNum4()).arg(getT4()).arg("ПИ4").arg("ПО4").arg("ПРкв4");
+    if(getK1())
+        str += QString("%1\t%2\t%3\t%4\t%5\n")
+            .arg(getNum1())
+            .arg(getT1())
+            .arg(getIndex(Channel1_ID))
+            .arg(getOtn(Channel1_ID))
+            .arg(getKvik(Channel1_ID));
+    if(getK2())
+        str += QString("%1\t%2\t%3\t%4\t%5\n")
+            .arg(getNum2())
+            .arg(getT2())
+            .arg(getIndex(Channel2_ID))
+            .arg(getOtn(Channel2_ID))
+            .arg(getKvik(Channel2_ID));
+    if(getK3())
+        str += QString("%1\t%2\t%3\t%4\t%5\n")
+            .arg(getNum3())
+            .arg(getT3())
+            .arg(getIndex(Channel3_ID))
+            .arg(getOtn(Channel3_ID))
+            .arg(getKvik(Channel3_ID));
+    if(getK4())
+        str += QString("%1\t%2\t%3\t%4\t%5\n")
+            .arg(getNum4())
+            .arg(getT4())
+            .arg(getIndex(Channel4_ID))
+            .arg(getOtn(Channel4_ID))
+            .arg(getKvik(Channel4_ID));
     return str;
+}
+
+double TestKo5::getKvik(Channel_ID ch) const
+{
+    switch (ch) {
+    case Channel1_ID:
+        return kvik1;
+    case Channel2_ID:
+        return kvik2;
+    case Channel3_ID:
+        return kvik3;
+    case Channel4_ID:
+        return kvik4;
+    default:
+        break;
+    }
+}
+
+void TestKo5::setKvik(double value, Channel_ID ch)
+{
+    switch (ch) {
+    case Channel1_ID:
+        kvik1 = value;
+        break;
+    case Channel2_ID:
+        kvik2 = value;
+        break;
+    case Channel3_ID:
+        kvik3 = value;
+        break;
+    case Channel4_ID:
+        kvik4 = value;
+        break;
+    default:
+        break;
+    }
+}
+
+double TestKo5::getIndex(Channel_ID ch) const
+{
+    switch (ch) {
+    case Channel1_ID:
+        return index1;
+    case Channel2_ID:
+        return index2;
+    case Channel3_ID:
+        return index3;
+    case Channel4_ID:
+        return index4;
+    default:
+        break;
+    }
+}
+
+void TestKo5::setIndex(double value, Channel_ID ch)
+{
+    switch (ch) {
+    case Channel1_ID:
+        index1 = value;
+        break;
+    case Channel2_ID:
+        index2 = value;
+        break;
+    case Channel3_ID:
+        index3 = value;
+        break;
+    case Channel4_ID:
+        index4 = value;
+        break;
+    default:
+        break;
+    }
+}
+
+double TestKo5::getOtn(Channel_ID ch) const
+{
+    switch (ch) {
+    case Channel1_ID:
+        return kvik1;
+    case Channel2_ID:
+        return kvik2;
+    case Channel3_ID:
+        return kvik3;
+    case Channel4_ID:
+        return kvik4;
+    default:
+        break;
+    }
+}
+
+void TestKo5::setOtn(double value, Channel_ID ch)
+{
+    switch (ch) {
+    case Channel1_ID:
+        otn1 = value;
+        break;
+    case Channel2_ID:
+        otn2 = value;
+        break;
+    case Channel3_ID:
+        otn3 = value;
+        break;
+    case Channel4_ID:
+        otn4 = value;
+        break;
+    default:
+        break;
+    }
 }
 
 QString TestAgr1::print()
 {
-//    хх.хх.хх   хх-хх
-//    Режим агрегометра
-//    Параметры агрегации тромбоцитов
+    //    хх.хх.хх   хх-хх
+    //    Режим агрегометра
+    //    Параметры агрегации тромбоцитов
 //    №пробы                СтА    СкА   С, тр/мкл
 //    xxxxxxxxxxxxx         хх,х   хх,х  хх,х
 //    xxxxxxxxxxxxx         хх,х   хх,х  хх,х
@@ -2613,7 +2830,7 @@ QDomDocument TestAgr2::createTest(const QString &name)
 
 void TestAgr2::save()
 {
-    setElement("BTP1", inductor);
+    setElement("inductor", inductor);
     setElement("BTP1", QString::number(btp1));
     setElement("BTP2", QString::number(btp2));
     setElement("BTP3", QString::number(btp3));
@@ -2798,4 +3015,67 @@ QDomDocument CalibrationAgr2::createCalibration(const QString &name)
     calibration.appendChild(document.createElement("ck4"));
     document.appendChild(calibration);
     return document;
+}
+
+
+QDomDocument TestKo5::createTest(const QString &name)
+{
+    Test::createTest(name);
+    QDomElement calibration = document.firstChildElement();
+    //выходные данные
+    calibration.appendChild(document.createElement("kvik1"));
+    calibration.appendChild(document.createElement("kvik2"));
+    calibration.appendChild(document.createElement("kvik3"));
+    calibration.appendChild(document.createElement("kvik4"));
+
+    calibration.appendChild(document.createElement("index1"));
+    calibration.appendChild(document.createElement("index2"));
+    calibration.appendChild(document.createElement("index3"));
+    calibration.appendChild(document.createElement("index4"));
+
+    calibration.appendChild(document.createElement("otn1"));
+    calibration.appendChild(document.createElement("otn2"));
+    calibration.appendChild(document.createElement("otn3"));
+    calibration.appendChild(document.createElement("otn4"));
+
+    document.appendChild(calibration);
+    return document;
+}
+
+void TestKo5::save()
+{
+    setElement("kvik1", QString::number(kvik1));
+    setElement("kvik2", QString::number(kvik2));
+    setElement("kvik3", QString::number(kvik3));
+    setElement("kvik4", QString::number(kvik4));
+
+    setElement("index1", QString::number(index1));
+    setElement("index2", QString::number(index2));
+    setElement("index3", QString::number(index3));
+    setElement("index4", QString::number(index4));
+
+    setElement("otn1", QString::number(otn1));
+    setElement("otn2", QString::number(otn2));
+    setElement("otn3", QString::number(otn3));
+    setElement("otn4", QString::number(otn4));
+    Test::save();
+}
+
+void TestKo5::load()
+{
+    kvik1 = getElement("kvik1").toDouble();
+    kvik2 = getElement("kvik2").toDouble();
+    kvik3 = getElement("kvik3").toDouble();
+    kvik4 = getElement("kvik4").toDouble();
+
+    index1 = getElement("index1").toDouble();
+    index2 = getElement("index2").toDouble();
+    index3 = getElement("index3").toDouble();
+    index4 = getElement("index4").toDouble();
+
+    otn1 = getElement("otn1").toDouble();
+    otn2 = getElement("otn2").toDouble();
+    otn3 = getElement("otn3").toDouble();
+    otn4 = getElement("otn4").toDouble();
+    Test::load();
 }
